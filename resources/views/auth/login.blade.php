@@ -1,5 +1,38 @@
 @extends('layouts.app')
 
+@section('navbar')
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url('/') }}">
+            {{ config('app.name', 'Laravel') }}
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left Side Of Navbar -->
+            <ul class="navbar-nav me-auto">
+
+            </ul>
+
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ms-auto">
+                <!-- Authentication Links -->
+                @guest
+                    @if (Route::has('login'))
+                        <li class="nav-item">
+                            Vous n'avez pas de compte ?
+                            <a class="nav-link d-inline" href="{{ route('register') }}">{{ __("S'inscrirer") }}</a>
+                        </li>
+                    @endif
+                @endguest
+            </ul>
+        </div>
+    </div>
+</nav>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
