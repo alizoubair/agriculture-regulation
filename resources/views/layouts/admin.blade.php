@@ -7,7 +7,6 @@
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
-<script type="text/javascript" src="{{ asset('js/admin.js') }}" defer></script>
 </head>
 <body>
   <aside class="sidebar"></aside>

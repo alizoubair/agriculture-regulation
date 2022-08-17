@@ -25,4 +25,4 @@ Route::get('/admin', [App\Http\Controllers\Admin\AdminHomeController::class, 'in
 
 Route::get('/admin/farms', [App\Http\Controllers\Admin\AdminFarmController::class, 'index'])->name('admin.farm.index');
 
-Route::post('/admin/farms', [App\Http\Controllers\Admin\AdminFarmController::class, 'create'])->name("admin.farm.create");
+Route::post('/admin/farms/create', [App\Http\Controllers\Admin\AdminFarmController::class, 'create'])->name("admin.farm.create");

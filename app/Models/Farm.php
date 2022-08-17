@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Farm extends Model
 {
-    use HasFactory;
+    /**
+    * $this->attributes['id'];
+    * $this->attributes['name'];
+    * $this->attributes['perimeter'];
+    * $this->attributes['area'];
+    * $this->attributes['created_at'];
+    * $this->attributes['updated_at']
+    */
 
     public function getId()
     {

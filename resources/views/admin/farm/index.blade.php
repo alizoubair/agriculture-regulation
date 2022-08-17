@@ -33,14 +33,18 @@
     
     <div id="calculation-box" style="display: none;">
         <button id="cancel">Cancel</button>
+
         <form method="POST" action="{{ route('admin.farm.create') }}">
             @csrf
-            <input id="name" type="text" name="name" placeholder="name">
-            <input id="calculated-area" type="text" name="area">
-            <input id="calculated-perimeter" type="text" name="perimeter">
+            <label>Name:</label>
+            <input id="name" type="text" name="name" value="{{ old('name') }}" class="form-control">
+            <label>Area:</label>
+            <input id="calculated-area" type="text" name="area" value="{{ old('area') }}" class="form-control">
+            <label>Perimeter:</label>
+            <input id="calculated-perimeter" type="text" name="perimeter" value="{{ old('perimeter') }}" class="form-control">
+            
+            <button type="submit">Save</button>
         </form>
-
-        <button type="submit">Save</button>
     </div>
     <div id="map"></div>
 </div>
@@ -117,11 +121,10 @@
             // Restrict the area and perimeter to 2 decimal points.
             const rounded_area = Math.round(area * 100) / 100;
 
-            area_field.value = `${rounded_area}`;
             area_field.placeholder = `${rounded_area} square meters`;
-
-            perimeter_field.value = `${perimeter}`;
+            area_field.setAttribute('value', rounded_area);
             perimeter_field.placeholder = `${perimeter} kilometers`;
+            perimeter_field.setAttribute('value', perimeter);
         } else {
             answer.innerHTML = '';
             if (e.type !== 'draw.delete')

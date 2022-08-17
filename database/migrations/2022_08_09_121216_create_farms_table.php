@@ -17,7 +17,7 @@ class CreateFarmsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('perimeter');
-            $table->string('surface');
+            $table->string('area');
             $table->timestamps();
         });
     }

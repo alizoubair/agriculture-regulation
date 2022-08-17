@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Farm;
 use App\Http\Controllers\Controller;
-use Eluminate\Http\Request;
+use Illuminate\Http\Request;
 use Mapper;
 
 class AdminFarmController extends Controller
