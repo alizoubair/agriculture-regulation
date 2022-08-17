@@ -16,6 +16,13 @@ class Greenhouse extends Model
     * $this->attributes['updated_at'] - timestamp - contains the greenhouse update date;
     */
 
+	public static function validate($request)
+	{
+		$request->validate([
+			"farm_id"=>"required|exists:farms,id",
+		]);
+	}
+
     public function getId()
     {
         return $this->attributes['id'];
