@@ -3,16 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Greenhouse;
 
 class Farm extends Model
 {
     /**
-    * $this->attributes['id'];
-    * $this->attributes['name'];
-    * $this->attributes['perimeter'];
-    * $this->attributes['area'];
-    * $this->attributes['created_at'];
+    * $this->attributes['id']
+    * $this->attributes['name']
+    * $this->attributes['perimeter']
+    * $this->attributes['area']
+    * $this->attributes['created_at']
     * $this->attributes['updated_at']
+    * $this->greenhouses - Greenhouse[] - contains the associated greenhouses
     */
 
     public function getId()
@@ -73,5 +75,20 @@ class Farm extends Model
     public function setUpdatedAt($updatedAt)
     {
         $this->attributes['updated_at'] = $updatedAt;
+    }
+
+    public function greenhouses()
+    {
+        return $this->hasMany(Greenhouse::class);
+    }
+
+    public function getGreenhouses()
+    {
+        return $this->greenhouses;
+    }
+
+    public function setGreenhouses($greenhouses)
+    {
+        $this->greenhouses = $greenhouses;
     }
 }
