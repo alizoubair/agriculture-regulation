@@ -16,9 +16,9 @@ class CreateGreenhousesTable extends Migration
         Schema::create('greenhouses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('farm');
-            $table->numeric('area');
-            $table->numeric('perimeter');
+            $table->foreign('farm_id')->references('id')->on('farms');
+            $table->integer('area');
+            $table->integer('perimeter');
             $table->timestamps();
         });
     }
