@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Greenhouse extends Model
 {
 	/**
-    * $this->attributes['id'];
-    * $this->attributes['name'];
-    * $this->attributes['farm'];
-    * $this->attributes['perimeter'];
-    * $this->attributes['area'];
-    * $this->attributes['created_at'];
-    * $this->attributes['updated_at']
+    * $this->attributes['id'] - int - contains the greenhouse primary key(id);
+    * $this->attributes['name'] - string - contains the greenhouse name;
+    * $this->attributes['farm_id'] - int - contains the referenced farm id;
+    * $this->attributes['perimeter'] - int - contains the perimeter;
+    * $this->attributes['area'] - int - contains the area;
+    * $this->attributes['created_at'] - timestamp - contains the greenhouse creation date;
+    * $this->attributes['updated_at'] - timestamp - contains the greenhouse update date;
     */
 
     public function getId()
