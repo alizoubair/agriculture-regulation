@@ -36,14 +36,14 @@ class Greenhouse extends Model
         $this->attributes['name'] = $name;
     }
 
-    public function setFarmId($farm)
-    {
-    	$this->attributes['farm_id'] = $farm;
-    }
-
     public function getFarmId()
     {
     	return $this->attributes['farm_id'];
+    }
+
+    public function setFarmId($farmId)
+    {
+    	$this->attributes['farm_id'] = $farmId;
     }
 
     public function getPerimeter()
