@@ -14,9 +14,9 @@
         <div class="dropdown">
           <button id="dropFermes" class="dropbtn">Fermes</button>
           <div id="dropdown-fermes" class="dropdown-content">
-            <a href="#">Ferme 1</a>
-            <a href="#">Ferme 2</a>
-            <a href="#">Ferme 3</a>
+             @foreach($viewData['farms'] as $farm)
+             <a>{{ $farm->getName() }}</a>
+             @endforeach
           </div>
         </div>
 
@@ -28,11 +28,11 @@
           </div>
         </div>
 
-      <button id="new-item">Create a new farm</button>  
+      <button id="new-item">Créer une nouvelle ferme</button>  
     </div>
     
     <div id="calculation-box" style="display: none;">
-        <button id="cancel">Cancel</button>
+        <button id="cancel">Annuler</button>
 
         <form method="POST" action="{{ route('admin.farm.create') }}">
             @csrf
@@ -46,6 +46,7 @@
             <button type="submit">Save</button>
         </form>
     </div>
+
     <div id="map"></div>
 </div>
 

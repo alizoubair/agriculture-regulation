@@ -51,12 +51,12 @@ main {
 .show {display: block;}
 
 #map {
-  width: 70%;
+  width: 100%;
   height: 100%;
 }
 
-.mapboxgl-map {
-	overflow: inherit;
+.mapboxgl-canvas-container {
+	height: 600px;
 }
 
 .header-logo {
