@@ -6,7 +6,6 @@ use App\Models\Farm;
 use APp\Models\Greenhouse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Mapper;
 
 class AdminFarmController extends Controller
 {
@@ -24,18 +23,6 @@ class AdminFarmController extends Controller
 		$newFarm->setPerimeter($request->input('perimeter'));
 		$newFarm->setArea($request->input('area'));
 		$newFarm->save();
-
-		return back();
-	}
-
-	public function createGreenhouse(Request $request)
-	{
-		$newGreenhouse = new Greenhosue();
-		$newGreenhouse->setName($request->input(name));
-		$newGreenhouse->setFarmId($request->input('farm_id'));
-		$newGreenhouse->setPerimeter($request->input('perimeter'));
-		$newGreenhouse->setArea($request->input('area'));
-		$newGreenhouse->save();
 
 		return back();
 	}
