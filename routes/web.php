@@ -21,4 +21,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+Route::get('/admin', [App\Http\Controllers\Admin\AdminHomeController::class, 'index'])->name('admin.home.index');
+
+Route::get('/admin/farms', [App\Http\Controllers\Admin\AdminFarmController::class, 'index'])->name('admin.farm.index');
+
+Route::post('/admin/farms', [App\Http\Controllers\Admin\AdminFarmController::class, 'create'])->name("admin.farm.create");

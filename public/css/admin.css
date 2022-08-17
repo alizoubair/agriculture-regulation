@@ -1,0 +1,130 @@
+body {
+	margin: 0;
+	font-family: "Open Sans", sans-serif;
+	color:  #444444;
+	line-height: 1.5;
+}
+
+.sidebar::-webkit-scrollbar {
+	width: 5px;
+	height: 8px;
+	background-color: #fff;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+	background-color: #aab7cf;
+}
+
+.sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 200px;	
+	padding: 20px;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color:  #aab7cf transparent;
+}
+
+main {
+	margin-left: 300px;
+	margin-top: 60px;
+	padding: 20px 30px;
+}
+
+.page-content {
+	display: flex;
+}
+
+.calculation-box {
+    width: 150px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    text-align: center;
+}
+
+.dropdown-content {
+	display: none;
+}
+
+.show {display: block;}
+
+#map {
+  width: 70%;
+  height: 100%;
+}
+
+.mapboxgl-map {
+	overflow: inherit;
+}
+
+.header-logo {
+	height: 60px;
+}
+
+.header-logo .logo {
+	display: flex;
+	align-items: center;
+}
+
+.header-logo .logo img {
+	margin-right: 6px;
+}
+
+.header-logo span {
+	font-size: 26px;
+	font-weight: 700;
+	color: #596f52;
+}
+
+.sidebar-nav {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.sidebar-nav .nav-item {
+	margin-bottom:  5px;
+}
+
+.sidebar-nav .nav-link {
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	padding: 10px 15px;
+	text-decoration: none;
+	border-radius: 4px;
+}
+
+.sidebar-nav .nav-link:hover {
+	color: #596f52;
+	background: #f6f9ff;
+}
+
+.sidebar-nav .nav-item i {
+	font-size: 18px;
+	margin-right: 10px;
+	color: #596f52;
+}
+
+.footer-logo img {
+	max-height: 50px;
+	padding-right: 10px;
+}
+
+.company {
+	position: absolute;
+	margin-top: 20%;
+}
+
+/* main content */
+.pagetitle {
+	margin-bottom: 10px;
+}
+
+.pagetitle h1 {
+	font-size: 24px;
+	font-weight: 600;
+	margin: 0;
+}
