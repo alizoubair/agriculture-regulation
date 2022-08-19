@@ -23,6 +23,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/admin', [App\Http\Controllers\Admin\AdminHomeController::class, 'index'])->name('admin.home.index');
 
-Route::get('/admin/farms', [App\Http\Controllers\Admin\AdminFarmController::class, 'index'])->name('admin.farm.index');
+Route::get('/admin', [App\Http\Controllers\Admin\AdminFarmController::class, 'index'])->name('admin.farm.index');
+
+Route::get('/admin/farms/create', [App\Http\Controllers\Admin\AdminFarmController::class, 'display'])->name("admin.farm.create");
 
 Route::post('/admin/farms/create', [App\Http\Controllers\Admin\AdminFarmController::class, 'create'])->name("admin.farm.create");
+
+Route::get('/admin/greenhouses/create', [App\Http\Controllers\Admin\AdminGreenhouseController::class, 'index'])->name("admin.greenhouse.create");
+
+Route::post('/admin/farms/greenhouses/create', [App\Http\Controllers\Admin\AdminGreenhouseController::class, 'create'])->name("admin.greenhouse.create");

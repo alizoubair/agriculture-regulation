@@ -31,6 +31,8 @@ map.on('draw.create', updateArea);
 map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
 
+
+
 function updateArea(e) {
     const data = draw.getAll();
     const area_field = document.getElementById('calculated-area');
@@ -49,7 +51,9 @@ function updateArea(e) {
         const rounded_area = Math.round(area * 100) / 100;
 
         area_field.placeholder = `${rounded_area} square meters`;
-        perimeter_field.placeholder = `${perimeter} kilometers`
+        area_field.setAttribute('value', rounded_area);
+        perimeter_field.placeholder = `${perimeter} kilometers`;
+        perimeter_field.setAttribute('value', perimeter);
     } else {
         answer.innerHTML = '';
         if (e.type !== 'draw.delete')
@@ -57,17 +61,47 @@ function updateArea(e) {
     }
 }
 
-const add = getElementById('new-item');
-const box = getElementById('calculated-box');
+/* Clickable dropdowns */
+const btnFarms = document.getElementById('farms');
+const btnGreenhouses = document.getElementById('greenhouses');
 
-add.addEventListener("click", createItem());
+function displayFarms() {
+    document.getElementById('dropdown-farms').setAttribute('style', 'display:block');
+    document.getElementById('dropdown-greenhouses').setAttribute('style', 'display:none');
+}
 
-function createItem() {
-    const input_area = document.createElement("input");
-    const input_perimeter = document.createElement("input");
+function displayGreenhouses() {
+    document.getElementById('dropdown-farms').setAttribute('style', 'display:none');
+    document.getElementById('dropdown-greenhouses').setAttribute('style', 'display:block');
+}
 
-    const btn = document.createElement('button');
-    btn.innerHTML('Save');
+btnFarms.addEventListener('click', displayFarms);
+btnGreenhouses.addEventListener('click', displayGreenhouses);
 
-    box.append(input_area);
-    box.append(input_perimeter);
+const createFarm = document.getElementById('new-farm');
+const createGreenhouse = document.getElementById('new-greenhouse');
+
+function setAttributeValue(collection, attr)
+{
+    Array.from(collection).forEach(function(current) { 
+        current.setAttribute("style",`display: ${attr}`);
+
+    })
+
+    console.log(Array.from(collection));
+}
+
+function createFarmBox()
+{
+    setAttributeValue(document.getElementsByClassName('farms-box'), 'block');
+    setAttributeValue(document.getElementById('content'), 'none');
+}
+
+function createGreenhouseBox()
+{
+    setAttributeValue(document.getElementsByClassName('greenhouses-box'), 'block');
+    setAttributeValue(document.getElementById('dropdown-greenhouses'), 'none');
+}
+
+createFarm.addEventListener('click', createFarmBox);
+createGreenhouse.addEventListener('click', createGreenhouseBox);

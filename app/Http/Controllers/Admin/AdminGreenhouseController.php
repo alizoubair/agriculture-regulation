@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class AdminGreenhouseController extends Controller
 {
+	function index()
+	{
+		return view('admin.greenhouse.create');
+	}
+
 	public function create(Request $request)
 	{
 		$newGreenhouse = new Greenhosue();

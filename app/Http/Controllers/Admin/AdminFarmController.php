@@ -16,14 +16,19 @@ class AdminFarmController extends Controller
 		return view('admin.farm.index')->with("viewData", $viewData); 
 	}
 
+	public function display()
+	{
+		return view('admin.farm.create');
+	}
+
 	public function create(Request $request)
 	{
 		$newFarm = new Farm();
 		$newFarm->setName($request->input('name'));
-		$newFarm->setPerimeter($request->input('perimeter'));
 		$newFarm->setArea($request->input('area'));
+		$newFarm->setPerimeter($request->input('perimeter'));
 		$newFarm->save();
 
-		return back();
+		return redirect()->route('admin.farm.index');
 	}
 }

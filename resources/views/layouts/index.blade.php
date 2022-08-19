@@ -32,7 +32,13 @@
     </ul>
   </aside>
   <main>
-    @yield('content')
+    <div class="page-content">
+        @yield('index')
+        
+        @yield('Farm')
+
+        @yield('Greenhouse')
+    </div>
   </main>
 </body>
 </html>
