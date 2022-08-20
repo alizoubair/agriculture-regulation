@@ -12,12 +12,12 @@
     </div>
     <div>
         <label>Ferme</label>
-        <input id="farm_id" type="text" name="farm_id" value="{{ old('name') }}" class="form-control">
 
-        <div class="dropdown-fermes">
-            
-            <a href="#">A</a>
-        </div>
+        <select class="dropdown-fermes" name="farm_id">
+            @foreach($viewData['farms'] as $farm)
+            <option id="farm_id" value="{{ $farm->getId() }}">{{ $farm->getName() }}</option>
+            @endforeach
+        </select>
     </div>
     <div>
         <label>Area:</label>
