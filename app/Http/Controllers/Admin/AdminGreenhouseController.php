@@ -11,7 +11,8 @@ class AdminGreenhouseController extends Controller
 {
 	function index()
 	{
-		return view('admin.greenhouse.create');
+		$viewData['greenhouses'] = Greenhouse::all();
+		return view('admin.greenhouse.create')->with('viewData', $viewData);
 	}
 
 	function display()

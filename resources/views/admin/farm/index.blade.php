@@ -1,6 +1,6 @@
 @extends('layouts.index')
 @section('index')
-<div id="content" style="display: block;">
+<div class="sidebar-content" style="display: block;">
     <div class="btns">
         <button id="farms" class="dropbtn">Fermes</button>
         <button id="greenhouses" class="dropbtn">Serres</button>

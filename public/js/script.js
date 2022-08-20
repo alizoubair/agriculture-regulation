@@ -32,6 +32,12 @@ map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
 
 
+// GeoJSON object to hold our measurement features
+const geojson = {
+'type': 'FeatureCollection',
+'features': []
+};
+
 function updateArea(e) {
     const data = draw.getAll();
     const area_field = document.getElementById('calculated-area');
