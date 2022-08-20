@@ -29,6 +29,12 @@ Route::get('/admin/farms/create', [App\Http\Controllers\Admin\AdminFarmControlle
 
 Route::post('/admin/farms/create', [App\Http\Controllers\Admin\AdminFarmController::class, 'create'])->name("admin.farm.create");
 
+Route::delete('/admin/farms/{id}/delete', [App\Http\Controllers\Admin\AdminFarmController::class, 'delete'])->name("admin.farm.delete");
+
 Route::get('/admin/greenhouses/create', [App\Http\Controllers\Admin\AdminGreenhouseController::class, 'display'])->name("admin.greenhouse.create");
 
 Route::post('/admin/greenhouses/create', [App\Http\Controllers\Admin\AdminGreenhouseController::class, 'create'])->name("admin.greenhouse.create");
+
+Route::delete('/admin/greenhouses/{id}/delete', [App\Http\Controllers\Admin\AdminGreenhouseController::class, 'delete'])->name("admin.greenhouse.delete");
+
+Route::put('/admin/greenhouses/{id}/update', [App\Http\Controllers\AdminGreenhouseController::class, 'update')]->name("admin.greenhouse.update");

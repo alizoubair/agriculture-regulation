@@ -8,8 +8,15 @@
       <div class="dropdown">
              <div id="dropdown-farms">
                 <div class="dropdown-content">
-                     @foreach($viewData['farms'] as $farm)
-                     <a>{{ $farm->getName() }}</a>
+                     @foreach($farmData['farms'] as $farm)
+                     <div>
+                        <a>{{ $farm->getName() }}</a>
+                         <form action="{{ route('admin.farm.delete', $farm->getId()) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Supprimer</button>
+                         </form>
+                     </div>
                      @endforeach
                 </div>
 
@@ -18,9 +25,17 @@
 
              <div id="dropdown-greenhouses" style="display: none;">
                 <div class="dropdown-content">
-                    <a href="#">Serre 1</a>
-                    <a href="#">Serre 2</a>
-                    <a href="#">Serre 3</a>
+                    @foreach($greenhouseData['greenhouses'] as $greenhouse)
+                    <div>
+                        <a>{{ $greenhouse->getName()}}</a>
+                         <form action="{{ route('admin.greenhouse.delete', $greenhouse->getId()) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Supprimer</button>
+                         </form>
+                         <a href="{{ route('admin.greenhouse.update', ['id'=>greenhouse->getId()])}}">Editer</a>
+                     </div>
+                    @endforeach
                 </div>
 
                 <button id="btnGreenhouse"><a href="admin/greenhouses/create">Créer une nouvelle Serre</a></button> 

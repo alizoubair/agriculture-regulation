@@ -32,4 +32,11 @@ class AdminGreenhouseController extends Controller
 
 		return redirect()->route('admin.farm.index');
 	}
+
+	public function delete($id)
+	{
+		$greenhouse = Greenhouse::find($id);
+		$greenhouse->delete();
+		return back();
+	}
 }

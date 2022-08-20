@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Farm;
-use APp\Models\Greenhouse;
+use App\Models\Greenhouse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -11,9 +11,9 @@ class AdminFarmController extends Controller
 {
 	public function index()
 	{
-		$viewData["title"] = "Farms";
-		$viewData["farms"] = Farm::all();
-		return view('admin.farm.index')->with("viewData", $viewData); 
+		$farmData["farms"] = Farm::all();
+		$greenhouseData['greenhouses'] = Greenhouse::all();
+		return view('admin.farm.index')->with("farmData", $farmData)->with("greenhouseData", $greenhouseData); 
 	}
 
 	public function display()
@@ -30,5 +30,12 @@ class AdminFarmController extends Controller
 		$newFarm->save();
 
 		return redirect()->route('admin.farm.index');
+	}
+
+	public function delete($id)
+	{
+		$farm = Farm::find($id);
+		$farm->delete();
+		return back();
 	}
 }

@@ -7,9 +7,6 @@ const map = new mapboxgl.Map({
   zoom: 5, // starting zoom
   projection: 'globe' // display the map as a 3D globe
 });
- 
-// Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.NavigationControl());
 
 map.addControl(
   new MapboxGeocoder({
@@ -24,6 +21,9 @@ const marker = new mapboxgl.Marker({
 .setLngLat([-7, 31])
 .addTo(map);
  
+ // Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
+
 function onDragEnd() {
   const lngLat = marker.getLngLat();    
 
