@@ -33,7 +33,7 @@
                             @method('DELETE')
                             <button type="submit">Supprimer</button>
                          </form>
-                         <a href="{{ route('admin.greenhouse.update', ['id'=>greenhouse->getId()])}}">Editer</a>
+                         <a href="{{route('admin.greenhouse.edit', ['id'=> $greenhouse->getId()])}}">Editer</a>
                      </div>
                     @endforeach
                 </div>

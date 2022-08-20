@@ -37,4 +37,6 @@ Route::post('/admin/greenhouses/create', [App\Http\Controllers\Admin\AdminGreenh
 
 Route::delete('/admin/greenhouses/{id}/delete', [App\Http\Controllers\Admin\AdminGreenhouseController::class, 'delete'])->name("admin.greenhouse.delete");
 
-Route::put('/admin/greenhouses/{id}/update', [App\Http\Controllers\AdminGreenhouseController::class, 'update')]->name("admin.greenhouse.update");
+Route::get('/admin/greenhouses/{id}/edit', [App\Http\Controllers\Admin\AdminGreenhouseController::class, 'edit'])->name("admin.greenhouse.edit");
+
+Route::put('/admin/greenhouses/{id}/update', [App\Http\Controllers\Admin\AdminGreenhouseController::class, 'update'])->name("admin.greenhouse.update");

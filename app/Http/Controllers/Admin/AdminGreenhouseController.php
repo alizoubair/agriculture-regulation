@@ -39,4 +39,25 @@ class AdminGreenhouseController extends Controller
 		$greenhouse->delete();
 		return back();
 	}
+
+	public function edit($id)
+	{
+		$viewData = [];
+		$viewData['greenhouse'] = Greenhouse::findOrFail($id);
+		$farmData['farms'] = Farm::all();
+		return view('admin.greenhouse.edit')->with("viewData", $viewData)->with("farmData", $farmData);
+	}
+
+	public function update(Request $request, $id)
+	{
+		$greenhouse = Greenhouse::findOrFail($id);
+		$greenhouse->setName($request->input('name'));
+		$greenhouse->setFarmId($request->input('farm_id'));
+		$greenhouse->setArea($request->input('area'));
+		$greenhouse->setPerimeter($request->input('perimeter'));
+
+		$greenhouse->save();
+
+		return redirect()->route('admin.farm.index');
+	}
 }
