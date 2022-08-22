@@ -12,8 +12,8 @@
         <input id="calculated-area" type="text" name="area" value="{{ old('area') }}" class="form-control">
         <label>Perimeter:</label>
         <input id="calculated-perimeter" type="text" name="perimeter" value="{{ old('perimeter') }}" class="form-control">
-        <input id="lng" type="text" name="lng">
-        <input id="lat" type="text" name="lat">
+        <input id="lng" type="text" name="lng" style="display: none">
+        <input id="lat" type="text" name="lat" style="display: none">
         
         <button type="submit">Save</button>
     </form>

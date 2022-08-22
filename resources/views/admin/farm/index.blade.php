@@ -11,8 +11,8 @@
                      @foreach($farmData['farms'] as $farm)
                      <div>
                         <a>{{ $farm->getName() }}</a>
-                        <input id="lng" type="text" name="lng" value="{{ $farm->getLongitude() }}">
-                        <input id="lat" type="text" name="lat" value="{{ $farm->getLatitude() }}">
+                        <input id="lng" type="text" name="lng" value="{{ $farm->getLongitude() }}" style="display: none;">
+                        <input id="lat" type="text" name="lat" value="{{ $farm->getLatitude() }}" style="display: none">
                          <form action="{{ route('admin.farm.delete', $farm->getId()) }}" method="POST">
                             @csrf
                             @method('DELETE')
