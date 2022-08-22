@@ -16,6 +16,11 @@ class AdminFarmController extends Controller
 		return view('admin.farm.index')->with("farmData", $farmData)->with("greenhouseData", $greenhouseData); 
 	}
 
+	public function test()
+	{
+		return view('admin.farm.test'); 
+	}
+
 	public function display()
 	{
 		return view('admin.farm.create');
@@ -25,6 +30,8 @@ class AdminFarmController extends Controller
 	{
 		$newFarm = new Farm();
 		$newFarm->setName($request->input('name'));
+		$newFarm->setLongitude($request->input('lng'));
+		$newFarm->setLatitude($request->input('lat'));
 		$newFarm->setArea($request->input('area'));
 		$newFarm->setPerimeter($request->input('perimeter'));
 		$newFarm->save();
@@ -37,5 +44,24 @@ class AdminFarmController extends Controller
 		$farm = Farm::find($id);
 		$farm->delete();
 		return back();
+	}
+
+	public function edit($id)
+	{
+		$viewData = [];
+		$viewData['farm'] = Farm::findOrFail($id);
+		return view('admin.farm.edit')->with("viewData", $viewData);
+	}
+
+	public function update(Request $request, $id)
+	{
+		$farm = Farm::findOrFail($id);
+		$farm->setName($request->input('name'));
+		$farm->setArea($request->input('area'));
+		$farm->setPerimeter($request->input('perimeter'));
+
+		$farm->save();
+
+		return redirect()->route('admin.farm.index');
 	}
 }

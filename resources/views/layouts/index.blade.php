@@ -29,6 +29,36 @@
           <span>Fermes</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="bi bi-house"></i>
+          <span>Alerte</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="bi bi-house"></i>
+          <span>Clients</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="bi bi-house"></i>
+          <span>Abonnement</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="bi bi-house"></i>
+          <span>Role</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="bi bi-house"></i>
+          <span>Utilisateur</span>
+        </a>
+      </li>
     </ul>
   </aside>
   <main>

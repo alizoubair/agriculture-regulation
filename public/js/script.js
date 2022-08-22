@@ -65,3 +65,10 @@ function updateArea(e) {
             alert('Click the map to draw a polygon.');
     }
 }
+
+// Set longitude and latitude
+const inputLongitude = document.getElementById('lng');
+const inputLatitude = document.getElementById('lat');
+
+inputLongitude.value = longitude;
+inputLatitude.value = latitude;

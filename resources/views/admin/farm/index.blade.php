@@ -7,15 +7,18 @@
     </div>
       <div class="dropdown">
              <div id="dropdown-farms">
-                <div class="dropdown-content">
+                <div id="idFarm" class="dropdown-content">
                      @foreach($farmData['farms'] as $farm)
                      <div>
                         <a>{{ $farm->getName() }}</a>
+                        <input id="lng" type="text" name="lng" value="{{ $farm->getLongitude() }}">
+                        <input id="lat" type="text" name="lat" value="{{ $farm->getLatitude() }}">
                          <form action="{{ route('admin.farm.delete', $farm->getId()) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Supprimer</button>
                          </form>
+                         <a href="{{route('admin.farm.edit', ['id'=> $farm->getId()])}}">Editer</a>
                      </div>
                      @endforeach
                 </div>
@@ -24,7 +27,7 @@
              </div>
 
              <div id="dropdown-greenhouses" style="display: none;">
-                <div class="dropdown-content">
+                <div id="idGreenhouse" class="dropdown-content">
                     @foreach($greenhouseData['greenhouses'] as $greenhouse)
                     <div>
                         <a>{{ $greenhouse->getName()}}</a>

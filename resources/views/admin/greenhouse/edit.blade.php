@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('Farm')
+@section('Greenhouse')
 <div class="sidebar-content">
     <button id="cancel-farm"><a href="/admin">Annuler</a></button>
 

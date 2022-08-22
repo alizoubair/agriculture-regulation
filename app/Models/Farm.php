@@ -37,6 +37,26 @@ class Farm extends Model
         $this->attributes['name'] = $name;
     }
 
+    public function getLongitude()
+    {
+        return $this->attributes['lng'];
+    }
+
+    public function setLongitude($lng)
+    {
+        $this->attributes['lng'] = $lng;
+    }
+
+    public function getLatitude()
+    {
+        return $this->attributes['lat'];
+    }
+
+    public function setLatitude($lat)
+    {
+        $this->attributes['lat'] = $lat;
+    }
+    
     public function getPerimeter()
     {
         return $this->attributes['perimeter'];

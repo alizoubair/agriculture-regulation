@@ -15,33 +15,23 @@ map.addControl(
   })
 );
 
-const marker = new mapboxgl.Marker({
-  draggable: true
-})
-.setLngLat([-7, 31])
-.addTo(map);
+map.on('mousemove', (e) => {
+  // `e.lngLat` is the longitude, latitude geographical position of the event.
+  var [longitude, latitude] = e.lngLat.toArray();
+
+  localStorage.setItem("Longitude", longitude);
+  localStorage.setItem("Latitude", latitude);
+});
  
  // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
-function onDragEnd() {
-  const lngLat = marker.getLngLat();    
-
-  coordinates.style.display = 'block';
-  coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
-
-  localStorage.setItem("Longitude", lngLat.lng);
-  localStorage.setItem("Latitude", lngLat.lat);
-}
- 
 function zoomLevel()
 {
   var currentZoom = map.getZoom();
 
   localStorage.setItem("Zoom", currentZoom);
 }
-
-marker.on('dragend', onDragEnd);
 
 map.on('zoom', zoomLevel);
 
@@ -64,3 +54,28 @@ function displayGreenhouses() {
 
 btnFarms.addEventListener('click', displayFarms);
 btnGreenhouses.addEventListener('click', displayGreenhouses);
+
+
+// Add farms' position on map with markers.
+const collection = document.getElementById('idFarm');
+const lngs = [];
+const lats = [];
+
+for (let i = 0; i < collection.children.length; i++)
+{
+   var lng = collection.children[i].children[1].value;
+   lngs.push(lng);
+   var lat = collection.children[i].children[2].value;
+   lats.push(lat);
+}
+
+for (let i = 0, j = 0; i < lngs.length; i++, j++)
+{
+  console.log(lngs[i]);
+  console.log(lats[i]);
+  const marker = new mapboxgl.Marker({
+    draggable: false
+  })
+  .setLngLat([parseInt(lngs[i]), parseInt(lats[j])])
+  .addTo(map);
+}

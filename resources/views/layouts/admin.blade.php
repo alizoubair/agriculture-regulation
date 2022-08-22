@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Draw a polygon and calculate its area</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet">
+<link href="https://apié.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
 <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
@@ -27,6 +27,36 @@
         <a class="nav-link">
           <i class="bi bi-house"></i>
           <span>Fermes</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="bi bi-house"></i>
+          <span>Alerte</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="bi bi-house"></i>
+          <span>Clients</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="bi bi-house"></i>
+          <span>Abonnement</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="bi bi-house"></i>
+          <span>Role</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="bi bi-house"></i>
+          <span>Utilisateur</span>
         </a>
       </li>
     </ul>
