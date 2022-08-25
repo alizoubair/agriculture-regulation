@@ -7,7 +7,7 @@ const map = new mapboxgl.Map({
   zoom: 5, // starting zoom
   projection: 'globe' // display the map as a 3D globe
 });
-
+          
 map.addControl(
   new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
@@ -34,6 +34,14 @@ function zoomLevel()
 }
 
 map.on('zoom', zoomLevel);
+
+map.on('zoom', function (e) {
+    localStorage.setItem('bounds', map.getBounds());
+});
+
+map.on('drag', function (e) {
+    localStorage.setItem('bounds', map.getBounds());
+});
 
 map.on('style.load', () => {
   map.setFog({}); // Set the default atmosphere style
@@ -76,6 +84,6 @@ for (let i = 0, j = 0; i < lngs.length; i++, j++)
   const marker = new mapboxgl.Marker({
     draggable: false
   })
-  .setLngLat([parseInt(lngs[i]), parseInt(lats[j])])
+  .setLngLat([lngs[i], lats[j]])
   .addTo(map);
 }

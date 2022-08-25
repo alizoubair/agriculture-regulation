@@ -24,7 +24,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/admin', [App\Http\Controllers\Admin\AdminHomeController::class, 'index'])->name('admin.home.index');
 
 Route::get('/admin', [App\Http\Controllers\Admin\AdminFarmController::class, 'index'])->name('admin.farm.index');
-Route::get('/admin/test', [App\Http\Controllers\Admin\AdminFarmController::class, 'test'])->name('admin.farm.test');
 
 Route::get('/admin/farms/create', [App\Http\Controllers\Admin\AdminFarmController::class, 'display'])->name("admin.farm.create");
 

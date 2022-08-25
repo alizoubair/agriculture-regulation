@@ -16,11 +16,6 @@ class AdminFarmController extends Controller
 		return view('admin.farm.index')->with("farmData", $farmData)->with("greenhouseData", $greenhouseData); 
 	}
 
-	public function test()
-	{
-		return view('admin.farm.test'); 
-	}
-
 	public function display()
 	{
 		return view('admin.farm.create');
