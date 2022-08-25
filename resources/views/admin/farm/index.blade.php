@@ -18,12 +18,12 @@
                             @method('DELETE')
                             <button type="submit">Supprimer</button>
                          </form>
-                         <a href="{{route('admin.farm.edit', ['id'=> $farm->getId()])}}">Editer</a>
+                         <button id="updateBtn"><a href="{{route('admin.farm.edit', ['id'=> $farm->getId()])}}">Editer</a></button>
                      </div>
                      @endforeach
                 </div>
 
-                 <button id="btnFarm"><a href="farms/create">Créer une nouvelle ferme</a></button>
+                 <button id="btnFarm"><a href="admin/farms/create">Créer une nouvelle ferme</a></button>
              </div>
 
              <div id="dropdown-greenhouses" style="display: none;">

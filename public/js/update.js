@@ -1,14 +1,15 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpem91YmFpciIsImEiOiJjbDZ3NG50N3AwY3k3M2VtZW82dWxtZXg1In0.yezx5Y9hGle2i6b_Rx46Rw';
 
-const longitude = localStorage.getItem('Longitude');
-const latitude = localStorage.getItem('Latitude');
+const longitude = document.getElementById("lng");
+console.log(longitude.value);
+const latitude = document.getElementById('lat');
 const zoomLevel = localStorage.getItem('Zoom');
 
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/satellite-v9', // style URL
-    center: [longitude, latitude], // starting position [lng, lat]
+    center: [longitude.value, latitude.value], // starting position [lng, lat]
     zoom: zoomLevel, // starting zoom
     projection: 'globe' // display the map as a 3D globe
 });
@@ -28,6 +29,7 @@ if (localStorage.getItem('bounds') != null) {
     var box = new mapboxgl.LngLatBounds(sw, ne);
     map.fitBounds(box);
 };
+  
 
 const draw = new MapboxDraw({
   displayControlsDefault: false,
@@ -55,7 +57,6 @@ function updateArea(e) {
     const coordinates = data.features[data.features.length - 1].geometry.coordinates;
 
     localStorage.setItem('coordinates', coordinates);
-    console.log(coordinates);
 
     if (data.features.length > 0) {
         const area = turf.area(data);
@@ -78,9 +79,44 @@ function updateArea(e) {
     }
 }
 
-// Set longitude and latitude 
-const inputLongitude = document.getElementById('lng');
-const inputLatitude = document.getElementById('lat');
+// Add created polygon to map using a GeoJSON source
+const coordinates = localStorage.getItem('coordinates');
+console.log(coordinates);
+map.on('load', () => {
+    // Add a data source containing GeoJSON data.
+    map.addSource('maine', {
+        'type': 'geojson',
+        'data': {
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Polygon',
+                // These coordinates outline Maine.
+                'coordinates': [coordinates]
+            }
+        }
+    });
+ 
+    // Add a new layer to visualize the polygon.
+    map.addLayer({
+        'id': 'maine',
+        'type': 'fill',
+        'source': 'maine', // reference the data source
+        'layout': {},
+        'paint': {
+        'fill-color': '#e3a036', // blue color fill
+        'fill-opacity': 0.5
+        }
+    });
 
-inputLongitude.value = longitude;
-inputLatitude.value = latitude;
+    // Add a black outline around the polygon.
+    map.addLayer({
+        'id': 'outline',
+        'type': 'line',
+        'source': 'maine',
+        'layout': {},
+        'paint': {
+        'line-color': '#000',
+        'line-width': 3
+        }
+    });
+});

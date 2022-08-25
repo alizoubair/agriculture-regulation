@@ -19,10 +19,16 @@
             <label>Perimeter:</label>
             <input id="calculated-perimeter" type="text" name="perimeter" value="{{ $viewData['farm']->getPerimeter() }}" class="form-control">
         </div>
+        <div>
+            <input id="lng" type="text" name="lng" value="{{ $viewData['farm']->getLongitude() }}" style="display: none">
+        </div>
+        <div>
+            <input id="lat" type="text" name="lat" value="{{ $viewData['farm']->getLatitude() }}" style="display: none">
+        </div>
         <button type="submit">Save</button>
     </form>
 </div>
 <div id="map"></div>
-<script type="module" src="{{ asset('js/script.js') }}"></script>
+<script type="module" src="{{ asset('js/update.js') }}"></script>
 
 @endsection

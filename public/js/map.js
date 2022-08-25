@@ -7,7 +7,7 @@ const map = new mapboxgl.Map({
   zoom: 5, // starting zoom
   projection: 'globe' // display the map as a 3D globe
 });
-          
+
 map.addControl(
   new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
@@ -79,8 +79,6 @@ for (let i = 0; i < collection.children.length; i++)
 
 for (let i = 0, j = 0; i < lngs.length; i++, j++)
 {
-  console.log(lngs[i]);
-  console.log(lats[i]);
   const marker = new mapboxgl.Marker({
     draggable: false
   })
