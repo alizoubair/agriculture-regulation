@@ -48,17 +48,29 @@ map.on('style.load', () => {
 });
 
 // Add zoom in to inspect a farm
-const end = {
-  center: [document.getElementById('lng').value, document.getElementById('lat').value],
-  zoom: document.getElementById('zoom').value
-};
-
 function showFarm(event) {
   const { target } = event;
+  
   if (target.tagName !== 'A') {
     return;
   }
-  console.log("hh");
+
+  var items = document.getElementById('idFarm');
+  var center;                                       // Add later, handle error for no center
+
+  for (let i = 0; i < items.children.length; i++)
+  {
+    if (items.children[i].children[0].id === target.attributes.id.value)
+    {
+      center = items.children[i].children[4].value.split(',');
+    }
+  }
+
+  const end = {
+    center: [center[0], center[1]],
+    zoom: document.getElementById('zoom').value
+  };
+
   map.flyTo({
     ...end,
     duration: 12000,

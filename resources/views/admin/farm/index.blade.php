@@ -10,7 +10,7 @@
                 <div id="idFarm" class="dropdown-content">
                      @foreach($farmData['farms'] as $farm)
                      <div>
-                        <a href="#">{{ $farm->getName() }}</a>
+                        <a id="{{ $farm->getId() }}" href="#">{{ $farm->getName() }}</a>
                         <input id="lng" type="text" name="lng" value="{{ $farm->getLongitude() }}" style="display: none;">
                         <input id="lat" type="text" name="lat" value="{{ $farm->getLatitude() }}" style="display: none">
                         <input id="zoom" type="text" name="zoom" value="{{ $farm->getZoomLevel() }}" style="display: none;">
