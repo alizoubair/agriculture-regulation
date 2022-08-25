@@ -62,18 +62,25 @@ function updateArea(e) {
 }
 
 // Add created polygon to map using a GeoJSON source
-const coordinates = localStorage.getItem('coordinates');
-console.log(coordinates);
+const arr = localStorage.getItem('coordinates').split(',');
+const coordinates = [];
+
+for (let i = 0; i < arr.length; i++)
+{
+    coordinates.push([arr[i], arr[i+1]]);
+    i++;
+}
+
 map.on('load', () => {
     // Add a data source containing GeoJSON data.
     map.addSource('maine', {
         'type': 'geojson',
         'data': {
-            'type': 'Feature',
-            'geometry': {
-                'type': 'Polygon',
-                // These coordinates outline Maine.
-                'coordinates': [coordinates]
+        'type': 'Feature',
+        'geometry': {
+            'type': 'Polygon',
+            // These coordinates outline Maine.
+            'coordinates': [coordinates]
             }
         }
     });
@@ -85,8 +92,8 @@ map.on('load', () => {
         'source': 'maine', // reference the data source
         'layout': {},
         'paint': {
-        'fill-color': '#e3a036', // blue color fill
-        'fill-opacity': 0.5
+            'fill-color': '#fbb03b', // blue color fill
+            'fill-opacity': 0.3
         }
     });
 
@@ -97,8 +104,8 @@ map.on('load', () => {
         'source': 'maine',
         'layout': {},
         'paint': {
-        'line-color': '#000',
-        'line-width': 3
+            'line-color': '#fbb03b',
+            'line-width': 1
         }
     });
 });
