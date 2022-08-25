@@ -23,7 +23,7 @@ map.on('mousemove', (e) => {
   localStorage.setItem("Latitude", latitude);
 });
  
- // Add zoom and rotation controls to the map.
+// Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
 function zoomLevel()
@@ -47,6 +47,31 @@ map.on('style.load', () => {
   map.setFog({}); // Set the default atmosphere style
 });
 
+// Zoom in to inspect a farm
+const end = {
+  center: [document.getElementById('lng').value, document.getElementById('lat').value],
+  zoom: document.getElementById('zoom').value
+};
+
+function showFarm(event) {
+  const { target } = event;
+  if (target.tagName !== 'A') {
+    return;
+  }
+  console.log("hh");
+  map.flyTo({
+    ...end,
+    duration: 12000,
+    essential: true
+  })
+}
+
+window.onload = function() {
+  if (document.addEventListener)
+    document.addEventListener('click', showFarm, false);
+}
+
+// Toggle between farms and greenhouses
 const btnFarms = document.getElementById('farms');
 const btnGreenhouses = document.getElementById('greenhouses');
 

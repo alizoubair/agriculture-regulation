@@ -1,9 +1,9 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpem91YmFpciIsImEiOiJjbDZ3NG50N3AwY3k3M2VtZW82dWxtZXg1In0.yezx5Y9hGle2i6b_Rx46Rw';
 
-const longitude = parseInt(document.getElementById("lng").value);
-const latitude = parseInt(document.getElementById('lat').value);
-const zoomLevel = parseInt(document.getElementById('zoom').value);
+const longitude = document.getElementById("lng").value;
+const latitude = document.getElementById('lat').value;
+const zoomLevel = document.getElementById('zoom').value;
 
 const map = new mapboxgl.Map({
     container: 'map', // container ID
