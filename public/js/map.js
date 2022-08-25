@@ -145,10 +145,9 @@ const lats = [];
 
 for (let i = 0; i < collection.children.length; i++)
 {
-   var lng = collection.children[i].children[1].value;
-   lngs.push(lng);
-   var lat = collection.children[i].children[2].value;
-   lats.push(lat);
+   var center = collection.children[i].children[4].value.split(',');
+   lngs.push(center[0]);
+   lats.push(center[1]);
 }
 
 for (let i = 0, j = 0; i < lngs.length; i++, j++)
