@@ -15,6 +15,7 @@ class Farm extends Model
     * $this->attributes['lat']
     * $this->attributes['zoom']
     * $this->attributes['area']
+    * $this->attrbutes['center']
     * $this->attributes['created_at']
     * $this->attributes['updated_at']
     * $this->greenhouses - Greenhouse[] - contains the associated greenhouses
@@ -88,6 +89,16 @@ class Farm extends Model
     public function setArea($area)
     {
         $this->attributes['area'] = $area;
+    }
+
+    public function getCenter()
+    {
+        return $this->attributes['center'];
+    }
+
+    public function setCenter($center)
+    {
+        $this->attributes['center'] = $center;
     }
 
     public function getCreatedAt()

@@ -4,6 +4,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpem91YmFpciIsImEiOiJjbDZ3NG50N3AwY3k3M2VtZ
 const longitude = localStorage.getItem('Longitude');
 const latitude = localStorage.getItem('Latitude');
 const zoomLevel = localStorage.getItem('Zoom');
+const bounds = localStorage.getItem('bounds');
 
 const map = new mapboxgl.Map({
     container: 'map', // container ID
@@ -42,7 +43,6 @@ const draw = new MapboxDraw({
 });
 
 map.addControl(draw);
-
 map.on('draw.create', updateArea);
 map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
@@ -54,8 +54,13 @@ function updateArea(e) {
 
     const coordinates = data.features[data.features.length - 1].geometry.coordinates;
 
+    // Set center of the polygon
+    const center = turf.center(data.features[data.features.length - 1]).geometry.coordinates;
+
+    const inputCenter = document.getElementById('center');
+    inputCenter.value = center;
+
     localStorage.setItem('coordinates', coordinates);
-    console.log(coordinates);
 
     if (data.features.length > 0) {
         const area = turf.area(data);
@@ -81,7 +86,7 @@ function updateArea(e) {
 // Set longitude and latitude 
 const inputLongitude = document.getElementById('lng');
 const inputLatitude = document.getElementById('lat');
-const inputZoom = document.getElementById('zoom')
+const inputZoom = document.getElementById('zoom');
 
 inputLongitude.value = longitude;
 inputLatitude.value = latitude;

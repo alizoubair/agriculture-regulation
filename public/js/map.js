@@ -47,7 +47,7 @@ map.on('style.load', () => {
   map.setFog({}); // Set the default atmosphere style
 });
 
-// Zoom in to inspect a farm
+// Add zoom in to inspect a farm
 const end = {
   center: [document.getElementById('lng').value, document.getElementById('lat').value],
   zoom: document.getElementById('zoom').value
@@ -65,6 +65,55 @@ function showFarm(event) {
     essential: true
   })
 }
+
+const arr = localStorage.getItem('coordinates').split(',');
+const coordinates = [];
+
+for (let i = 0; i < arr.length; i++)
+{
+    coordinates.push([arr[i], arr[i+1]]);
+    i++;
+}
+
+map.on('load', () => {
+    // Add a data source containing GeoJSON data.
+    map.addSource('maine', {
+        'type': 'geojson',
+        'data': {
+        'type': 'Feature',
+        'geometry': {
+            'type': 'Polygon',
+            // These coordinates outline Maine.
+            'coordinates': [coordinates]
+            }
+        }
+    });
+ 
+    // Add a new layer to visualize the polygon.
+    map.addLayer({
+        'id': 'maine',
+        'type': 'fill',
+        'source': 'maine', // reference the data source
+        'layout': {},
+        'paint': {
+            'fill-color': '#fbb03b', // blue color fill
+            'fill-opacity': 0.3
+        }
+    });
+
+    // Add a black outline around the polygon.
+    map.addLayer({
+        'id': 'outline',
+        'type': 'line',
+        'source': 'maine',
+        'layout': {},
+        'paint': {
+            'line-color': '#fbb03b',
+            'line-width': 1,
+            'line-dasharray': [5, 5]
+        }
+    });
+});
 
 window.onload = function() {
   if (document.addEventListener)

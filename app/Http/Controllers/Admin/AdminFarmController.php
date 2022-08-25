@@ -30,6 +30,7 @@ class AdminFarmController extends Controller
 		$newFarm->setZoomLevel($request->input('zoom'));
 		$newFarm->setArea($request->input('area'));
 		$newFarm->setPerimeter($request->input('perimeter'));
+		$newFarm->setCenter($request->input('center'));
 		$newFarm->save();
 
 		return redirect()->route('admin.farm.index');

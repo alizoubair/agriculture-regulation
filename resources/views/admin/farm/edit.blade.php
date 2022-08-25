@@ -34,5 +34,5 @@
 </div>
 <div id="map"></div>
 <script type="text/javascript" src="{{ asset('js/update.js') }}"></script>
-
+<script type="text/javascript" src="{{ asset('js/polygon.js') }}"></script>
 @endsection

@@ -15,7 +15,8 @@
         <input id="lng" type="text" name="lng" style="display: none">
         <input id="lat" type="text" name="lat" style="display: none">
         <input id="zoom" type="text" name="zoom" style="display: none">
-
+        <input id="center" type="text" name="center" style="display: none">
+        
         <button type="submit">Save</button>
     </form>
 </div>

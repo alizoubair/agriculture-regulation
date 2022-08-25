@@ -14,6 +14,7 @@
                         <input id="lng" type="text" name="lng" value="{{ $farm->getLongitude() }}" style="display: none;">
                         <input id="lat" type="text" name="lat" value="{{ $farm->getLatitude() }}" style="display: none">
                         <input id="zoom" type="text" name="zoom" value="{{ $farm->getZoomLevel() }}" style="display: none;">
+                        <input type="text" name="center" value="{{ $farm->getCenter() }}" style="display: none">
                          <form action="{{ route('admin.farm.delete', $farm->getId()) }}" method="POST">
                             @csrf
                             @method('DELETE')
