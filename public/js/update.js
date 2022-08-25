@@ -1,36 +1,18 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpem91YmFpciIsImEiOiJjbDZ3NG50N3AwY3k3M2VtZW82dWxtZXg1In0.yezx5Y9hGle2i6b_Rx46Rw';
 
-const longitude = document.getElementById("lng");
-console.log(longitude.value);
-const latitude = document.getElementById('lat');
-const zoomLevel = localStorage.getItem('Zoom');
+const longitude = parseInt(document.getElementById("lng").value);
+const latitude = parseInt(document.getElementById('lat').value);
+const zoomLevel = parseInt(document.getElementById('zoom').value);
 
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/satellite-v9', // style URL
-    center: [longitude.value, latitude.value], // starting position [lng, lat]
+    center: [longitude, latitude], // starting position [lng, lat]
     zoom: zoomLevel, // starting zoom
     projection: 'globe' // display the map as a 3D globe
 });
-
-// Fit the map to the last view
-if (localStorage.getItem('bounds') != null) {
-    let bounds = localStorage.getItem('bounds');
-    var araBounds = bounds.toString().split(',');
-    var swX = parseFloat(araBounds[0].replace('LngLatBounds(LngLat(',''));
-    var swY = parseFloat(araBounds[1].replace(')',''));
-    var neX = parseFloat(araBounds[2].replace('LngLat(',''));
-    var neY = parseFloat(araBounds[3].replace('))', ''));
-
-    var ne = new mapboxgl.LngLat(neX, neY);
-    var sw = new mapboxgl.LngLat(swX, swY);
-
-    var box = new mapboxgl.LngLatBounds(sw, ne);
-    map.fitBounds(box);
-};
   
-
 const draw = new MapboxDraw({
   displayControlsDefault: false,
   // Select which mapbox-gl-draw control buttons to add to the map.

@@ -14,7 +14,8 @@
         <input id="calculated-perimeter" type="text" name="perimeter" value="{{ old('perimeter') }}" class="form-control">
         <input id="lng" type="text" name="lng" style="display: none">
         <input id="lat" type="text" name="lat" style="display: none">
-        
+        <input id="zoom" type="text" name="zoom" style="display: none">
+
         <button type="submit">Save</button>
     </form>
 </div>

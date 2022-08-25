@@ -13,9 +13,9 @@ class AddZoomLevel extends Migration
      */
     public function up()
     {
-        Schema::table('farms', function(Blueprint $table)) {
-            $table->string('zoom');        
-        }
+        Schema::table('farms', function(Blueprint $table) {
+            $table->string('zoom');       
+        });
     }
 
     /**
@@ -25,8 +25,8 @@ class AddZoomLevel extends Migration
      */
     public function down()
     {
-        Schema::table('farms', function(Blueprint $table)) {
+        Schema::table('farms', function(Blueprint $table) {
             $table->string('zoom');        
-        }
+        });
     }
 }

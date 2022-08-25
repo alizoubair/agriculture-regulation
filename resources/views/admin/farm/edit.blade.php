@@ -25,10 +25,14 @@
         <div>
             <input id="lat" type="text" name="lat" value="{{ $viewData['farm']->getLatitude() }}" style="display: none">
         </div>
+        <div>
+            <input id="zoom" type="text" name="zoom" value="{{ $viewData['farm']->getZoomLevel() }}" style="display: none">
+        </div>
+
         <button type="submit">Save</button>
     </form>
 </div>
 <div id="map"></div>
-<script type="module" src="{{ asset('js/update.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/update.js') }}"></script>
 
 @endsection

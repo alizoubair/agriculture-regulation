@@ -81,6 +81,8 @@ function updateArea(e) {
 // Set longitude and latitude 
 const inputLongitude = document.getElementById('lng');
 const inputLatitude = document.getElementById('lat');
+const inputZoom = document.getElementById('zoom')
 
 inputLongitude.value = longitude;
 inputLatitude.value = latitude;
+inputZoom.value = zoomLevel;
