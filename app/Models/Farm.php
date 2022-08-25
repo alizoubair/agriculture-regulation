@@ -11,6 +11,9 @@ class Farm extends Model
     * $this->attributes['id']
     * $this->attributes['name']
     * $this->attributes['perimeter']
+    * $this->attributes['lng']
+    * $this->attributes['lat']
+    * $this->attributes['zoom']
     * $this->attributes['area']
     * $this->attributes['created_at']
     * $this->attributes['updated_at']
@@ -55,6 +58,16 @@ class Farm extends Model
     public function setLatitude($lat)
     {
         $this->attributes['lat'] = $lat;
+    }
+
+    public function getZoomLevel()
+    {
+        return $this->attributes['zoom'];
+    }
+
+    public function setZoomLevel($zoom)
+    {
+        $this->attributes['zoom'] = $zoom;
     }
     
     public function getPerimeter()
