@@ -14,8 +14,9 @@
         <label>Ferme</label>
 
         <select class="dropdown-fermes" name="farm_id">
+            <option value="" selected>selectioner une ferme</option>
             @foreach($viewData['farms'] as $farm)
-            <option id="farm_id" value="{{ $farm->getId() }}">{{ $farm->getName() }}</option>
+            <option id="{{ $farm->getId() }}" value="{{ $farm->getCenter() }}">{{ $farm->getName() }}</option>
             @endforeach
         </select>
     </div>
@@ -27,10 +28,10 @@
         <label>Perimeter:</label>
         <input id="calculated-perimeter" type="text" name="perimeter" value="{{ old('perimeter') }}" class="form-control">
     </div>
-    <button type="submit">Save</button>
+    <button type="submit">Enregistrer</button>
 </form>
 </div>
 <div id="map"></div>
 <script type="module" src="{{ asset('js/script.js') }}"></script>
-
+<script type="text/javascript" src="{{ asset('js/greenhouse.js') }}"></script>
 @endsection

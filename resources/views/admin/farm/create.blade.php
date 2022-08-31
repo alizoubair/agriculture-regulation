@@ -2,7 +2,7 @@
 
 @section('Farm')
 <div class="sidebar-content">
-    <button id="cancel-farm"><a href="/admin">Annuler</a></button>
+    <button id="cancelBtn"><a href="/admin">Annuler</a></button>
 
     <form method="POST" action="{{ route('admin.farm.create') }}">
         @csrf
@@ -14,10 +14,11 @@
         <input id="calculated-perimeter" type="text" name="perimeter" value="{{ old('perimeter') }}" class="form-control">
         <input id="lng" type="text" name="lng" style="display: none">
         <input id="lat" type="text" name="lat" style="display: none">
+        <input id="coordinates" trype="text" name="coordinates" style="display: none" >
         <input id="zoom" type="text" name="zoom" style="display: none">
         <input id="center" type="text" name="center" style="display: none">
         
-        <button type="submit">Save</button>
+        <button id="createBtn" type="submit">Save</button>
     </form>
 </div>
 <div id="map"></div>

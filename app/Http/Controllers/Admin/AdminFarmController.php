@@ -31,6 +31,7 @@ class AdminFarmController extends Controller
 		$newFarm->setArea($request->input('area'));
 		$newFarm->setPerimeter($request->input('perimeter'));
 		$newFarm->setCenter($request->input('center'));
+		$newFarm->setCoordinates($request->input('coordinates'));
 		$newFarm->save();
 
 		return redirect()->route('admin.farm.index');

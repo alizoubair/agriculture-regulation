@@ -1,4 +1,3 @@
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpem91YmFpciIsImEiOiJjbDZ3NG50N3AwY3k3M2VtZW82dWxtZXg1In0.yezx5Y9hGle2i6b_Rx46Rw';
 
 const longitude = localStorage.getItem('Longitude');
@@ -30,6 +29,11 @@ if (localStorage.getItem('bounds') != null) {
     map.fitBounds(box);
 };
 
+/* Allow point delete in polygon mode 
+MapboxDraw.modes.draw_polygon.clickAnywhere = function (state, e) {
+    console.log(state);
+} */
+
 const draw = new MapboxDraw({
   displayControlsDefault: false,
   // Select which mapbox-gl-draw control buttons to add to the map.
@@ -42,7 +46,22 @@ const draw = new MapboxDraw({
   defaultMode: 'draw_polygon'
 });
 
+/* Add Controls to the Map */
+map.on('click', () => {
+    const coordinates = draw.getAll().features[draw.getAll().features.length - 1].geometry.coordinates;
+    const coordinateCount = coordinates[0].length;
+
+    if (coordinateCount > 3)
+    {
+        const popup = new mapboxgl.Popup({ closeButton: false })
+            .setLngLat([coordinates[0][0][0], coordinates[0][0][1]])
+            .setHTML('<button id="popupBtn">Terminer</button>')
+            .addTo(map);
+    }
+});
+
 map.addControl(draw);
+
 map.on('draw.create', updateArea);
 map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
@@ -60,8 +79,9 @@ function updateArea(e) {
     const inputCenter = document.getElementById('center');
     inputCenter.value = center;
 
-    localStorage.setItem('coordinates', coordinates);
-
+    const Inputcoordinates = document.getElementById('coordinates');
+    Inputcoordinates.value = coordinates;
+    
     if (data.features.length > 0) {
         const area = turf.area(data);
 
