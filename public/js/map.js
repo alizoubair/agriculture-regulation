@@ -190,8 +190,8 @@ function showGreenhouse(event) {
 
     for (let i = 0; i < greenhouses.children.length; i++) {
         if (greenhouses.children[i].children[0].id == target.attributes.id.value) {
-            center = greenhouses.children[i].children[6].value.split(',');
-            zoom = greenhouses.children[i].children[5].value;
+            zoom = greenhouses.children[i].children[1].value;
+            center = greenhouses.children[i].children[2].value.split(',');
         }
     }
 
@@ -205,4 +205,9 @@ function showGreenhouse(event) {
         duration: 10000,
         essential: true
     });
+}
+
+window.onload = function () {
+    if (document.addEventListener)
+        document.addEventListener('click', showGreenhouse, false);
 }

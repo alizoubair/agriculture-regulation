@@ -30,7 +30,7 @@ class AdminGreenhouseController extends Controller
 		$newGreenhouse->setArea($request->input('area'));
 		$newGreenhouse->setZoomLevel($request->input('zoom'));
 		$newGreenhouse->setCenter($request->input('center'));
-		$newGreenhouse->setCoordinates($requets->input('coordinates'));
+		$newGreenhouse->setCoordinates($request->input('coordinates'));
 		$newGreenhouse->save();
 
 		return redirect()->route('admin.farm.index');
