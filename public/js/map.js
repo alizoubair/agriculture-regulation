@@ -152,7 +152,7 @@ function showFarm(event) {
             selectedMarker = markers[i];
         }
     }
-console.log(zoom);
+
     const end = {
         center: [center[0], center[1]],
         zoom: zoom,
@@ -164,7 +164,7 @@ console.log(zoom);
         essential: true
     });
 
-    // Remove marker when we're clone enough
+    // Remove marker when we're close enough
     map.on('moveend', () => {
         if (map.getZoom() == zoom) {
             selectedMarker.remove();

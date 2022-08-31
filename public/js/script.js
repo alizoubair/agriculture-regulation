@@ -5,7 +5,7 @@ const latitude = localStorage.getItem('Latitude');
 const zoomLevel = localStorage.getItem('Zoom');
 const bounds = localStorage.getItem('bounds');
 
-const map = new mapboxgl.Map({
+export const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/satellite-v9', // style URL
     center: [longitude, latitude], // starting position [lng, lat]
@@ -50,7 +50,7 @@ const draw = new MapboxDraw({
 map.on('click', () => {
     const coordinates = draw.getAll().features[draw.getAll().features.length - 1].geometry.coordinates;
     const coordinateCount = coordinates[0].length;
-
+    console.log(coordinates[0]);
     if (coordinateCount > 3)
     {
         const popup = new mapboxgl.Popup({ closeButton: false })
