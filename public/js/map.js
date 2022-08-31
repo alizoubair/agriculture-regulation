@@ -176,3 +176,33 @@ window.onload = function () {
     if (document.addEventListener)
         document.addEventListener('click', showFarm, false);
 }
+
+// Add zoom in to inspect a greenhouse
+function showGreenhouse(event) {
+    const { target } = event;
+
+    if (target.tagName !== 'A') {
+        return;
+    }
+
+    var greenhouses = document.getElementById('idGreenhouse');
+    var center, zoom;
+
+    for (let i = 0; i < greenhouses.children.length; i++) {
+        if (greenhouses.children[i].children[0].id == target.attributes.id.value) {
+            center = greenhouses.children[i].children[6].value.split(',');
+            zoom = greenhouses.children[i].children[5].value;
+        }
+    }
+
+    const end = {
+        center: [center[0], center[1]],
+        zoom: zoom,
+    };
+
+    map.flyTo({
+        ...end,
+        duration: 10000,
+        essential: true
+    });
+}

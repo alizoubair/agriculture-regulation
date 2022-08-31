@@ -34,8 +34,11 @@
                 <div id="idGreenhouse" class="dropdown-content">
                     @foreach($greenhouseData['greenhouses'] as $greenhouse)
                     <div>
-                        <a>{{ $greenhouse->getName()}}</a>
-                         <form action="{{ route('admin.greenhouse.delete', $greenhouse->getId()) }}" method="POST">
+                        <a id="{{ $greenhouse->getId() }}" href="#">{{ $greenhouse->getName()}}</a>
+                        <input id="zoom" type="text" name="zoom" value="{{ $greenhouse->getZoomLevel() }}" style="display: none;">
+                        <input type="text" name="center" value="{{ $greenhouse->getCenter() }}" style="display: none">
+                        <input type="text"  name="coordinates" value="{{ $greenhouse->getCoordinates() }}" style="display: none;" > 
+                        <form action="{{ route('admin.greenhouse.delete', $greenhouse->getId()) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Supprimer</button>
