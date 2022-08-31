@@ -46,41 +46,6 @@ map.on('style.load', () => {
     map.setFog({}); // Set the default atmosphere style
 });
 
-// Add zoom in to inspect a farm
-function showFarm(event) {
-    const { target } = event;
-
-    if (target.tagName !== 'A') {
-        return;
-    }
-
-    var items = document.getElementById('idFarm');
-    var center, zoom;                                       // Add later, handle error for no center
-
-    for (let i = 0; i < items.children.length; i++) {
-        if (items.children[i].children[0].id === target.attributes.id.value) {
-            center = items.children[i].children[6].value.split(',');
-            zoom = items.children[i].children[5].value;
-        }
-    }
-
-    const end = {
-        center: [center[0], center[1]],
-        zoom: zoom,
-    };
-
-    map.flyTo({
-        ...end,
-        duration: 10000,
-        essential: true
-    });
-}
-
-window.onload = function () {
-    if (document.addEventListener)
-        document.addEventListener('click', showFarm, false);
-}
-
 // Toggle between farms and greenhouses
 const btnFarms = document.getElementById('farms');
 const btnGreenhouses = document.getElementById('greenhouses');
@@ -104,6 +69,7 @@ btnGreenhouses.addEventListener('click', displayGreenhouses);
 
 
 const collection = document.getElementById('idFarm');
+var markers = [];
 
 for (let i = 0; i < collection.children.length; i++) {
     // Outline each farm
@@ -114,7 +80,7 @@ for (let i = 0; i < collection.children.length; i++) {
         coordinates.push([arr[i], arr[i + 1]]);
         i++;
     }
-console.log([coordinates]);
+
     map.on('load', () => {
         // Add a data source containing GeoJSON data.
         map.addSource(`farm${i}`, {
@@ -164,4 +130,49 @@ console.log([coordinates]);
         .setLngLat([center[0], center[1]])
         .addTo(map);
 
+    markers.push(marker);
+}
+
+// Add zoom in to inspect a farm
+function showFarm(event) {
+    const { target } = event;
+
+    if (target.tagName !== 'A') {
+        return;
+    }
+
+    var items = document.getElementById('idFarm');
+    var center, zoom;                                      // Add later, handle error for no center
+    var selectedMarker;
+
+    for (let i = 0; i < items.children.length; i++) {
+        if (items.children[i].children[0].id === target.attributes.id.value) {
+            center = items.children[i].children[6].value.split(',');
+            zoom = items.children[i].children[5].value;
+            selectedMarker = markers[i];
+        }
+    }
+console.log(zoom);
+    const end = {
+        center: [center[0], center[1]],
+        zoom: zoom,
+    };
+
+    map.flyTo({
+        ...end,
+        duration: 10000,
+        essential: true
+    });
+
+    // Remove marker when we're clone enough
+    map.on('moveend', () => {
+        if (map.getZoom() == zoom) {
+            selectedMarker.remove();
+        }
+    })    
+}
+
+window.onload = function () {
+    if (document.addEventListener)
+        document.addEventListener('click', showFarm, false);
 }
