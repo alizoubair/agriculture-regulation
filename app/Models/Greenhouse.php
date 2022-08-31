@@ -73,6 +73,36 @@ class Greenhouse extends Model
         $this->attributes['area'] = $area;
     }
 
+    public function getZoomLevel()
+    {
+        return $this->attributes['zoom'];
+    }
+
+    public function setZoomLevel($zoom)
+    {
+        $this->attributes['zoom'] = $zoom;
+    }
+
+    public function getCenter()
+    {
+        return $this->attributes['center'];
+    }
+
+    public function setCenter($center)
+    {
+        $this->attributes['center'] = $center;
+    }
+
+    public function getCoordinates()
+    {
+        return $this->attributes['coordinates'];
+    }
+
+    public function setCoordinates($coordinates)
+    {
+        $this->attributes['coordinates'] = $coordinates;
+    }
+
     public function getCreatedAt()
     {
         return $this->attributes['created_at'];
