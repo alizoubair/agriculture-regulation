@@ -1,7 +1,27 @@
+html, body {
+	margin: 0; 
+	height: 100%; 
+	overflow: hidden
+}
+
 body {
-	margin: 0;
 	font-family: "Open Sans", sans-serif;
 	line-height: 1.5;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+p {
+	margin: 0;
+	text-align: center;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -15,21 +35,22 @@ body {
 }
 
 .sidebar {
-	position: fixed;
-	top: 0;
+	position: absolute;
 	left: 0;
 	bottom: 0;
-	width: 200px;	
-	padding: 20px;
-	overflow-y: auto;
-	scrollbar-width: thin;
-	scrollbar-color:  #aab7cf transparent;
+	width: 200px;
+	height: 100%;
+	padding: 0 20px;
+	background: linear-gradient(181.09deg, #336638 7.49%, #36763C 87.42%);
+	box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.25);
 }
 
 main {
-	margin-left: 200px;
-	margin-top: 60px;
-	padding: 20px 30px;
+	position: absolute;
+	left: 240px;
+	top: 64px;
+	height: 94%;
+	overflow: hidden;
 }
 
 #content {
@@ -39,6 +60,7 @@ main {
 .page-content {
 	display: flex;
 	width: 100%;
+	padding: 20px;
 }
 
 #calculation-box {
@@ -49,16 +71,17 @@ main {
     display: none;
 }
 
+/* Main */
+.dropdown {
+	display: flex;
+	justify-content: center;
+}
+
 .sidebar-content {
 	width: 360px;
-	height: 972px;
-	padding-left: 20px;
 	padding-right: 20px;
 }
 
-.sidebar-content form {
-	height: 100%;
-}
 .sidebar-content .btns button {
 	width: 130px;
 	height: 58px;
@@ -66,38 +89,132 @@ main {
 }
 
 #farms {
+	width: 177px;
+	height: 58px;
 	background: #78B044;
+	color: #FFFFFF;
+	border-radius: 0px 5px 0px 0px;
 }
 
 #greenhouses {
+	width: 177px;
+	height: 58px;
 	background: #EEF5EC;
+	color: #ACB4AB;
+	border-radius: 0px 5px 0px 0px;
 }
 
 .sidebar-content form input {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 13px;
 	width: 328px;
 	height: 36px;
-	margin:  53px 16px;
+	margin-bottom: 56px;
+	padding-left: 10px;
+	padding-top: 11px; 
+	padding-bottom: 11px;
+	color: #333333;
+	border-radius: 5px;
+	background: #EEF5EC;
+}
+
+.sidebar-content form label {
+	color: #78B044;
+}
+
+.sidebar-content p {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 13px;
+	color: #FFFFFF;
 }
 
 #createBtn {
-	position: relative;
+	position: absolute;
 	width: 179px;
-	height: 44;
-	bottom: -920px;
+	bottom: 28px;
+	left: 90px;
+	background: #78B044;
+	color: #FFFFFF;
+	border-radius: 5px;
+	padding: 14.87px 17.9px 16.13px 16.91px;
+}
+
+#createBtn a {
+	color: #FFFFFF;
+}
+
+.line::before {
+	position: absolute;
+	bottom: 80px;
+	display: inline-block;
+    content: "";
+    border: 1px solid #BFE3C3;
+    width: 360px;
+	transform: translateY(-1rem);
 }
 
 #farm {
 	background: #FFFFFF;
+	width: 100%;
 	border: 0.5px solid #BFE3C3;
 	box-shadow: 1px 1px 8px rgba(120, 176, 68, 0.25);
 	border-radius: 5px;
+	margin: 0 10px 4px 0;
 }
 
-.show {display: block;}
+#greenhouse {
+	background: #FFFFFF;
+	width: 100%;
+	border: 0.5px solid #BFE3C3;
+	box-shadow: 1px 1px 8px rgba(120, 176, 68, 0.25);
+	border-radius: 5px;
+	margin: 0 10px 4px 0;
+}
+
+#idFarm, #idGreenhouse {
+	display: flex;
+	width: 100%;
+}
+
+#idFarm::before {
+	display: inline-block;
+	content: "";
+	width: 20px;
+	height: 100%;
+	background: #79FF76;
+	border-radius: 5px 0px 0px 5px;
+}
+
+#idGreenhouse::before {
+	display: inline-block;
+	content: "";
+	width: 20px;
+	height: 100px;
+	background: #FE813B;
+	border-radius: 5px 0px 0px 5px;
+}
+
+#updateBtn a i {
+	color: #E7AB11;
+}
+
+#deleteBtn a i {
+	color: #E74011;
+}
 
 #map {
-  width: 1300px;
-  height: 100%;
+  width: 1600px;
+  height: 900px;
+}
+
+.mapboxgl-canvas-container {
+    width: 100vh;
 }
 
 .coordinates {
@@ -118,29 +235,41 @@ main {
 	height: 600px;
 }
 
-.header-logo {
-	height: 60px;
+/* Header */
+#header {
+	position: relative;
+	top: 0;
+	left: 200px;
+	height: 64px;
+	background: #66A66D;
+}
+.logo {
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
-.header-logo .logo {
-	display: flex;
-	align-items: center;
+.logo span {
+	font-family: 'Redacted Script';
+	font-size: 24px;
+	line-height: 24px;
+	text-align: center;
+	padding: 20px 47px;
+	color: #66A66D;
 }
 
-.header-logo .logo img {
-	margin-right: 6px;
+.sidebar .main::before {
+	display: inline-block;
+    content: "";
+    border: 1px solid #BFE3C3;
+    width: 200px;
+	transform: translateY(-1rem);
 }
 
-.header-logo span {
-	font-size: 26px;
-	font-weight: 700;
-	color: #596f52;
-}
-
-.sidebar-nav {
-	padding: 0;
-	margin: 0;
-	list-style: none;
+/* Main */
+#search {
+	width: 340px;
+	height: 36px;
+	margin: 10px;
 }
 
 .sidebar-nav .nav-item {
@@ -153,17 +282,45 @@ main {
 	padding: 10px 15px;
 	text-decoration: none;
 	border-radius: 4px;
+	color: #FFFFFF;
 }
 
 .sidebar-nav .nav-item i {
 	font-size: 18px;
 	margin-right: 10px;
-	color: #596f52;
+	color: #FFFFFF;
 }
 
-.footer-logo img {
+.sidebar-nav .nav-item .nav-link:focus {
+	color: #78B044;
+	background-color: #E7FFE8;
+}
+
+.sidebar-nav .nav-item .nav-link:focus i {
+	color: #78B044;
+}
+
+.settings {
+	position: absolute;
+	bottom: 96px;
+}
+
+.sidebar-footer {
+	position: absolute;
+	bottom: 0;
+	height: 96px;
+}
+
+.sidebar-footer:before {
+	display: inline-block;
+    content: "";
+    border: 1px solid #BFE3C3;
+    width: 200px;
+	transform: translateY(-1rem);
+}
+
+.sidebar-footer img {
 	max-height: 50px;
-	padding-right: 10px;
 }
 
 .company {
@@ -184,4 +341,34 @@ main {
 
 /* Pop up control */
 .mapboxgl-popup-content {
+}
+
+/* Create Farm & Greenhouse*/
+.main-title {
+	height: 59px;
+	background: #78B044;
+	color: #FFFFFF;
+	border-radius: 5px 0px 0px 0px;
+	padding: 24px 20px;
+}
+
+#cancelBtn {
+	background: none;
+	border: none;
+}
+
+#cancelBtn a span {
+	color: #808080;
+}
+
+#cancelBtn a i {
+	width: 16px;
+	height: 14px;
+}
+
+#cancelBtn::after {
+	display: block;
+	content: "";
+	width: 360px;
+	border: 1px solid #BFE3C3;
 }

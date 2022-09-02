@@ -47,6 +47,26 @@ map.on('draw.create', updateArea);
 map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
 
+// Add created polygon to map
+const arr = document.getElementById('coordinates').value.split(',');
+const coordinates = [];
+
+for (let i = 0; i < arr.length; i++)
+{
+    coordinates.push([parseFloat(arr[i]), parseFloat(arr[i+1])]);
+    i++;
+}
+console.log(coordinates);
+draw.add({
+    'id': 'polygon',
+    'type': 'Feature',
+    'properties': {},
+    'geometry': {
+        'type': 'Polygon',
+        'coordinates': [coordinates]
+    }
+});
+
 function updateArea(e) {
     const data = draw.getAll();
     const area_field = document.getElementById('calculated-area');
@@ -76,53 +96,3 @@ function updateArea(e) {
             alert('Click the map to draw a polygon.');
     }
 }
-
-// Add created polygon to map using a GeoJSON source
-const arr = localStorage.getItem('coordinates').split(',');
-const coordinates = [];
-
-for (let i = 0; i < arr.length; i++)
-{
-    coordinates.push([arr[i], arr[i+1]]);
-    i++;
-}
-
-map.on('load', () => {
-    // Add a data source containing GeoJSON data.
-    map.addSource('maine', {
-        'type': 'geojson',
-        'data': {
-        'type': 'Feature',
-        'geometry': {
-            'type': 'Polygon',
-            // These coordinates outline Maine.
-            'coordinates': [coordinates]
-            }
-        }
-    });
- 
-    // Add a new layer to visualize the polygon.
-    map.addLayer({
-        'id': 'maine',
-        'type': 'fill',
-        'source': 'maine', // reference the data source
-        'layout': {},
-        'paint': {
-            'fill-color': '#fbb03b', // blue color fill
-            'fill-opacity': 0.3
-        }
-    });
-
-    // Add a black outline around the polygon.
-    map.addLayer({
-        'id': 'outline',
-        'type': 'line',
-        'source': 'maine',
-        'layout': {},
-        'paint': {
-            'line-color': '#fbb03b',
-            'line-width': 1,
-            'line-dasharray': [5, 5]
-        }
-    });
-});

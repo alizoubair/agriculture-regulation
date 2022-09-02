@@ -5,35 +5,36 @@
         <button id="farms" class="dropbtn">Fermes</button>
         <button id="greenhouses" class="dropbtn">Serres</button>
     </div>
-      <div class="dropdown">
-             <div id="dropdown-farms">
+      <div>
+            <input id="search" placeholder="recherche par ferme">
+            <div id="dropdown-farms" class="dropdown">
                 <div id="idFarm" class="dropdown-content">
-                     @foreach($farmData['farms'] as $farm)
-                     <div id="farm">
+                    @foreach($farmData['farms'] as $farm)
+                    <div id="farm">
                         <a id="{{ $farm->getId() }}" href="#">{{ $farm->getName() }}</a>
-                        <button id="updateBtn"><a href="{{route('admin.farm.edit', ['id'=> $farm->getId()])}}"><i class="bi bi-pencil"></i></a></button>
+                        <button id="updateBtn"><a href="{{route('admin.farm.edit', ['id'=> $farm->getId()])}}"><i class="bi bi-pencil-fill"></i></a></button>
                         <p>Périmètre: {{ $farm->getPerimeter() }} Surface: {{ $farm->getArea() }}</p>
                         <input id="lng" type="text" name="lng" value="{{ $farm->getLongitude() }}" style="display: none;">
                         <input id="lat" type="text" name="lat" value="{{ $farm->getLatitude() }}" style="display: none">
                         <input id="zoom" type="text" name="zoom" value="{{ $farm->getZoomLevel() }}" style="display: none;">
                         <input type="text" name="center" value="{{ $farm->getCenter() }}" style="display: none">
                         <input type="text"  name="coordinates" value="{{ $farm->getCoordinates() }}" style="display: none;" >
-                         <form action="{{ route('admin.farm.delete', $farm->getId()) }}" method="POST">
+                        <form action="{{ route('admin.farm.delete', $farm->getId()) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit"><i class="bi bi-trash"></i></button>
-                         </form>
-                     </div>
-                     @endforeach
+                            <button id="deleteBtn" type="submit"><i class="bi bi-trash-fill"></i></button>
+                        </form>
+                    </div>
+                    @endforeach
                 </div>
 
-                 <button id="btnFarm"><a href="admin/farms/create">Créer une nouvelle ferme</a></button>
-             </div>
+                <button id="createBtn"><a href="admin/farms/create">Ajouter une ferme</a></button>
+            </div>
 
-             <div id="dropdown-greenhouses" style="display: none;">
+            <div id="dropdown-greenhouses" class="dropdown" style="display: none;">
                 <div id="idGreenhouse" class="dropdown-content">
                     @foreach($greenhouseData['greenhouses'] as $greenhouse)
-                    <div>
+                    <div id="greenhouse">
                         <a id="{{ $greenhouse->getId() }}" href="#">{{ $greenhouse->getName()}}</a>
                         <input id="zoom" type="text" name="zoom" value="{{ $greenhouse->getZoomLevel() }}" style="display: none;">
                         <input type="text" name="center" value="{{ $greenhouse->getCenter() }}" style="display: none">
@@ -41,18 +42,17 @@
                         <form action="{{ route('admin.greenhouse.delete', $greenhouse->getId()) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Supprimer</button>
-                         </form>
-                         <a href="{{route('admin.greenhouse.edit', ['id'=> $greenhouse->getId()])}}">Editer</a>
-                     </div>
+                            <button id="deleteBtn" type="submit">Supprimer</button>
+                        </form>
+                        <a href="{{route('admin.greenhouse.edit', ['id'=> $greenhouse->getId()])}}">Editer</a>
+                    </div>
                     @endforeach
                 </div>
 
-                <button id="btnGreenhouse"><a href="admin/greenhouses/create">Créer une nouvelle Serre</a></button> 
+                <button id="createBtn"><a href="admin/greenhouses/create">Ajouter une Serre</a></button> 
             </div>
       </div>
 </div>
 <div id="map"></div>
-<pre id="coordinates" class="coordinates"></pre>
 <script type="module" src="{{ asset('js/map.js') }}"></script>
 @endsection

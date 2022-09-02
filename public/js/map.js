@@ -46,6 +46,10 @@ map.on('style.load', () => {
     map.setFog({}); // Set the default atmosphere style
 });
 
+map.on('render', function () {
+    map.resize();
+});
+
 // Toggle between farms and greenhouses
 const btnFarms = document.getElementById('farms');
 const btnGreenhouses = document.getElementById('greenhouses');
@@ -53,15 +57,15 @@ const btnGreenhouses = document.getElementById('greenhouses');
 function displayFarms() {
     btnFarms.setAttribute('style', 'background: #78B044');
     btnGreenhouses.setAttribute('style', 'background: #EEF5EC');
-    document.getElementById('dropdown-farms').setAttribute('style', 'display:block');
+    document.getElementById('dropdown-farms').setAttribute('style', 'display:block; display: flex');
     document.getElementById('dropdown-greenhouses').setAttribute('style', 'display:none');
 }
 
 function displayGreenhouses() {
-    btnFarms.setAttribute('style', 'background: #EEF5EC');
-    btnGreenhouses.setAttribute('style', 'background: #78B044');
+    btnFarms.setAttribute('style', 'background: #EEF5EC; color: #ACB4AB');
+    btnGreenhouses.setAttribute('style', 'background: #78B044; color: #FFFFFF;');
     document.getElementById('dropdown-farms').setAttribute('style', 'display:none');
-    document.getElementById('dropdown-greenhouses').setAttribute('style', 'display:block');
+    document.getElementById('dropdown-greenhouses').setAttribute('style', 'display:block; display: flex');
 }
 
 btnFarms.addEventListener('click', displayFarms);

@@ -28,6 +28,9 @@
         <div>
             <input id="zoom" type="text" name="zoom" value="{{ $viewData['farm']->getZoomLevel() }}" style="display: none">
         </div>
+        <div>
+            <input id="coordinates" type="text" name="coordinates" value="{{ $viewData['farm']->getCoordinates() }}" style="display: none">
+        </div>
 
         <button type="submit">Save</button>
     </form>
