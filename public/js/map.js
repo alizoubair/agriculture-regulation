@@ -125,6 +125,11 @@ for (let i = 0; i < collection.children.length; i++) {
         });
     });
 
+    // Attach a popup to a marker instance
+    const popup = new mapboxgl.Popup({ offset: 25 }).setText(
+        `${collection.children[i].children[2].innerHTML}`
+    );
+
     // Add farms' position on map with markers.
     var center = collection.children[i].children[6].value.split(',');
 
@@ -132,6 +137,7 @@ for (let i = 0; i < collection.children.length; i++) {
         draggable: false
     })
         .setLngLat([center[0], center[1]])
+        .setPopup(popup)
         .addTo(map);
 
     markers.push(marker);
