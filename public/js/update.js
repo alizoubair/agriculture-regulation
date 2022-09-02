@@ -56,14 +56,14 @@ for (let i = 0; i < arr.length; i++)
     coordinates.push([parseFloat(arr[i]), parseFloat(arr[i+1])]);
     i++;
 }
-console.log(coordinates);
+
 draw.add({
     'id': 'polygon',
     'type': 'Feature',
     'properties': {},
     'geometry': {
         'type': 'Polygon',
-        'coordinates': [coordinates]
+        'coordinates': [coordinates],
     }
 });
 
