@@ -73,11 +73,12 @@ btnGreenhouses.addEventListener('click', displayGreenhouses);
 
 
 const collection = document.getElementById('idFarm');
+console.log(collection.children[0].children);
 var markers = [];
 
 for (let i = 0; i < collection.children.length; i++) {
     // Outline each farm
-    var arr = collection.children[i].children[7].value.split(',');
+    var arr = collection.children[i].children[0].children[9].value.split(',');
     const coordinates = [];
 
     for (let i = 0; i < arr.length; i++) {
@@ -118,28 +119,35 @@ for (let i = 0; i < collection.children.length; i++) {
             'source': `farm${i}`,
             'layout': {},
             'paint': {
-                'line-color': '#fbb03b',
-                'line-width': 1,
-                'line-dasharray': [5, 5]
+                'line-color': '#FFD704',
+                'line-width': 3,
             }
         });
     });
 
     // Attach a popup to a marker instance
     const popup = new mapboxgl.Popup({ offset: 25 }).setText(
-        `${collection.children[i].children[2].innerHTML}`
+        `${collection.children[i].children[0].children[3].innerHTML}
+         ${collection.children[i].children[0].children[4].innerHTML}`
     );
 
     // Add farms' position on map with markers.
-    var center = collection.children[i].children[6].value.split(',');
+    var center = collection.children[i].children[0].children[8].value.split(',');
 
     const marker = new mapboxgl.Marker({
         draggable: false
     })
         .setLngLat([center[0], center[1]])
-        .setPopup(popup)
         .addTo(map);
 
+    const element = marker.getElement();
+    element.id = "marker"
+
+    element.addEventListener('mouseenter', () => popup.addTo(map));
+    element.addEventListener('mouseleave', () => popup.remove());
+    
+    marker.setPopup(popup);
+    
     markers.push(marker);
 }
 
@@ -201,7 +209,8 @@ function showGreenhouse(event) {
     for (let i = 0; i < greenhouses.children.length; i++) {
         if (greenhouses.children[i].children[0].id == target.attributes.id.value) {
             zoom = greenhouses.children[i].children[1].value;
-            center = greenhouses.children[i].children[2].value.split(',');
+            center = greenhouses.children[i].children[9].value.split(',');
+            console.log(center);
         }
     }
 

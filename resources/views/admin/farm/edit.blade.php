@@ -32,7 +32,7 @@
             <input id="coordinates" type="text" name="coordinates" value="{{ $viewData['farm']->getCoordinates() }}" style="display: none">
         </div>
 
-        <button type="submit">Save</button>
+        <button type="submit">Enregistrer</button>
     </form>
 </div>
 <div id="map"></div>

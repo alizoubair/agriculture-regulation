@@ -50,7 +50,6 @@ const draw = new MapboxDraw({
 map.on('click', () => {
     const coordinates = draw.getAll().features[draw.getAll().features.length - 1].geometry.coordinates;
     const coordinateCount = coordinates[0].length;
-    console.log(coordinates[0]);
     if (coordinateCount > 3)
     {
         const popup = new mapboxgl.Popup({ closeButton: false })
@@ -72,7 +71,7 @@ function updateArea(e) {
     const perimeter_field = document.getElementById('calculated-perimeter');
 
     const coordinates = data.features[data.features.length - 1].geometry.coordinates;
-
+    console.log(coordinates);
     // Set center of the polygon
     const center = turf.center(data.features[data.features.length - 1]).geometry.coordinates;
 
@@ -91,11 +90,12 @@ function updateArea(e) {
 
         // Restrict the area and perimeter to 2 decimal points.
         const rounded_area = Math.round(area * 100) / 100;
+        const rounded_perimeter = Math.round(perimeter * 100) / 100;
 
-        area_field.placeholder = `${rounded_area} square meters`;
+        area_field.placeholder = `${rounded_area} m`;
         area_field.setAttribute('value', rounded_area);
-        perimeter_field.placeholder = `${perimeter} kilometers`;
-        perimeter_field.setAttribute('value', perimeter);
+        perimeter_field.placeholder = `${rounded_perimeter} m`;
+        perimeter_field.setAttribute('value', rounded_perimeter);
     } else {
         answer.innerHTML = '';
         if (e.type !== 'draw.delete')

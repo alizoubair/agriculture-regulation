@@ -6,24 +6,27 @@
         <button id="greenhouses" class="dropbtn">Serres</button>
     </div>
       <div>
-            <input id="search" placeholder="recherche par ferme">
+            <input class="typeahead form-control" id="search" type="text" placeholder="recherche par ferme">
             <div id="dropdown-farms" class="dropdown">
                 <div id="idFarm" class="dropdown-content">
                     @foreach($farmData['farms'] as $farm)
                     <div id="farm">
-                        <a id="{{ $farm->getId() }}" href="#">{{ $farm->getName() }}</a>
-                        <button id="updateBtn"><a href="{{route('admin.farm.edit', ['id'=> $farm->getId()])}}"><i class="bi bi-pencil-fill"></i></a></button>
-                        <p>Périmètre: {{ $farm->getPerimeter() }} Surface: {{ $farm->getArea() }}</p>
-                        <input id="lng" type="text" name="lng" value="{{ $farm->getLongitude() }}" style="display: none;">
-                        <input id="lat" type="text" name="lat" value="{{ $farm->getLatitude() }}" style="display: none">
-                        <input id="zoom" type="text" name="zoom" value="{{ $farm->getZoomLevel() }}" style="display: none;">
-                        <input type="text" name="center" value="{{ $farm->getCenter() }}" style="display: none">
-                        <input type="text"  name="coordinates" value="{{ $farm->getCoordinates() }}" style="display: none;" >
-                        <form action="{{ route('admin.farm.delete', $farm->getId()) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button id="deleteBtn" type="submit"><i class="bi bi-trash-fill"></i></button>
-                        </form>
+                        <div id="farm-container">
+                            <a id="{{ $farm->getId() }}" href="#">{{ $farm->getName() }}</a>
+                            <button id="updateBtn"><a href="{{route('admin.farm.edit', ['id'=> $farm->getId()])}}"><i class="bi bi-pencil-fill"></i></a></button>
+                            <form action="{{ route('admin.farm.delete', $farm->getId()) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button id="deleteBtn" type="submit"><i class="bi bi-trash-fill"></i></button>
+                            </form>
+                            <p class="perimeter">Périmètre: {{ $farm->getPerimeter() }} m</p> 
+                            <p class="area">Surface: {{ $farm->getArea() }} m</p>
+                            <input id="lng" type="text" name="lng" value="{{ $farm->getLongitude() }}" style="display: none;">
+                            <input id="lat" type="text" name="lat" value="{{ $farm->getLatitude() }}" style="display: none">
+                            <input id="zoom" type="text" name="zoom" value="{{ $farm->getZoomLevel() }}" style="display: none;">
+                            <input type="text" name="center" value="{{ $farm->getCenter() }}" style="display: none">
+                            <input type="text"  name="coordinates" value="{{ $farm->getCoordinates() }}" style="display: none;" >
+                        </div> 
                     </div>
                     @endforeach
                 </div>

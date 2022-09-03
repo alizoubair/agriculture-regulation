@@ -131,7 +131,6 @@ main {
 	font-weight: 500;
 	font-size: 16px;
 	line-height: 13px;
-	color: #FFFFFF;
 }
 
 #createBtn {
@@ -160,6 +159,7 @@ main {
 }
 
 #farm {
+	display: flex;
 	background: #FFFFFF;
 	width: 100%;
 	border: 0.5px solid #BFE3C3;
@@ -179,29 +179,69 @@ main {
 
 #idFarm, #idGreenhouse {
 	display: flex;
+	flex-direction: column;
 	width: 100%;
 }
 
-#idFarm::before {
+#farm::before {
 	display: inline-block;
 	content: "";
 	width: 20px;
 	height: 100%;
 	background: #79FF76;
+	margin-right: 8px;
 	border-radius: 5px 0px 0px 5px;
 }
 
-#idGreenhouse::before {
+#farm-container a {
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	color: #78B044;
+}
+
+#farm-container p {
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 15px;
+	color: #808080;
+}
+
+#farm-container .perimeter, .area {
+	display: inline;
+}
+
+#farm-container .perimeter {
+	margin-right: 8px;
+}
+
+#greenhouse::before {
 	display: inline-block;
 	content: "";
 	width: 20px;
 	height: 100px;
 	background: #FE813B;
+	margin-right: 8px;
 	border-radius: 5px 0px 0px 5px;
+}
+
+#updateBtn {
+	position: relative;
+	left: 240px;
+	background: none;
+	border: none;
 }
 
 #updateBtn a i {
 	color: #E7AB11;
+}
+
+#deleteBtn {
+	position: relative;
+	left: 310px;
+	top: -22px;
+	background: none;
+	border: none;
 }
 
 #deleteBtn a i {
