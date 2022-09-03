@@ -1,5 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpem91YmFpciIsImEiOiJjbDZ3NG50N3AwY3k3M2VtZW82dWxtZXg1In0.yezx5Y9hGle2i6b_Rx46Rw';
 
+/* Launch mapbox map */
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/satellite-v9', // style URL
@@ -50,7 +51,7 @@ map.on('render', function () {
     map.resize();
 });
 
-// Toggle between farms and greenhouses
+/* Toggle between farms and greenhouses */
 const btnFarms = document.getElementById('farms');
 const btnGreenhouses = document.getElementById('greenhouses');
 
@@ -71,24 +72,11 @@ function displayGreenhouses() {
 btnFarms.addEventListener('click', displayFarms);
 btnGreenhouses.addEventListener('click', displayGreenhouses);
 
-
-const collection = document.getElementById('idFarm');
-console.log(collection.children[0].children);
-var markers = [];
-
-for (let i = 0; i < collection.children.length; i++) {
-    // Outline each farm
-    var arr = collection.children[i].children[0].children[9].value.split(',');
-    const coordinates = [];
-
-    for (let i = 0; i < arr.length; i++) {
-        coordinates.push([arr[i], arr[i + 1]]);
-        i++;
-    }
-
+/* Outline a geometry */
+function outline(id, coordinates) {
     map.on('load', () => {
         // Add a data source containing GeoJSON data.
-        map.addSource(`farm${i}`, {
+        map.addSource(`farm${id}`, {
             'type': 'geojson',
             'data': {
                 'type': 'Feature',
@@ -102,9 +90,9 @@ for (let i = 0; i < collection.children.length; i++) {
 
         // Add a new layer to visualize the polygon.
         map.addLayer({
-            'id': `farm${i}`,
+            'id': `farm${id}`,
             'type': 'fill',
-            'source': `farm${i}`, // reference the data source
+            'source': `farm${id}`, // reference the data source
             'layout': {},
             'paint': {
                 'fill-color': '#fbb03b', // blue color fill
@@ -114,9 +102,9 @@ for (let i = 0; i < collection.children.length; i++) {
 
         // Add a black outline around the polygon.
         map.addLayer({
-            'id': `outline${i}`,
+            'id': `outline${id}`,
             'type': 'line',
-            'source': `farm${i}`,
+            'source': `farm${id}`,
             'layout': {},
             'paint': {
                 'line-color': '#FFD704',
@@ -124,15 +112,45 @@ for (let i = 0; i < collection.children.length; i++) {
             }
         });
     });
+}
+
+/* Fly to a geometry */
+function flyToGeometry(center, zoom) {
+    const end = {
+        center: [center[0], center[1]],
+        zoom: zoom,
+    };
+
+    map.flyTo({
+        ...end,
+        duration: 10000,
+        essential: true
+    });
+}
+
+/* Outline each farm */
+const farms = document.getElementById('idFarm');
+var markers = [];
+
+for (let i = 0; i < farms.children.length; i++) {
+    var arr = farms.children[i].children[0].children[9].value.split(',');
+    const coordinates = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        coordinates.push([arr[i], arr[i + 1]]);
+        i++;
+    }
+
+    outline(i, coordinates);
 
     // Attach a popup to a marker instance
-    const popup = new mapboxgl.Popup({ offset: 25 }).setText(
-        `${collection.children[i].children[0].children[3].innerHTML}
-         ${collection.children[i].children[0].children[4].innerHTML}`
+    const popup = new mapboxgl.Popup({ offset: 25, closeButton: false }).setText(
+        `${farms.children[i].children[0].children[3].innerHTML}
+         ${farms.children[i].children[0].children[4].innerHTML}`
     );
 
     // Add farms' position on map with markers.
-    var center = collection.children[i].children[0].children[8].value.split(',');
+    var center = farms.children[i].children[0].children[8].value.split(',');
 
     const marker = new mapboxgl.Marker({
         draggable: false
@@ -151,7 +169,9 @@ for (let i = 0; i < collection.children.length; i++) {
     markers.push(marker);
 }
 
-// Add zoom in to inspect a farm
+/* Add zoom in to inspect a farm */
+var selectedMarker;
+
 function showFarm(event) {
     const { target } = event;
 
@@ -159,28 +179,17 @@ function showFarm(event) {
         return;
     }
 
-    var items = document.getElementById('idFarm');
     var center, zoom;                                      // Add later, handle error for no center
-    var selectedMarker;
 
-    for (let i = 0; i < items.children.length; i++) {
-        if (items.children[i].children[0].id === target.attributes.id.value) {
-            center = items.children[i].children[6].value.split(',');
-            zoom = items.children[i].children[5].value;
+    for (let i = 0; i < farms.children.length; i++) {
+        if (farms.children[i].children[0].children[0].id === target.attributes.id.value) {
+            center = farms.children[i].children[0].children[8].value.split(',');
+            zoom = farms.children[i].children[0].children[7].value;
             selectedMarker = markers[i];
         }
     }
 
-    const end = {
-        center: [center[0], center[1]],
-        zoom: zoom,
-    };
-
-    map.flyTo({
-        ...end,
-        duration: 10000,
-        essential: true
-    });
+    flyToGeometry(center, zoom);
 
     // Remove marker when we're close enough
     map.on('moveend', () => {
@@ -195,7 +204,9 @@ window.onload = function () {
         document.addEventListener('click', showFarm, false);
 }
 
-// Add zoom in to inspect a greenhouse
+/* Inspect each greenhouse */
+const greenhouses = document.getElementById('idGreenhouse');
+
 function showGreenhouse(event) {
     const { target } = event;
 
@@ -203,27 +214,23 @@ function showGreenhouse(event) {
         return;
     }
 
-    var greenhouses = document.getElementById('idGreenhouse');
-    var center, zoom;
+    var center, zoom;                                      // Add later, handle error for no center
 
     for (let i = 0; i < greenhouses.children.length; i++) {
-        if (greenhouses.children[i].children[0].id == target.attributes.id.value) {
-            zoom = greenhouses.children[i].children[1].value;
-            center = greenhouses.children[i].children[9].value.split(',');
-            console.log(center);
+        if (greenhouses.children[i].children[0].children[0].id === target.attributes.id.value) {
+            center = greenhouses.children[i].children[0].children[2].value.split(',');
+            zoom = greenhouses.children[i].children[0].children[1].value;
         }
     }
 
-    const end = {
-        center: [center[0], center[1]],
-        zoom: zoom,
-    };
-
-    map.flyTo({
-        ...end,
-        duration: 10000,
-        essential: true
-    });
+    flyToGeometry(center, zoom);
+    
+    // Remove farm markers when we're fetching greenhouses
+    map.on('moveend', () => {
+        if (map.getZoom() == zoom) {
+            selectedMarker.remove();
+        }
+    })
 }
 
 window.onload = function () {

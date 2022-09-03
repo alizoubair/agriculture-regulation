@@ -46,19 +46,6 @@ const draw = new MapboxDraw({
   defaultMode: 'draw_polygon'
 });
 
-/* Add Controls to the Map */
-map.on('click', () => {
-    const coordinates = draw.getAll().features[draw.getAll().features.length - 1].geometry.coordinates;
-    const coordinateCount = coordinates[0].length;
-    if (coordinateCount > 3)
-    {
-        const popup = new mapboxgl.Popup({ closeButton: false })
-            .setLngLat([coordinates[0][0][0], coordinates[0][0][1]])
-            .setHTML('<button id="popupBtn">Terminer</button>')
-            .addTo(map);
-    }
-});
-
 map.addControl(draw);
 
 map.on('draw.create', updateArea);

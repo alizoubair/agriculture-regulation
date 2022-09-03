@@ -38,17 +38,20 @@
                 <div id="idGreenhouse" class="dropdown-content">
                     @foreach($greenhouseData['greenhouses'] as $greenhouse)
                     <div id="greenhouse">
-                        <a id="{{ $greenhouse->getId() }}" href="#">{{ $greenhouse->getName()}}</a>
-                        <input id="zoom" type="text" name="zoom" value="{{ $greenhouse->getZoomLevel() }}" style="display: none;">
-                        <input type="text" name="center" value="{{ $greenhouse->getCenter() }}" style="display: none">
-                        <input type="text"  name="coordinates" value="{{ $greenhouse->getCoordinates() }}" style="display: none;" > 
-                        <form action="{{ route('admin.greenhouse.delete', $greenhouse->getId()) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button id="deleteBtn" type="submit">Supprimer</button>
-                        </form>
-                        <a href="{{route('admin.greenhouse.edit', ['id'=> $greenhouse->getId()])}}">Editer</a>
+                        <div id="greenhouse-container">
+                            <a id="{{ $greenhouse->getId() }}" href="#">{{ $greenhouse->getName()}}</a>
+                            <input id="zoom" type="text" name="zoom" value="{{ $greenhouse->getZoomLevel() }}" style="display: none;">
+                            <input type="text" name="center" value="{{ $greenhouse->getCenter() }}" style="display: none">
+                            <input type="text"  name="coordinates" value="{{ $greenhouse->getCoordinates() }}" style="display: none;" > 
+                            <form action="{{ route('admin.greenhouse.delete', $greenhouse->getId()) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button id="deleteBtn" type="submit">Supprimer</button>
+                            </form>
+                            <a href="{{route('admin.greenhouse.edit', ['id'=> $greenhouse->getId()])}}">Editer</a>
+                        </div>
                     </div>
+                    
                     @endforeach
                 </div>
 
