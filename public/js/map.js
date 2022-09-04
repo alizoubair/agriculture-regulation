@@ -1,3 +1,10 @@
+const farms = document.getElementById('idFarm');
+const nbrFarms = farms.children.length;
+const greenhouses = document.getElementById('idGreenhouse');
+const nbrGreenhouses = greenhouses.children.length;
+const toggleableFarmLayerIds = [];
+const toggleableGreenhouseLayerIds = [];
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpem91YmFpciIsImEiOiJjbDZ3NG50N3AwY3k3M2VtZW82dWxtZXg1In0.yezx5Y9hGle2i6b_Rx46Rw';
 
 /* Launch mapbox map */
@@ -72,11 +79,21 @@ function displayGreenhouses() {
 btnFarms.addEventListener('click', displayFarms);
 btnGreenhouses.addEventListener('click', displayGreenhouses);
 
-/* Outline a geometry */
-function outline(id, coordinates) {
-    map.on('load', () => {
+/* Outline each farm */
+map.on('load', () => {
+    var markers = [];
+
+    for (let i = 0; i < nbrFarms; i++) {
+        var arr = farms.children[i].children[0].children[9].value.split(',');
+        const coordinates = [];
+
+        for (let i = 0; i < arr.length; i++) {
+            coordinates.push([arr[i], arr[i + 1]]);
+            i++;
+        }
+
         // Add a data source containing GeoJSON data.
-        map.addSource(`farm${id}`, {
+        map.addSource(`farm${i}`, {
             'type': 'geojson',
             'data': {
                 'type': 'Feature',
@@ -90,9 +107,9 @@ function outline(id, coordinates) {
 
         // Add a new layer to visualize the polygon.
         map.addLayer({
-            'id': `farm${id}`,
+            'id': `farm${i}`,
             'type': 'fill',
-            'source': `farm${id}`, // reference the data source
+            'source': `farm${i}`, // reference the data source
             'layout': {},
             'paint': {
                 'fill-color': '#fbb03b', // blue color fill
@@ -102,76 +119,96 @@ function outline(id, coordinates) {
 
         // Add a black outline around the polygon.
         map.addLayer({
-            'id': `outline${id}`,
+            'id': `outlineFarm${i}`,
             'type': 'line',
-            'source': `farm${id}`,
+            'source': `farm${i}`,
             'layout': {},
             'paint': {
                 'line-color': '#FFD704',
                 'line-width': 3,
             }
         });
-    });
-}
 
-/* Fly to a geometry */
-function flyToGeometry(center, zoom) {
-    const end = {
-        center: [center[0], center[1]],
-        zoom: zoom,
-    };
+        toggleableFarmLayerIds.push([`outlineFarm${i}`, `farm${i}`]);
 
-    map.flyTo({
-        ...end,
-        duration: 10000,
-        essential: true
-    });
-}
+        // Attach a popup to a marker instance
+        const popup = new mapboxgl.Popup({ offset: 25, closeButton: false }).setText(
+            `${farms.children[i].children[0].children[3].innerHTML}
+            ${farms.children[i].children[0].children[4].innerHTML}`
+        );
 
-/* Outline each farm */
-const farms = document.getElementById('idFarm');
-var markers = [];
+        // Add farms' position on map with markers.
+        var center = farms.children[i].children[0].children[8].value.split(',');
 
-for (let i = 0; i < farms.children.length; i++) {
-    var arr = farms.children[i].children[0].children[9].value.split(',');
-    const coordinates = [];
+        const marker = new mapboxgl.Marker({
+            draggable: false
+        })
+            .setLngLat([center[0], center[1]])
+            .addTo(map);
 
-    for (let i = 0; i < arr.length; i++) {
-        coordinates.push([arr[i], arr[i + 1]]);
-        i++;
+        const element = marker.getElement();
+        element.id = "marker"
+
+        element.addEventListener('mouseenter', () => popup.addTo(map));
+        element.addEventListener('mouseleave', () => popup.remove());
+
+        marker.setPopup(popup);
+
+        markers.push(marker);
     }
+});
 
-    outline(i, coordinates);
-
-    // Attach a popup to a marker instance
-    const popup = new mapboxgl.Popup({ offset: 25, closeButton: false }).setText(
-        `${farms.children[i].children[0].children[3].innerHTML}
-         ${farms.children[i].children[0].children[4].innerHTML}`
-    );
-
-    // Add farms' position on map with markers.
-    var center = farms.children[i].children[0].children[8].value.split(',');
-
-    const marker = new mapboxgl.Marker({
-        draggable: false
-    })
-        .setLngLat([center[0], center[1]])
-        .addTo(map);
-
-    const element = marker.getElement();
-    element.id = "marker"
-
-    element.addEventListener('mouseenter', () => popup.addTo(map));
-    element.addEventListener('mouseleave', () => popup.remove());
-    
-    marker.setPopup(popup);
-    
-    markers.push(marker);
+function hideLayer(layers) {
+    for (let i = 0; i < layers.length; i++) {
+        map.setLayoutProperty(
+            layers[i],
+            'visibility',
+            'none'
+        );
+    }
 }
+
+function showLayer(layers) {
+    for (let i = 0; i < layers.length; i++) {
+        map.setLayoutProperty(
+            layers[i],
+            'visibility',
+            'visible'
+        );
+    }
+}
+
+/* Show and hide layers */
+map.on('idle', () => {
+    const toggleableBtnIds = ['farms', 'greenhouses'];
+    for (const id of toggleableBtnIds) {
+        const link = document.getElementById(id);
+        link.textContent = id;
+
+        link.onclick = function (e) {
+            for (let i = 0; i < nbrFarms; i++) {
+                const farmLayers = toggleableFarmLayerIds[i];
+                for (let j = 0; j < nbrGreenhouses; j++) {
+                    const greenhouseLayers = toggleableGreenhouseLayerIds[j];
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    if (this.textContent === 'farms') {
+                        hideLayer(greenhouseLayers);
+                        showLayer(farmLayers);
+
+                    } else {
+                        hideLayer(farmLayers);
+                        showLayer(greenhouseLayers);
+
+                    }
+                }
+            }
+        }
+    }
+});
 
 /* Add zoom in to inspect a farm */
-var selectedMarker;
-
 function showFarm(event) {
     const { target } = event;
 
@@ -180,23 +217,34 @@ function showFarm(event) {
     }
 
     var center, zoom;                                      // Add later, handle error for no center
+    var selectedMarker;
 
     for (let i = 0; i < farms.children.length; i++) {
         if (farms.children[i].children[0].children[0].id === target.attributes.id.value) {
             center = farms.children[i].children[0].children[8].value.split(',');
             zoom = farms.children[i].children[0].children[7].value;
             selectedMarker = markers[i];
+
         }
     }
 
-    flyToGeometry(center, zoom);
+    const end = {
+        center: [parseFloat(center[0]), parseFloat(center[1])],
+        zoom: zoom,
+    };
+
+    map.flyTo({
+        ...end,
+        duration: 10000,
+        essential: true
+    });
 
     // Remove marker when we're close enough
     map.on('moveend', () => {
         if (map.getZoom() == zoom) {
             selectedMarker.remove();
         }
-    })    
+    })
 }
 
 window.onload = function () {
@@ -205,8 +253,6 @@ window.onload = function () {
 }
 
 /* Inspect each greenhouse */
-const greenhouses = document.getElementById('idGreenhouse');
-
 function showGreenhouse(event) {
     const { target } = event;
 
@@ -223,17 +269,75 @@ function showGreenhouse(event) {
         }
     }
 
-    flyToGeometry(center, zoom);
-    
-    // Remove farm markers when we're fetching greenhouses
-    map.on('moveend', () => {
-        if (map.getZoom() == zoom) {
-            selectedMarker.remove();
-        }
-    })
+    const end = {
+        center: [center[0], center[1]],
+        zoom: zoom,
+    };
+
+    map.flyTo({
+        ...end,
+        duration: 10000,
+        essential: true
+    });
 }
 
 window.onload = function () {
     if (document.addEventListener)
         document.addEventListener('click', showGreenhouse, false);
 }
+
+map.on('load', () => {
+
+    for (let i = 0; i < nbrGreenhouses; i++) {
+        var arr = greenhouses.children[i].children[0].children[3].value.split(',');
+        const coordinates = [];
+
+        for (let i = 0; i < arr.length; i++) {
+            coordinates.push([arr[i], arr[i + 1]]);
+            i++;
+        }
+
+        // Add a data source containing GeoJSON data.
+        map.addSource(`greenhouse${i}`, {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Polygon',
+                    // These coordinates outline Maine.
+                    'coordinates': [coordinates]
+                }
+            }
+        });
+
+        // Add a new layer to visualize the polygon.
+        map.addLayer({
+            'id': `greenhouse${i}`,
+            'type': 'fill',
+            'source': `greenhouse${i}`, // reference the data source
+            'layout': {
+                'visibility': 'none'
+            },
+            'paint': {
+                'fill-color': '#fbb03b', // blue color fill
+                'fill-opacity': 0.3
+            }
+        });
+
+        // Add a black outline around the polygon.
+        map.addLayer({
+            'id': `outlineGreenhouse${i}`,
+            'type': 'line',
+            'source': `greenhouse${i}`,
+            'layout': {
+                'visibility': 'none'
+            },
+            'paint': {
+                'line-color': '#FFD704',
+                'line-width': 3,
+            },
+        });
+
+        toggleableGreenhouseLayerIds.push([`outlineGreenhouse${i}`, `greenhouse${i}`]);
+    }
+});

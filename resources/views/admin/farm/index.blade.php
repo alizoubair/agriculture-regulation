@@ -2,8 +2,8 @@
 @section('index')
 <div class="sidebar-content" style="display: block;">
     <div class="btns">
-        <button id="farms" class="dropbtn">Fermes</button>
-        <button id="greenhouses" class="dropbtn">Serres</button>
+        <a id="farms"">Fermes</a>
+        <a id="greenhouses">Serres</a>
     </div>
       <div>
             <input class="typeahead form-control" id="search" type="text" placeholder="recherche par ferme">

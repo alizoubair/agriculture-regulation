@@ -1,4 +1,4 @@
-import { map } from './script.js';
+import { map } from './draw_polygon.js';
 
 const selectOption = document.getElementById('select');
 

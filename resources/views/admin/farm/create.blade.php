@@ -33,6 +33,6 @@
     
 </div>
 <div id="map"></div>
-<script type="module" src="{{ asset('js/script.js') }}"></script>
+<script type="module" src="{{ asset('js/draw_polygon.js') }}"></script>
 
 @endsection
