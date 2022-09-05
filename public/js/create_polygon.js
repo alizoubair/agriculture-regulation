@@ -1,4 +1,4 @@
-import {draw, map} from './draw_polygon.js'
+import {map, draw} from './draw_polygon.js'
 
 // Add created polygon to map
 const arr = document.getElementById('coordinates').value.split(',');
@@ -19,3 +19,9 @@ draw.add({
         'coordinates': [coordinates],
     }
 });
+
+draw.changeMode('direct_select', { featureId: 'polygon' });
+
+map.on('click', () => {
+    draw.changeMode('direct_select', { featureId: 'polygon' });
+})

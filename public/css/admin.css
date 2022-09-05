@@ -2,7 +2,6 @@ html,
 body {
 	margin: 0;
 	height: 100%;
-	overflow: hidden
 }
 
 body {
@@ -224,7 +223,7 @@ main {
 }
 
 #map {
-	width: 1600px;
+	width: 1000px;
 	height: 900px;
 }
 
@@ -254,7 +253,7 @@ main {
 #header {
 	position: relative;
 	top: 0;
-	left: 200px;
+	left: 240px;
 	height: 64px;
 	background: #66A66D;
 }
