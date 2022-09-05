@@ -12,7 +12,7 @@ class AdminGreenhouseController extends Controller
 	function index()
 	{
 		$viewData['greenhouses'] = Greenhouse::all();
-		return view('admin.greenhouse.create')->with('viewData', $viewData);
+		return view('admin.greenhouse.index')->with('viewData', $viewData);
 	}
 
 	function display()
@@ -33,7 +33,7 @@ class AdminGreenhouseController extends Controller
 		$newGreenhouse->setCoordinates($request->input('coordinates'));
 		$newGreenhouse->save();
 
-		return redirect()->route('admin.farm.index');
+		return redirect()->route('admin.greenhouse.index');
 	}
 
 	public function delete($id)
@@ -45,7 +45,6 @@ class AdminGreenhouseController extends Controller
 
 	public function edit($id)
 	{
-		$viewData = [];
 		$viewData['greenhouse'] = Greenhouse::findOrFail($id);
 		$farmData['farms'] = Farm::all();
 		return view('admin.greenhouse.edit')->with("viewData", $viewData)->with("farmData", $farmData);
@@ -61,6 +60,6 @@ class AdminGreenhouseController extends Controller
 
 		$greenhouse->save();
 
-		return redirect()->route('admin.farm.index');
+		return redirect()->route('admin.greenhouse.index');
 	}
 }

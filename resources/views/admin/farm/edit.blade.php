@@ -2,7 +2,7 @@
 
 @section('Farm')
 <div class="sidebar-content">
-    <button id="cancel-farm"><a href="/admin">Annuler</a></button>
+    <button id="cancel-farm"><a href="/admin/farms">Annuler</a></button>
 
     <form method="POST" action="{{ route('admin.farm.update', ['id'=>$viewData['farm']->getId()]) }}" enctype="multipart/form-data">
         @csrf
@@ -36,5 +36,5 @@
     </form>
 </div>
 <div id="map"></div>
-<script type="text/javascript" src="{{ asset('js/update.js') }}"></script>
+<script type="module" src="{{ asset('js/create_polygon.js') }}"></script>
 @endsection

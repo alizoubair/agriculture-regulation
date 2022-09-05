@@ -2,7 +2,7 @@
 
 @section('Greenhouse')
 <div class="sidebar-content">
-<button id="cancel-greenhouse"><a href="/admin">Annuler</a></button>
+<button id="cancel-greenhouse"><a href="/admin/greenhouses">Annuler</a></button>
 
 <form method="POST" action="{{ route('admin.greenhouse.create') }}">
     @csrf

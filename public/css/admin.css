@@ -1,6 +1,7 @@
-html, body {
-	margin: 0; 
-	height: 100%; 
+html,
+body {
+	margin: 0;
+	height: 100%;
 	overflow: hidden
 }
 
@@ -21,7 +22,6 @@ a {
 
 p {
 	margin: 0;
-	text-align: center;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -64,11 +64,11 @@ main {
 }
 
 #calculation-box {
-    width: 150px;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 15px;
-    text-align: center;
-    display: none;
+	width: 150px;
+	background-color: rgba(255, 255, 255, 0.9);
+	padding: 15px;
+	text-align: center;
+	display: none;
 }
 
 /* Main */
@@ -88,74 +88,35 @@ main {
 	border-radius: 5px 0px 0px 0px;
 }
 
+.btns {
+	display: flex;
+}
+
 #farms {
+	display: block;
 	width: 177px;
-	height: 58px;
 	background: #78B044;
 	color: #FFFFFF;
 	border-radius: 0px 5px 0px 0px;
+	padding: 21.6px 67.09px 24.4px 66.91px;
+	text-align: center;
+	font-size: 14px;
+	line-height: 13px;
+	font-weight: 500;
 }
 
 #greenhouses {
+	display: block;
 	width: 177px;
-	height: 58px;
 	background: #EEF5EC;
 	color: #ACB4AB;
 	border-radius: 0px 5px 0px 0px;
-}
-
-.sidebar-content form input {
-	font-family: 'Poppins';
-	font-style: normal;
-	font-weight: 400;
+	text-align: center;
+	padding: 21.6px 67.09px 24.4px 66.91px;
+	text-align: center;
 	font-size: 14px;
 	line-height: 13px;
-	width: 328px;
-	height: 36px;
-	margin-bottom: 56px;
-	padding-left: 10px;
-	padding-top: 11px; 
-	padding-bottom: 11px;
-	color: #333333;
-	border-radius: 5px;
-	background: #EEF5EC;
-}
-
-.sidebar-content form label {
-	color: #78B044;
-}
-
-.sidebar-content p {
-	font-family: 'Poppins';
-	font-style: normal;
 	font-weight: 500;
-	font-size: 16px;
-	line-height: 13px;
-}
-
-#createBtn {
-	position: absolute;
-	width: 179px;
-	bottom: 28px;
-	left: 90px;
-	background: #78B044;
-	color: #FFFFFF;
-	border-radius: 5px;
-	padding: 14.87px 17.9px 16.13px 16.91px;
-}
-
-#createBtn a {
-	color: #FFFFFF;
-}
-
-.line::before {
-	position: absolute;
-	bottom: 80px;
-	display: inline-block;
-    content: "";
-    border: 1px solid #BFE3C3;
-    width: 360px;
-	transform: translateY(-1rem);
 }
 
 #farm {
@@ -169,6 +130,7 @@ main {
 }
 
 #greenhouse {
+	display: flex;
 	background: #FFFFFF;
 	width: 100%;
 	border: 0.5px solid #BFE3C3;
@@ -177,7 +139,8 @@ main {
 	margin: 0 10px 4px 0;
 }
 
-#idFarm, #idGreenhouse {
+#idFarm,
+#idGreenhouse {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -193,25 +156,42 @@ main {
 	border-radius: 5px 0px 0px 5px;
 }
 
-#farm-container a {
+#container {
+	width: 100%;
+}
+
+#container a {
+	color: #78B044;
+	margin-bottom: 8px;
 	font-weight: 500;
 	font-size: 16px;
 	line-height: 20px;
-	color: #78B044;
 }
 
-#farm-container p {
+#container #updateBtn {
+	position: relative;
+	left: 190px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	color: #E7AB11;
+}
+
+#container form {
+	display: inline;
+	position: relative;
+	left: 200px;
+	;
+}
+
+#container p {
 	font-weight: 400;
 	font-size: 12px;
 	line-height: 15px;
 	color: #808080;
 }
 
-#farm-container .perimeter, .area {
-	display: inline;
-}
-
-#farm-container .perimeter {
+#container .perimeter {
 	margin-right: 8px;
 }
 
@@ -226,10 +206,7 @@ main {
 }
 
 #updateBtn {
-	position: relative;
-	left: 240px;
 	background: none;
-	border: none;
 }
 
 #updateBtn a i {
@@ -237,9 +214,7 @@ main {
 }
 
 #deleteBtn {
-	position: relative;
-	left: 310px;
-	top: -22px;
+
 	background: none;
 	border: none;
 }
@@ -249,12 +224,12 @@ main {
 }
 
 #map {
-  width: 1600px;
-  height: 900px;
+	width: 1600px;
+	height: 900px;
 }
 
 .mapboxgl-canvas-container {
-    width: 100vh;
+	width: 100vh;
 }
 
 .coordinates {
@@ -283,6 +258,7 @@ main {
 	height: 64px;
 	background: #66A66D;
 }
+
 .logo {
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -299,9 +275,9 @@ main {
 
 .sidebar .main::before {
 	display: inline-block;
-    content: "";
-    border: 1px solid #BFE3C3;
-    width: 200px;
+	content: "";
+	border: 1px solid #BFE3C3;
+	width: 200px;
 	transform: translateY(-1rem);
 }
 
@@ -309,11 +285,12 @@ main {
 #search {
 	width: 340px;
 	height: 36px;
+	padding-left: 16.66px;
 	margin: 10px;
 }
 
 .sidebar-nav .nav-item {
-	margin-bottom:  5px;
+	margin-bottom: 5px;
 }
 
 .sidebar-nav .nav-link {
@@ -353,9 +330,9 @@ main {
 
 .sidebar-footer:before {
 	display: inline-block;
-    content: "";
-    border: 1px solid #BFE3C3;
-    width: 200px;
+	content: "";
+	border: 1px solid #BFE3C3;
+	width: 200px;
 	transform: translateY(-1rem);
 }
 
@@ -379,22 +356,105 @@ main {
 	margin: 0;
 }
 
-/* Pop up control */
-.mapboxgl-popup-content {
-}
-
 /* Create Farm & Greenhouse*/
 .main-title {
-	height: 59px;
+	display: block;
+	width: 201px;
+	height: 13px;
+	background: #78B044;
+	color: #FFFFFF;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 13px;
+	padding: 23px 79px;
+	margin-bottom: 15px;
+	border-radius: 5px 0px 0px 0px;
+}
+
+.sidebar-content form {
+	margin-top: 32px;
+	margin-left: 16px;
+	margin-right: 16px;
+}
+
+.sidebar-content form input {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 13px;
+	width: 310px;
+	height: 36px;
+	margin-bottom: 32px;
+	padding-left: 10px;
+	padding-top: 11px;
+	padding-bottom: 11px;
+	color: #333333;
+	border-radius: 5px;
+	background: #EEF5EC;
+}
+
+.sidebar-content form label {
+	color: #78B044;
+	margin-bottom: 8px;
+}
+
+.sidebar-content p {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 13px;
+	color: #97CD9D;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+#createBtn {
+	position: absolute;
+	width: 124.19px;
+	height: 13px;
+	bottom: 28px;
+	left: 90px;
+	background: #78B044;
+	color: #FFFFFF;
+	border-radius: 5px;
+	padding: 14.87px 17.9px 16.13px 16.91px;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 13px;
+}
+
+#createBtn a {
+	color: #FFFFFF;
+}
+
+.line::before {
+	position: absolute;
+	bottom: 80px;
+	display: inline-block;
+	content: "";
+	border: 1px solid #BFE3C3;
+	width: 360px;
+	transform: translateY(-1rem);
+}
+
+.sidebar-content form label .main-title {
+	display: block;
+	width: 201px;
+	height: 13x;
 	background: #78B044;
 	color: #FFFFFF;
 	border-radius: 5px 0px 0px 0px;
-	padding: 24px 20px;
+	padding: 23px 79px;
 }
 
 #cancelBtn {
+	display: inline;
 	background: none;
-	border: none;
+	color: #808080;
+	margin-left: 15px;
 }
 
 #cancelBtn a span {
@@ -411,4 +471,6 @@ main {
 	content: "";
 	width: 360px;
 	border: 1px solid #BFE3C3;
+	margin-top: 15.92px;
+	margin-bottom: 24px;
 }
