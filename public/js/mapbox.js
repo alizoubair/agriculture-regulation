@@ -6,7 +6,7 @@ export const map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/satellite-v9', // style URL
     center: [-7, 31], // starting position [lng, lat]
     zoom: 5, // starting zoom
-    projection: 'mercator' // display the map as a 3D globe
+    projection: 'globe' // display the map as a 3D globe
 });
 
 map.addControl(
@@ -27,16 +27,12 @@ map.on('mousemove', (e) => {
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
-function zoomLevel() {
+map.on('zoom', function (e) {
     var currentZoom = map.getZoom();
 
     localStorage.setItem("Zoom", currentZoom);
-}
-
-map.on('zoom', zoomLevel);
-
-map.on('zoom', function (e) {
     localStorage.setItem('bounds', map.getBounds());
+    localStorage.setItem('center',map.getCenter());
 });
 
 map.on('drag', function (e) {

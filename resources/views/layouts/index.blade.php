@@ -90,7 +90,7 @@
     </aside>
     <main>
         <header id="header">
-            <h1>{{ (Request::is('admin/farms')) ? 'Carte des fermes' : ''}}</h1>
+            <h1>{{ (Request::is('admin/farms')) ? 'Carte des fermes' : 'Carte des serres'}}</h1>
         </header>
         <div class="page-content">
             @yield('index')

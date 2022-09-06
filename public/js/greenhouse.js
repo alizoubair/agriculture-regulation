@@ -1,31 +1,27 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpem91YmFpciIsImEiOiJjbDZ3NG50N3AwY3k3M2VtZW82dWxtZXg1In0.yezx5Y9hGle2i6b_Rx46Rw';
+import { map } from './mapbox.js'
 
 const greenhouses = document.getElementById('idGreenhouse');
 const nbrGreenhouses = greenhouses.children.length;
 
-const longitude = localStorage.getItem('Longitude');
-const latitude = localStorage.getItem('Latitude');
-const zoomLevel = localStorage.getItem('Zoom');
+const zoom = localStorage.getItem('Zoom');
 
-export const map = new mapboxgl.Map({
-    container: 'map', // container ID
-    style: 'mapbox://styles/mapbox/satellite-v9', // style URL
-    center: [longitude, latitude], // starting position [lng, lat]
-    zoom: zoomLevel, // starting zoom
-    projection: 'mercator' // display the map as a 3D globe
-});
-
-// Fit the map to the last view
+/* Fit the map to the last view */
 if (localStorage.getItem('bounds') != null) {
     let bounds = localStorage.getItem('bounds');
     var araBounds = bounds.toString().split(',');
-    var swX = parseFloat(araBounds[0].replace('LngLatBounds(LngLat(',''));
-    var swY = parseFloat(araBounds[1].replace(')',''));
-    var neX = parseFloat(araBounds[2].replace('LngLat(',''));
+    var swX = parseFloat(araBounds[0].replace('LngLatBounds(LngLat(', ''));
+    var swY = parseFloat(araBounds[1].replace(')', ''));
+    var neX = parseFloat(araBounds[2].replace('LngLat(', ''));
     var neY = parseFloat(araBounds[3].replace('))', ''));
-
     var ne = new mapboxgl.LngLat(neX, neY);
     var sw = new mapboxgl.LngLat(swX, swY);
+
+    // calculate center of bounds
+    const lng = (swX + neX) / 2;
+    const lat = (swY + neY) / 2;
+
+    map.setCenter([lng, lat]);
+    map.setZoom(zoom);
 
     var box = new mapboxgl.LngLatBounds(sw, ne);
     map.fitBounds(box);
@@ -73,7 +69,7 @@ map.on('load', () => {
             coordinates.push([arr[i], arr[i + 1]]);
             i++;
         }
-        
+
         // Add a data source containing GeoJSON data.
         map.addSource(`greenhouse${i}`, {
             'type': 'geojson',
