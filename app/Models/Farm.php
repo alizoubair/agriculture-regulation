@@ -11,8 +11,6 @@ class Farm extends Model
     * $this->attributes['id']
     * $this->attributes['name']
     * $this->attributes['perimeter']
-    * $this->attributes['lng']
-    * $this->attributes['lat']
     * $this->attributes['zoom']
     * $this->attributes['area']
     * $this->attrbutes['center']
@@ -42,26 +40,16 @@ class Farm extends Model
         $this->attributes['name'] = $name;
     }
 
-    public function getLongitude()
+    public function getCenter()
     {
-        return $this->attributes['lng'];
+        return $this->attributes['center'];
     }
 
-    public function setLongitude($lng)
+    public function setCenter($center)
     {
-        $this->attributes['lng'] = $lng;
+        $this->attributes['center'] = $center;
     }
-
-    public function getLatitude()
-    {
-        return $this->attributes['lat'];
-    }
-
-    public function setLatitude($lat)
-    {
-        $this->attributes['lat'] = $lat;
-    }
-
+    
     public function getZoomLevel()
     {
         return $this->attributes['zoom'];
@@ -90,16 +78,6 @@ class Farm extends Model
     public function setArea($area)
     {
         $this->attributes['area'] = $area;
-    }
-
-    public function getCenter()
-    {
-        return $this->attributes['center'];
-    }
-
-    public function setCenter($center)
-    {
-        $this->attributes['center'] = $center;
     }
 
     public function getCoordinates()

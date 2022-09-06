@@ -25,11 +25,9 @@ class AdminFarmController extends Controller
 	{
 		$newFarm = new Farm();
 		$newFarm->setName($request->input('name'));
-		$newFarm->setLongitude($request->input('lng'));
-		$newFarm->setLatitude($request->input('lat'));
-		$newFarm->setZoomLevel($request->input('zoom'));
 		$newFarm->setArea($request->input('area'));
 		$newFarm->setPerimeter($request->input('perimeter'));
+		$newFarm->setZoomLevel($request->input('zoom'));
 		$newFarm->setCenter($request->input('center'));
 		$newFarm->setCoordinates($request->input('coordinates'));
 		$newFarm->save();

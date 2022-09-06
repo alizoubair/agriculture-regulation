@@ -16,23 +16,12 @@ map.addControl(
     })
 );
 
-map.on('mousemove', (e) => {
-    // `e.lngLat` is the longitude, latitude geographical position of the event.
-    var [longitude, latitude] = e.lngLat.toArray();
-
-    localStorage.setItem("Longitude", longitude);
-    localStorage.setItem("Latitude", latitude);
-});
-
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
 map.on('zoom', function (e) {
-    var currentZoom = map.getZoom();
-
-    localStorage.setItem("Zoom", currentZoom);
+    localStorage.setItem("zoom", map.getZoom());
     localStorage.setItem('bounds', map.getBounds());
-    localStorage.setItem('center',map.getCenter());
 });
 
 map.on('drag', function (e) {

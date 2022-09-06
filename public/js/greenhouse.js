@@ -3,7 +3,7 @@ import { map } from './mapbox.js'
 const greenhouses = document.getElementById('idGreenhouse');
 const nbrGreenhouses = greenhouses.children.length;
 
-const zoom = localStorage.getItem('Zoom');
+const zoom = localStorage.getItem('zoom');
 
 /* Fit the map to the last view */
 if (localStorage.getItem('bounds') != null) {
