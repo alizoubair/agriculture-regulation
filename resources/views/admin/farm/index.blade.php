@@ -23,8 +23,6 @@
                             <p class="perimeter">Périmètre: {{ $farm->getPerimeter() }} m</p> 
                             <p class="area">Surface: {{ $farm->getArea() }} m</p>
                         </div>
-                        <input id="lng" type="text" name="lng" value="{{ $farm->getLongitude() }}" style="display: none;">
-                        <input id="lat" type="text" name="lat" value="{{ $farm->getLatitude() }}" style="display: none">
                         <input id="zoom" type="text" name="zoom" value="{{ $farm->getZoomLevel() }}" style="display: none;">
                         <input id="center" type="text" name="center" value="{{ $farm->getCenter() }}" style="display: none">
                         <input id="coordinates" type="text"  name="coordinates" value="{{ $farm->getCoordinates() }}" style="display: none;" >

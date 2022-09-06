@@ -5,13 +5,6 @@ const nbrFarms = farms.children.length;
 const toggleableFarmLayerIds = [];
 var markers = [];
 
-function displayGreenhouses() {
-    btnFarms.setAttribute('style', 'background: #EEF5EC; color: #ACB4AB');
-    btnGreenhouses.setAttribute('style', 'background: #78B044; color: #FFFFFF;');
-    document.getElementById('dropdown-farms').setAttribute('style', 'display:none');
-    document.getElementById('dropdown-greenhouses').setAttribute('style', 'display:block; display: flex');
-}
-
 /* Outline each farm */
 map.on('load', () => {
     for (let i = 0; i < nbrFarms; i++) {
@@ -87,26 +80,6 @@ map.on('load', () => {
         markers.push(marker);
     }
 });
-
-function hideLayer(layers) {
-    for (let i = 0; i < layers.length; i++) {
-        map.setLayoutProperty(
-            layers[i],
-            'visibility',
-            'none'
-        );
-    }
-}
-
-function showLayer(layers) {
-    for (let i = 0; i < layers.length; i++) {
-        map.setLayoutProperty(
-            layers[i],
-            'visibility',
-            'visible'
-        );
-    }
-}
 
 /* Add zoom in to inspect a farm */
 function showFarm(event) {

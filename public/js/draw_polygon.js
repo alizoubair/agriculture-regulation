@@ -1,22 +1,7 @@
 import {map} from "./mapbox.js";
+import * as utils from './utils.js';
 
-const bounds = localStorage.getItem('bounds');
-
-// Fit the map to the last view
-if (localStorage.getItem('bounds') != null) {
-    let bounds = localStorage.getItem('bounds');
-    var araBounds = bounds.toString().split(',');
-    var swX = parseFloat(araBounds[0].replace('LngLatBounds(LngLat(',''));
-    var swY = parseFloat(araBounds[1].replace(')',''));
-    var neX = parseFloat(araBounds[2].replace('LngLat(',''));
-    var neY = parseFloat(araBounds[3].replace('))', ''));
-
-    var ne = new mapboxgl.LngLat(neX, neY);
-    var sw = new mapboxgl.LngLat(swX, swY);
-
-    var box = new mapboxgl.LngLatBounds(sw, ne);
-    map.fitBounds(box);
-};
+utils.fitView();
 
 export const draw = new MapboxDraw({
   displayControlsDefault: false,
@@ -73,5 +58,7 @@ function updateArea(e) {
             alert('Click the map to draw a polygon.');
     }
 }
+
+document.getElementById('zoom').value = localStorage.getItem('zoom');
 
 export {map};

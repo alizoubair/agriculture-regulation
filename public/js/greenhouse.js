@@ -1,31 +1,10 @@
 import { map } from './mapbox.js'
+import * as utils from './utils.js';
 
 const greenhouses = document.getElementById('idGreenhouse');
 const nbrGreenhouses = greenhouses.children.length;
 
-const zoom = localStorage.getItem('zoom');
-
-/* Fit the map to the last view */
-if (localStorage.getItem('bounds') != null) {
-    let bounds = localStorage.getItem('bounds');
-    var araBounds = bounds.toString().split(',');
-    var swX = parseFloat(araBounds[0].replace('LngLatBounds(LngLat(', ''));
-    var swY = parseFloat(araBounds[1].replace(')', ''));
-    var neX = parseFloat(araBounds[2].replace('LngLat(', ''));
-    var neY = parseFloat(araBounds[3].replace('))', ''));
-    var ne = new mapboxgl.LngLat(neX, neY);
-    var sw = new mapboxgl.LngLat(swX, swY);
-
-    // calculate center of bounds
-    const lng = (swX + neX) / 2;
-    const lat = (swY + neY) / 2;
-
-    map.setCenter([lng, lat]);
-    map.setZoom(zoom);
-
-    var box = new mapboxgl.LngLatBounds(sw, ne);
-    map.fitBounds(box);
-};
+utils.fitView();
 
 /* Inspect each greenhouse */
 function showGreenhouse(event) {
