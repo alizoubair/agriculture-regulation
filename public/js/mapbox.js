@@ -19,12 +19,17 @@ map.addControl(
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
-map.on('zoom', function (e) {
+map.on('load',  () => {
+    localStorage.setItem("zoom", map.getZoom());
+    localStorage.setItem("bounds", map.getBounds());
+})
+
+map.on('zoom',  () => {
     localStorage.setItem("zoom", map.getZoom());
     localStorage.setItem('bounds', map.getBounds());
 });
 
-map.on('drag', function (e) {
+map.on('drag', () => {
     localStorage.setItem('bounds', map.getBounds());
 });
 
