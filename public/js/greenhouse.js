@@ -1,8 +1,19 @@
-
-import {map} from './mapbox.js';
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpem91YmFpciIsImEiOiJjbDZ3NG50N3AwY3k3M2VtZW82dWxtZXg1In0.yezx5Y9hGle2i6b_Rx46Rw';
 
 const greenhouses = document.getElementById('idGreenhouse');
 const nbrGreenhouses = greenhouses.children.length;
+
+const longitude = localStorage.getItem('Longitude');
+const latitude = localStorage.getItem('Latitude');
+const zoomLevel = localStorage.getItem('Zoom');
+
+export const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/satellite-v9', // style URL
+    center: [longitude, latitude], // starting position [lng, lat]
+    zoom: zoomLevel, // starting zoom
+    projection: 'mercator' // display the map as a 3D globe
+});
 
 // Fit the map to the last view
 if (localStorage.getItem('bounds') != null) {
@@ -31,8 +42,8 @@ function showGreenhouse(event) {
 
     for (let i = 0; i < greenhouses.children.length; i++) {
         if (greenhouses.children[i].children[0].children[0].id === target.attributes.id.value) {
-            center = greenhouses.children[i].children[0].children[2].value.split(',');
-            zoom = greenhouses.children[i].children[0].children[1].value;
+            center = document.getElementById('center').value.split(',');
+            zoom = document.getElementById('zoom').value;
         }
     }
 
@@ -55,7 +66,7 @@ window.onload = function () {
 
 map.on('load', () => {
     for (let i = 0; i < nbrGreenhouses; i++) {
-        var arr = greenhouses.children[i].children[0].children[3].value.split(',');
+        var arr = document.getElementById('coordinates').value.split(',');
         const coordinates = [];
 
         for (let i = 0; i < arr.length; i++) {

@@ -12,11 +12,10 @@ function displayGreenhouses() {
     document.getElementById('dropdown-greenhouses').setAttribute('style', 'display:block; display: flex');
 }
 
-
 /* Outline each farm */
 map.on('load', () => {
     for (let i = 0; i < nbrFarms; i++) {
-        var arr = farms.children[i].children[0].children[9].value.split(',');
+        var arr = document.getElementById('coordinates').value.split(',');
         const coordinates = [];
 
         for (let i = 0; i < arr.length; i++) {
@@ -65,12 +64,11 @@ map.on('load', () => {
 
         // Attach a popup to a marker instance
         const popup = new mapboxgl.Popup({ offset: 25, closeButton: false }).setText(
-            `${farms.children[i].children[0].children[3].innerHTML}
-            ${farms.children[i].children[0].children[4].innerHTML}`
+            `${document.getElementsByClassName('dimensions')[0].innerText}`
         );
 
         // Add farms' position on map with markers.
-        var center = farms.children[i].children[0].children[8].value.split(',');
+        var center = document.getElementById('center').value.split(',');
 
         const marker = new mapboxgl.Marker({
             draggable: false
@@ -122,8 +120,8 @@ function showFarm(event) {
 
     for (let i = 0; i < farms.children.length; i++) {
         if (farms.children[i].children[0].children[0].id === target.attributes.id.value) {
-            center = farms.children[i].children[0].children[8].value.split(',');
-            zoom = farms.children[i].children[0].children[7].value;
+            center = document.getElementById('center').value.split(',');
+            zoom = document.getElementById('zoom').value;
             selectedMarker = markers[i];
         }
     }

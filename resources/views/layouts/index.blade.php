@@ -17,8 +17,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
-    <header id="header">
-    </header>
     <aside class="sidebar">
         <div class="logo">
             <a>
@@ -26,80 +24,81 @@
             </a>
         </div>    
 
-        <ul class="sidebar-nav main">
+        <ul class="sidebar-nav">
             <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="bi bi-house-fill"></i>
-                <span>Tableau de bord</span>
-            </a>
+                <a class="nav-link" href="#">
+                    <i class="bi bi-house-fill"></i>
+                    <span>Tableau de bord</span>
+                </a>
+            </li>
+            <li class="{{ (Request::is('admin/farms') || Request::is('admin/greenhouses')) ? 'nav-item active' : 'nav-item' }}">
+                <a class="nav-link" href="/admin/farms">
+                    <i class="bi bi-map-fill"></i>
+                    <span>Cartes des fermes</span>
+                </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="bi bi-map-fill"></i>
-                <span>Fermes</span>
-            </a>
+                <a class="nav-link" href="#">
+                    <i class="bi bi-bell-fill"></i>
+                    <span>Alertes</span>
+                </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="bi bi-bell-fill"></i>
-                <span>Alerte</span>
-            </a>
+                <a class="nav-link" href="#">
+                    <i class="bi bi-house-fill"></i>
+                    <span>Abonnement</span>
+                </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="bi bi-house-fill"></i>
-                <span>Abonnement</span>
-            </a>
+                <a class="nav-link" href="#">
+                    <i class="bi bi-house-fill"></i>
+                    <span>Role</span>
+                </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="bi bi-house-fill"></i>
-                <span>Role</span>
-            </a>
+                <a class="nav-link" href="#">
+                    <i class="bi bi-person-fill"></i>
+                    <span>Utilisateur</span>
+                </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="bi bi-person-fill"></i>
-                <span>Utilisateur</span>
-            </a>
+                <a class="nav-link" href="#">
+                    <i class="bi bi-gear-fill"></i>
+                    <span>Paramètres</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="bi bi-question-circle-fill"></i>
+                    <span>Aider</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Se déconnecter</span>
+                </a>
             </li>
         </ul>
-
-        <div class="settings">
-            <ul class="sidebar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="bi bi-gear-fill"></i>
-                        <span>Paramètres</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="bi bi-question-circle-fill"></i>
-                        <span>Aider</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Se déconnecter</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
         <div class="sidebar-footer">
-            <img src="{{ asset('images/logoitinfo.png') }}">
+            <img src="{{ asset('images/logoitinfo(2).png') }}">
+            <div>
+                <p class="company">ITINFODEV</p>
+                <a>Editer le profile</a>
+            </div>
         </div>
     </aside>
     <main>
-    <div class="page-content">
-        @yield('index')
-        
-        @yield('Farm')
+        <header id="header">
+            <h1>{{ (Request::is('admin/farms')) ? 'Carte des fermes' : ''}}</h1>
+        </header>
+        <div class="page-content">
+            @yield('index')
+            
+            @yield('Farm')
 
-        @yield('Greenhouse')
-    </div>
+            @yield('Greenhouse')
+        </div>
     </main>
 </body>
 </html>

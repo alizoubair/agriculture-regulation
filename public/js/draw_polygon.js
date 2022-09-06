@@ -1,8 +1,5 @@
 import {map} from "./mapbox.js";
 
-const longitude = localStorage.getItem('Longitude');
-const latitude = localStorage.getItem('Latitude');
-const zoomLevel = localStorage.getItem('Zoom');
 const bounds = localStorage.getItem('bounds');
 
 // Fit the map to the last view
@@ -76,14 +73,5 @@ function updateArea(e) {
             alert('Click the map to draw a polygon.');
     }
 }
-
-// Set longitude and latitude 
-const inputLongitude = document.getElementById('lng');
-const inputLatitude = document.getElementById('lat');
-const inputZoom = document.getElementById('zoom');
-
-inputLongitude.value = longitude;
-inputLatitude.value = latitude;
-inputZoom.value = zoomLevel;
 
 export {map};
