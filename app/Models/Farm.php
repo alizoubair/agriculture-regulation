@@ -25,7 +25,7 @@ class Farm extends Model
         return $this->attributes['id'];
     }
 
-    public function seId($id)
+    public function setId($id)
     {
         $this->attributes['id'] = $id;
     }

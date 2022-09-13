@@ -60,9 +60,4 @@ class AdminFarmController extends Controller
 
 		return redirect()->route('admin.farm.index');
 	}
-
-	public function test()
-	{
-		return view('admin.farm.test'); 
-	}
 }

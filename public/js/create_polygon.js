@@ -20,7 +20,7 @@ draw.add({
     }
 });
 
-draw.changeMode('direct_select', { featureId: 'polygon' });
+draw.changeMode('direct_select', { featureId: 'polygon' })
 
 map.on('click', () => {
     draw.changeMode('direct_select', { featureId: 'polygon' });

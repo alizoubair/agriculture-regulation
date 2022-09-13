@@ -40,7 +40,7 @@
             <input id="center" type="text" name="center" style="display: none">
         </form>
     </div>
-    <button id="createBtn" type="submit">Enregistrer</button>
+    <button id="changeBtn" type="submit">Enregistrer</button>
 </div>
 <div id="map"></div>
 <script type="module" src="{{ asset('js/draw_polygon.js') }}"></script>

@@ -6,6 +6,7 @@
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
 <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.js"></script>
@@ -31,7 +32,9 @@
                     <span>Tableau de bord</span>
                 </a>
             </li>
-            <li class="{{ (Request::is('admin/farms') || Request::is('admin/greenhouses')) ? 'nav-item active' : 'nav-item' }}">
+            <li class="{{ (Request::is('admin/farms') || Request::is('admin/farms/create') 
+                || Request::is('admin/farms/edit') || Request::is('admin/greenhouses')
+                || Request::is('admin/greenhouses/create') || Request::is('admin/greenhouses/edit')) ? 'nav-item active' : 'nav-item' }}">
                 <a class="nav-link" href="/admin/farms">
                     <i class="bi bi-map-fill"></i>
                     <span>Cartes des fermes</span>
@@ -55,8 +58,8 @@
                     <span>Role</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+            <li class="nav-item" class="{{ (Request::is('user')) ? 'nav-item active' : 'nav-item' }}">
+                <a class="nav-link" href="/user">
                     <i class="bi bi-person-fill"></i>
                     <span>Utilisateur</span>
                 </a>
@@ -90,15 +93,18 @@
     </aside>
     <main>
         <header id="header">
-            <h1>{{ (Request::is('admin/farms')) ? 'Carte des fermes' : 'Carte des serres'}}</h1>
+            @yield('header')
         </header>
-        <div class="page-content">
+        <div id="content">
             @yield('index')
             
             @yield('Farm')
 
             @yield('Greenhouse')
+
+            @yield('user')
         </div>
     </main>
+    @yield('javascripts')
 </body>
 </html>

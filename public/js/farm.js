@@ -56,7 +56,7 @@ map.on('load', () => {
         toggleableFarmLayerIds.push([`outlineFarm${i}`, `farm${i}`]);
 
         // Attach a popup to a marker instance
-        const popup = new mapboxgl.Popup({ offset: 25, closeButton: false }).setText(
+        const popup = new mapboxgl.Popup({ offset: 25, closeButton: false, className: "popup" }).setText(
             `${document.getElementsByClassName('dimensions')[0].innerText}`
         );
 

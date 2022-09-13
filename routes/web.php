@@ -46,4 +46,15 @@ Route::delete('/admin/greenhouses/{id}/delete', [App\Http\Controllers\Admin\Admi
 Route::get('/admin/greenhouses/{id}/edit', [App\Http\Controllers\Admin\AdminGreenhouseController::class, 'edit'])->name("admin.greenhouse.edit");
 
 Route::put('/admin/greenhouses/{id}/update', [App\Http\Controllers\Admin\AdminGreenhouseController::class, 'update'])->name("admin.greenhouse.update");
-Route::get('/admin/test', [App\Http\Controllers\Admin\AdminFarmController::class, 'test'])->name("admin.test");
+
+Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name("user.index");
+
+Route::get('/user/create', [App\Http\Controllers\UserController::class, 'display'])->name("user.display");
+
+Route::post('/user/create', [App\Http\Controllers\UserController::class, 'create'])->name("user.create");
+
+Route::get('/user/{id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name("user.edit");
+
+Route::get('/user/{id}/update', [App\Http\Controllers\UserController::class, 'update'])->name("user.update");
+
+Route::delete('/user/{id}/delete', [App\Http\Controllers\UserController::class, 'delete'])->name('user.delete');

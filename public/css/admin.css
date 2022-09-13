@@ -2,7 +2,6 @@ html,
 body {
 	margin: 0;
 	height: 100%;
-	color: #FFFFFF;
 }
 
 body {
@@ -24,7 +23,8 @@ h1 {
 	line-height: 36px;
 	letter-spacing: 0em;
 	text-align: left;
-	margin: 14px 0 14px 20px;
+	margin: 20px 0 20px 20px;
+	line-height: 24px;
 }
 
 a {
@@ -33,6 +33,16 @@ a {
 
 p {
 	margin: 0;
+}
+
+label {
+	display: block;
+	color: #78B044;
+	margin-bottom: 8px;
+}
+
+.popup {
+	color: #000;
 }
 
 .mapboxgl-popup-content {
@@ -101,13 +111,13 @@ main {
 }
 
 #content {
-	height: 100%;
+	padding: 20px;
 }
 
 .page-content {
 	display: grid;
 	grid-template-columns: 380px auto;
-	padding: 20px;
+	height: 100%;
 }
 
 #calculation-box {
@@ -306,6 +316,10 @@ main {
 	background: #66A66D;
 }
 
+#header h1 {
+	color: #FFFFFF;
+}
+
 .sidebar .logo {
 	border-bottom: 1px solid #BFE3C3;
 }
@@ -317,7 +331,7 @@ main {
 	font-size: 24px;
 	line-height: 24px;
 	text-align: center;
-	padding: 20px 47px 20px 42px;
+	padding: 20px 51px 20px 51px;
 	color: #FFFFFF;
 }
 
@@ -420,7 +434,6 @@ main {
 	line-height: 13px;
 	padding: 23px 79px;
 	margin-bottom: 15px;
-	border-radius: 5px 0px 0px 0px;
 	text-align: center;
 }
 
@@ -441,7 +454,7 @@ main {
 
 .sidebar-content form select {
 	display: block;
-	width: 162px;
+	width: 178px;
 	height: 13px;
 	padding: 11px 152px 12px 14px;
 	background: #EEF5EC;
@@ -516,7 +529,6 @@ main {
 }
 
 .sidebar-content form label .main-title {
-	display: block;
 	width: 201px;
 	height: 13px;
 	background: #78B044;
@@ -540,4 +552,208 @@ main {
 #cancelBtn a i {
 	width: 16px;
 	height: 14px;
+}
+
+/* User */
+.index-user {
+	display: grid;
+	grid-template-rows: 108px auto;
+	height: 100%;
+	padding: 16px 48px 54px 48px;
+}
+
+.filter {
+	display: flex;
+	justify-content: space-between;
+	grid-row-start: 1;
+	grid-row-end: span 1;
+}
+
+.index-user .filter button {
+	height: 35px;
+	color: #FFFFFF;
+	background: #78B044;
+	align-self: center;
+	padding: 8px 24px;
+	margin-right: 40px;
+	margin-top: 28px;
+	cursor: pointer;
+}
+
+.index-user .filter select {
+	width: 476.5px;
+	height: 36px;
+	color: #7C7C7C;
+	background: #FFFFFF;
+	padding: 10px 23px 10px 5px;
+	margin-right: 30px;
+}
+
+.dataTables_wrapper {
+	grid-row-start: 2;
+	grid-row-end: span 1;
+}
+
+.datatable .thead {
+	background: #E7FFE8;
+	color: #575F6E;
+}
+
+.sorting_asc {
+	padding-top: 18px;
+	padding-left: 24px;
+	padding-bottom: 18px;
+	text-align: start;
+}
+
+.sorting {
+	padding-top: 18px;
+	padding-bottom: 18px;
+	padding-left: 24px;
+	text-align: start;
+}
+
+.odd td, .even td {
+	padding: 24px;
+}
+
+.dataTables_filter, .dataTables_info {
+	display: none;
+}
+
+.dataTables_paginate {
+	background: #E7FFE8;
+	padding: 18px 24px;
+}
+
+
+
+
+header {
+	display: flex;
+	justify-content: space-between;
+}
+
+header a {
+	width: 160px;
+	height: 24px;
+	padding: 10px 24px;
+	color: #FFFFFF;
+	background: #78B044;
+	margin: 10px 20px 10px 0;
+}
+
+#redirect {
+	width: 53px;
+	height: 24px;
+}
+
+.edit-user {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 20px;
+	height: 100%;
+}
+
+.edit-user .user-info {
+	grid-column-start: 1;
+	grid-column-end: span 1;
+}
+
+.edit-user .password {
+	grid-column-start: 2;
+	grid-column-end: span 1;
+}
+
+.edit-user .user-info,
+.edit-user .password {
+	border: 1px solid #BFE3C3
+}
+
+.edit-user .title {
+	display: block;
+	width: 395px;
+	height: 15px;
+	color: #78B044;
+	padding-top: 22px;
+	padding-left: 32px;
+	padding-bottom: 22px;
+}
+
+.edit-user form {
+	border-top: 1px solid #BFE3C3;
+	padding-left: 24px;
+	padding-right: 24px;
+	padding-top: 40px
+}
+
+.edit-user form label {
+	color: #78B044;
+}
+
+.edit-user form input {
+	width: 161px;
+	height: 15px;
+	padding: 16.71px 456.17px 16.49px 32.83px;
+	margin-bottom: 40px;
+	border: 1px solid #BFE3C3;
+	background: #EEF5EC;
+}
+
+.edit-user button {
+	width: 118px;
+	height: 40px;
+	color: #FFFFFF;
+	background: #78B044;
+	padding: 10px 24px;
+	cursor: pointer;
+}
+
+.create-user {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.register {
+	grid-column-start: 1;
+	grid-column-end: span 1;
+	border: 1px solid #BFE3C3;
+}
+
+.create-user a {
+	display: block;
+	border-bottom: 1px solid #BFE3C3;
+	color: #78B044;
+	padding-top: 18px;
+	padding-bottom: 18px;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+.create-user form {
+	padding: 20px 40px;
+	margin-top: 36px;
+}
+
+.create-user form label {
+	color: #78B044;
+	margin-bottom: 8px;
+}
+
+.create-user form input {
+	width: 126px;
+	height: 15px;
+	margin-bottom: 40px;
+	padding: 16.51px 624px 16.49px 16px;
+	background: #EEF5EC;
+	border: 1px solid #BFE3C3;
+}
+
+.create-user button {
+	width: 118px;
+	height: 40px;
+	color: #FFFFFF;
+	background: #78B044;
+	padding: 10px 24px;
+	cursor: pointer;
 }

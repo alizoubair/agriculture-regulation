@@ -18,6 +18,9 @@ map.addControl(
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
+// Add fullscreen control
+map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
+
 map.on('load',  () => {
     localStorage.setItem("zoom", map.getZoom());
     localStorage.setItem("bounds", map.getBounds());
