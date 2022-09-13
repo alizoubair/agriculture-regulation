@@ -558,8 +558,8 @@ main {
 .index-user {
 	display: grid;
 	grid-template-rows: 108px auto;
-	height: 100%;
 	padding: 16px 48px 54px 48px;
+	border: 1px solid #BFE3C3;
 }
 
 .filter {
@@ -590,6 +590,9 @@ main {
 }
 
 .dataTables_wrapper {
+	display: grid;
+	grid-template-columns: 208px auto;
+	grid-template-rows: auto 67px;
 	grid-row-start: 2;
 	grid-row-end: span 1;
 }
@@ -597,6 +600,27 @@ main {
 .datatable .thead {
 	background: #E7FFE8;
 	color: #575F6E;
+}
+
+.datatable {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: span 1;
+	border-top: 1px solid #BFE3C3;
+	border-left: 1px solid #BFE3C3;
+	border-right: 1px solid #BFE3C3;
+}
+
+.dataTables_length {
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	background: #E7FFE8;
+	padding: 18px 24px;
+	border-bottom: 1px solid #BFE3C3;
+	border-left: 1px solid #BFE3C3;
 }
 
 .sorting_asc {
@@ -613,17 +637,32 @@ main {
 	text-align: start;
 }
 
-.odd td, .even td {
+.odd td,
+.even td {
 	padding: 24px;
 }
 
-.dataTables_filter, .dataTables_info {
+.dataTables_filter,
+.dataTables_info {
 	display: none;
 }
 
 .dataTables_paginate {
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 2;
+	grid-column-end: 3;
 	background: #E7FFE8;
 	padding: 18px 24px;
+	display: flex;
+	justify-content: center;
+	border-right: 1px solid #BFE3C3;
+	border-bottom: 1px solid #BFE3C3;
+}
+
+.paginate_button .previous, .paginate_button {
+	cursor: pointer;
+	margin-right: 48px;
 }
 
 

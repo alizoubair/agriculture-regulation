@@ -23,6 +23,12 @@ class UserController extends Controller
                                 return Str::contains($row['name'], $request->get('name')) ? true : false;
                             });
                         }
+
+                        if (!empty($request->get('user_type'))) {
+                            $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                                return Str::contains($row['user_type'], $request->get('user_type')) ? true : false;
+                            });
+                        }
                     })
                     ->addColumn('action', function($row){
                         $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';

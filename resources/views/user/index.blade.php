@@ -18,9 +18,9 @@
         
         <div>
             <label>Rôle</label>
-            <select class="searchRole">
+            <select class="searchUserType">
                 <option>Recherche par rôle</option>
-                <option>ali zoubair</option>
+                <option>Responsable</option>
             </select>
         </div>
 
@@ -35,7 +35,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="tbody">
         </tbody>
     </table>
 </div>
@@ -46,6 +46,7 @@
     <script>
         $(document).ready(function() {
             var table = $('.datatable').DataTable({
+                "pageLength": 5,
                 'processing': true,
                 'serverSide': true,
                 'ajax': {
