@@ -6,13 +6,35 @@ use App\Models\Greenhouse;
 use App\Models\Farm;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
 
 class AdminGreenhouseController extends Controller
 {
-	function index()
+	function index(Request $request)
 	{
-		$viewData['greenhouses'] = Greenhouse::all();
-		return view('admin.greenhouse.index')->with('viewData', $viewData);
+		if ($request->ajax()) {
+			$data = Greenhouse::latest()->get();
+
+			return Datatables::of($data)
+					->addIndexColumn()
+					->filter(function ($instance) use ($request) {
+						if (!empty($request->get('name'))) {
+							$instance->collection = $instance->collection->filter(function ($row) use ($request) {
+								return Str::contains($row['name'], $request->get('name')) ? true : false;
+							});
+						}
+					})
+					->addColumn('action', function($greenhouse) {
+						return '<a id="updateBtn" href="/admin/greenhouses/'.$greenhouse->id.'/edit"><i class="bi bi-pencil-fill"></i></a>
+								<form methode="POST">
+									<button id="deleteBtn" type="submit"><i class="bi bi-trash-fill"></i></button>
+								</form>';
+					})
+					->make(true);
+		}
+
+		return view('admin.greenhouse.index');
 	}
 
 	function display()

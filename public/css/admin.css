@@ -129,11 +129,6 @@ main {
 }
 
 /* Main */
-.dropdown {
-	display: flex;
-	justify-content: center;
-}
-
 .sidebar-content {
 	display: grid;
 	grid-template-rows: 59px auto 60px;
@@ -154,7 +149,77 @@ main {
 	grid-row-start: span 1;
 }
 
-#farms {
+#idGreenhouse_length,
+#idGreenhouse_paginate {
+	display: none;
+}
+
+#idGreenhouse tbody tr {
+	display: grid;
+	grid-template-rows: repeat(3, 1fr);
+	grid-template-columns: 12px repeat(2, auto) 88.95px;
+	margin-bottom: 3.97px;
+	border: 0.5px solid #BFE3C3;
+}
+
+#idGreenhouse tbody .sorting_1 {
+	grid-row-start: 1;
+	grid-row-end: span 1;
+	grid-column-start: 2;
+	grid-column-end: 4;
+	color: #78B044;
+}
+
+#idGreenhouse tbody tr td {
+	margin-left: 20px;
+	margin-top: 6.93px;
+	margin-bottom: 8.76px;
+	color: #808080;
+}
+
+#idGreenhouse tbody tr .farmId {
+	grid-row-start: 3;
+	grid-row-end: span 1;
+	grid-column-start: 2;
+	grid-column-end: 5;
+	color: #808080;
+}
+
+#idGreenhouse tbody .action {
+	display: flex;
+	grid-row-start: 1;
+	grid-row-end: span 1;
+	margin-bottom: 4px;
+}
+
+#idGreenhouse tbody .action a {
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	color: #E7AB11;
+	background: none;
+	margin-right: 19.85px;
+}
+
+#idGreenhouse tbody .action #deleteBtn {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+#idGreenhouse tbody .action #deleteBtn i {
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 20px;
+	border-radius: 0px;
+	color: #E74011;
+}
+
+.dataTables_scrollHead {
+	display: none;
+}
+
+.farms {
 	display: block;
 	width: 177px;
 	background: #78B044;
@@ -166,7 +231,7 @@ main {
 	font-weight: 500;
 }
 
-#greenhouses {
+.greenhouses {
 	display: block;
 	width: 177px;
 	background: #EEF5EC;
@@ -180,39 +245,26 @@ main {
 	font-weight: 500;
 }
 
-#farm {
-	display: flex;
-	background: #FFFFFF;
-	border: 0.5px solid #BFE3C3;
-	box-shadow: 1px 1px 8px rgba(120, 176, 68, 0.25);
-	border-radius: 5px;
-	margin: 0 10px 4px 10px;
+#dropdown-greenhouses {
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
-#greenhouse {
-	display: flex;
-	background: #FFFFFF;
-	border: 0.5px solid #BFE3C3;
-	box-shadow: 1px 1px 8px rgba(120, 176, 68, 0.25);
-	border-radius: 5px;
-	margin: 0 10px 4px 10px;
-}
-
-#idFarm,
 #idGreenhouse {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 }
 
-#farm::before {
-	display: inline-block;
+#idGreenhouse tbody tr::before {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 4;
 	content: "";
-	width: 20px;
-	height: 100%;
-	background: #79FF76;
-	border-radius: 5px 0px 0px 5px;
+	background: #FE813B;
 }
+
 
 #container {
 	display: grid;
@@ -230,13 +282,90 @@ main {
 	line-height: 20px;
 }
 
-#container #updateBtn {
-	grid-area: 1 / 4;
+#idFarm_wrapper #idFarm_paginate,
+#idFarm_wrapper #idFarm_length {
+	display: none;
+}
+
+#idFarm tbody tr {
+	display: grid;
+	grid-template-rows: repeat(3, 1fr);
+	grid-template-columns: 12px repeat(2, auto) 73.95px;
+	margin-bottom: 4px;
+	border: 0.5px solid #BFE3C3;
+}
+
+#idFarm tbody tr td {
+	margin-left: 8px;
+	margin-top: 6.93px;
+	margin-bottom: 8.76px;
+}
+
+#idFarm tbody .sorting_1 {
+	grid-row-start: 1;
+	grid-row-end: span 1;
+	grid-column-start: 2;
+	grid-column-end: 4;
+	color: #78B044;
+}
+
+#idFarm tbody .area {
+	grid-row-start: 2;
+	grid-row-end: span 1;
+	grid-column-start: 2;
+	grid-column-end: 3;
+	color: #808080;
+}
+
+#idFarm tbody .perimeter {
+	grid-row-start: 2;
+	grid-row-end: span 1;
+	grid-column-start: 3;
+	grid-column-end: 5;
+	color: #808080;
+}
+
+#idFarm tbody .action {
+	display: flex;
+	grid-row-start: 1;
+	grid-row-end: span 1;
+}
+
+#idFarm tbody .action a {
 	font-weight: 500;
 	font-size: 16px;
 	line-height: 20px;
 	color: #E7AB11;
 	background: none;
+	margin-right: 12.85px;
+	cursor: pointer;
+}
+
+#idFarm tbody .action #deleteBtn {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+#idFarm tbody .action #deleteBtn i {
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 20px;
+	border-radius: 0px;
+	color: #E74011;
+}
+
+#idFarm tbody tr::before {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 4;
+	content: "";
+	background: #79FF76;
+}
+
+#idFarm thead {
+	display: none;
 }
 
 #container form {
@@ -259,30 +388,8 @@ main {
 	grid-area: 3 / 2;
 }
 
-#greenhouse::before {
-	display: inline-block;
-	content: "";
-	width: 20px;
-	height: 100%;
-	background: #FE813B;
-	border-radius: 5px 0px 0px 5px;
-}
-
 #updateBtn a i {
 	color: #E7AB11;
-}
-
-#deleteBtn {
-	background: none;
-	border: none;
-	cursor: pointer;
-}
-
-#deleteBtn a i {
-	height: 17.08px;
-	width: 16.66px;
-	border-radius: 0px;
-	color: #E74011;
 }
 
 #map {
@@ -341,7 +448,11 @@ main {
 	height: 13px;
 	margin: 9px 9px 10px 9px;
 	padding: 11px 182px 12px 16px;
-	border-radius: 5px;
+}
+
+#dropdown-farms {
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .sidebar-nav {
@@ -448,7 +559,6 @@ main {
 	margin-bottom: 32px;
 	padding: 11px 133px 12px 16px;
 	color: #333333;
-	border-radius: 5px;
 	background: #EEF5EC;
 }
 
@@ -458,7 +568,6 @@ main {
 	height: 13px;
 	padding: 11px 152px 12px 14px;
 	background: #EEF5EC;
-	border-radius: 5px;
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 13px;
@@ -589,7 +698,7 @@ main {
 	margin-right: 30px;
 }
 
-.dataTables_wrapper {
+#userFilter_wrapper {
 	display: grid;
 	grid-template-columns: 208px auto;
 	grid-template-rows: auto 67px;
@@ -597,12 +706,12 @@ main {
 	grid-row-end: span 1;
 }
 
-.datatable .thead {
+#userFilter .thead {
 	background: #E7FFE8;
 	color: #575F6E;
 }
 
-.datatable {
+#userFilter {
 	grid-column-start: 1;
 	grid-column-end: 3;
 	grid-row-start: 1;
@@ -637,11 +746,6 @@ main {
 	text-align: start;
 }
 
-.odd td,
-.even td {
-	padding: 24px;
-}
-
 .dataTables_filter,
 .dataTables_info {
 	display: none;
@@ -660,7 +764,8 @@ main {
 	border-bottom: 1px solid #BFE3C3;
 }
 
-.paginate_button .previous, .paginate_button {
+.paginate_button .previous,
+.paginate_button {
 	cursor: pointer;
 	margin-right: 48px;
 }

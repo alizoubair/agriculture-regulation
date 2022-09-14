@@ -12,7 +12,7 @@
             <label>Utilisateur</label>
             <select class="searchUser">
                 <option>Recherche par utilisateur</option>
-                <option>ali zoubair</option>
+                <option>SOMEONE</option>
             </select>
         </div>
         
@@ -26,7 +26,7 @@
 
         <button id="filter">Filter</button>
     </div>
-    <table class="datatable" style="width: 100%">
+    <table id="userFilter" class="datatable" style="width: 100%">
         <thead class="thead">
             <tr>
                 <th>Nom</th>
@@ -42,7 +42,6 @@
 @endsection
 
 @section('javascripts')
-    <script type="text/javascript" src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
             var table = $('.datatable').DataTable({
@@ -65,7 +64,7 @@
 
             $('#filter').on('click', function () {
                 table.draw();
-            })
+            });
         });
     </script>
 @endsection('javascripts')

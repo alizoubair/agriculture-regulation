@@ -1,42 +1,91 @@
 @extends('layouts.index')
 @section('index')
-<div class="sidebar-content">
-    <div class="btns">
-        <a id="farms" href=" {{ route('admin.farm.index') }}" style="background: #EEF5EC; color: #ACB4AB">Fermes</a>
-        <a id="greenhouses" href=" {{ route('admin.greenhouse.index') }}" style="background: #78B044; color: #FFFFFF">Serres</a>
-    </div>
-    <div>
-        <input class="typeahead form-control" id="search" type="text" placeholder="recherche par serre">
-
-        <div id="dropdown-greenhouses" class="dropdown">
-            <div id="idGreenhouse" class="dropdown-content">
-                @foreach($viewData['greenhouses'] as $greenhouse)
-                <div id="greenhouse">
-                    <div id="container">
-                        <a id="{{ $greenhouse->getId() }}" class="showGreenhouse" href="#">{{ $greenhouse->getName()}}</a>
-                        <a id="updateBtn" href="{{route('admin.greenhouse.edit', ['id'=> $greenhouse->getId()])}}"><i class="bi bi-pencil-fill"></i></a>
-                        <form action="{{ route('admin.greenhouse.delete', $greenhouse->getId()) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button id="deleteBtn" type="submit"><i class="bi bi-trash-fill"></i></button>
-                        </form>
-                        <input id="zoom" type="text" name="zoom" value="{{ $greenhouse->getZoomLevel() }}" style="display: none;">
-                        <input id="center" type="text" name="center" value="{{ $greenhouse->getCenter() }}" style="display: none">
-                        <input id="coordinates" type="text"  name="coordinates" value="{{ $greenhouse->getCoordinates() }}" style="display: none;" > 
-                        <div class="dimensions">
-                            <p>Périmètre: {{ $greenhouse->getPerimeter() }}</p>
-                            <p>Surface: {{ $greenhouse->getArea() }}</p>
-                        </div>
-                        <p class="farm">Ferme: {{ $greenhouse->getFarmId() }}</p>
-                    </div>
-                </div>
-                @endforeach
+    <div class="page-content">
+        <div class="sidebar-content">
+            <div class="btns">
+                <a class="farms" href=" {{ route('admin.farm.index') }}" style="background: #EEF5EC; color: #ACB4AB">Fermes</a>
+                <a class="greenhouses" href=" {{ route('admin.greenhouse.index') }}" style="background: #78B044; color: #FFFFFF">Serres</a>
             </div>
+            <div>
+                <input id="search" class="searchGreenhouse" type="text" placeholder="recherche par serre">
+
+                <div id="dropdown-greenhouses" class="dropdown">
+                    <table id="idGreenhouse" class="dropdown-content datatable" style="width: 100%">
+                        <tbody id="greenhouse">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <a id="changeBtn" href="greenhouses/create">Ajouter une Serre</a>
         </div>
-      </div>
-      <a id="changeBtn" href="greenhouses/create">Ajouter une Serre</a>
-</div>
-<div id="map"></div>
-<script type="module" src="{{ asset('js/mapbox.js') }}"></script>
-<script type="module" src="{{ asset('js/greenhouse.js') }}"></script>
+        <div id="map"></div>
+    </div>
+@endsection
+@section('javascripts')
+    <script type="module" src="{{ asset('js/mapbox.js') }}"></script>
+    <script type="module" src="{{ asset('js/greenhouse.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('.datatable').DataTable({
+                'scrollY': '400px',
+                'scrollCollapse': true,
+                'serverSide': true,
+                'ajax': {
+                    url: "{{ route('admin.greenhouse.index') }}",
+                    data: function(d) {
+                        d.name = $('#search').val()
+                    }
+                },
+                'columns': [
+                    {'data': 'name'},
+                    {
+                        'class': 'area',
+                        data: 'area',
+                        render: function(data) {
+                            return 'Surface: ' + data;
+                        }
+                    },
+                    {
+                        'class': 'perimeter',
+                        data: 'perimeter',
+                        render: function(data) {
+                            return 'Périmètre: ' + data;
+                        }
+                    },
+                    {
+                        'class': 'farmId',
+                        data : 'farmId',
+                        render: function(data) {
+                            return 'Ferme: ' + data;
+                        }
+                    },
+                    {
+                        'class' :'coordinates',
+                        data : 'coordinates',
+                    },
+                    {
+                        'class': 'action',
+                        'data': 'action',
+                        'name': 'action',
+                        searchable: false
+                    }
+                ],
+                'columnDefs': [
+                    {
+                        'targets': 4,
+                        'createdCell':  function (td, cellData, rowData, row, col) {
+                            $(td).attr('id', 'coordinates'); 
+                        }
+                    }
+                ],
+                "language": {
+                    "zeroRecords": 'Aucune serre disponible',
+                }
+            });
+
+            $('#search').keyup(function() {
+                table.draw();
+            })
+        })
+    </script>
 @endsection

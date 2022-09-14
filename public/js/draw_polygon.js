@@ -157,12 +157,12 @@ function updateArea(e) {
     if (data.features.length > 0) {
         const dimensions = utils.getDimensions(data, coordinates);
 
-        const updated_area = (dimensions[0] < 1000) ? `${dimensions[0]} m²`
-            : `${dimensions[0] / 1000000} km²`;
+        const updated_area = (dimensions[0] < 1000) ? `${dimensions[0].toFixed(2)} m²`
+            : `${(dimensions[0] / 1000000).toFixed(2)} km²`;
         area_field.setAttribute('value', updated_area);
 
-        const updated_perimeter = (dimensions[1] > 1) ? `${dimensions[1]} km`
-            : `${dimensions[1] * 1000} m`;
+        const updated_perimeter = (dimensions[1] > 1) ? `${dimensions[1].toFixed(2)} km`
+            : `${(dimensions[1] * 1000).toFixed(2)} m`;
         perimeter_field.setAttribute('value', updated_perimeter);
     }
 }
