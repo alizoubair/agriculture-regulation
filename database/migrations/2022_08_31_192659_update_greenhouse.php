@@ -16,7 +16,7 @@ class UpdateGreenhouse extends Migration
         Schema::table('greenhouses', function(Blueprint $table) {
             $table->string('zoom');
             $table->string('center');
-            $table->string('coordinates');
+            $table->string('coordinates', 8000);
         });
     }
 

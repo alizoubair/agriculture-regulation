@@ -38,6 +38,8 @@
     </div>
     <div id="map"></div>   
 </div>
+@endsection
 
-<script type="module" src="{{ asset('js/draw_polygon.js') }}"></script>
+@section('javascripts')
+    <script type="module" src="{{ asset('js/draw_polygon.js') }}"></script>
 @endsection

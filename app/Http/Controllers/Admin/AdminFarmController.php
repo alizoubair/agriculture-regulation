@@ -25,13 +25,17 @@ class AdminFarmController extends Controller
 							});
 						}
 					})
+					->addColumn('name', function($farm) {
+						return '<a href="#">'.$farm->name.'</a>';
+					})
 					->addColumn('action', function($farm) {
 						return '<a id="updateBtn" href="/admin/farms/'.$farm->id.'/edit"><i class="bi bi-pencil-fill"></i></a>
-								<form  action="/admin/farms/'.$farm->id.'/delete" method="POST">									
+								<form  action="/admin/farms/'.$farm->id.'/delete" method="POST">
 									<button id="deleteBtn" type="submit"><i class="bi bi-trash-fill"></i></button>
 								</form>';
 					})
-					->make(true);
+					->rawColumns(['name', 'action'])
+					->toJson();
 		}
 
 		return view('admin.farm.index');
@@ -76,7 +80,9 @@ class AdminFarmController extends Controller
 		$farm->setName($request->input('name'));
 		$farm->setArea($request->input('area'));
 		$farm->setPerimeter($request->input('perimeter'));
-
+		$farm->setCoordinates($request->input('coordinates'));
+		$farm->setCenter($request->input('center'));
+		$farm->setZoomLevel($request->input('zoom'));
 		$farm->save();
 
 		return redirect()->route('admin.farm.index');

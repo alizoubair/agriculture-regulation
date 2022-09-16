@@ -1,4 +1,7 @@
 @extends('layouts.index')
+@section('header')
+    <h1>Carte des fermes</h1>
+@endsection
 
 @section('Greenhouse')
     <div class="page-content">
@@ -34,11 +37,15 @@
                         <label>Perimeter:</label>
                         <input id="calculated-perimeter" type="text" name="perimeter" value="{{ old('perimeter') }}" class="form-control">
                     </div>
-                    <input id="lng" type="text" name="lng" style="display: none">
-                    <input id="lat" type="text" name="lat" style="display: none">
-                    <input id="coordinates" trype="text" name="coordinates" style="display: none" >
-                    <input id="zoom" type="text" name="zoom" style="display: none">
-                    <input id="center" type="text" name="center" style="display: none">
+                    <div>
+                        <input id="coordinates" trype="text" name="coordinates" style="display: none" >
+                    </div>
+                    <div>
+                        <input id="zoom" type="text" name="zoom" style="display: none">
+                    </div>
+                    <div>
+                        <input id="center" type="text" name="center" style="display: none">
+                    </div>
                 </form>
             </div>
             <button id="changeBtn" type="submit" form="form">Enregistrer</button>

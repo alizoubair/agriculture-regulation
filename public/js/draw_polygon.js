@@ -1,10 +1,15 @@
 import { map } from "./mapbox.js";
 import * as utils from './utils.js';
 
-var cancelPop = "<button id='cancelPopup'>Annuler</button>";
-var renderPop = "<button id='renderPopup'>Terminer</button>";
 var vertex = 0, last_vertex = 0;
 var coordinates, removePopup, renderPopup, areaPopup;
+const area_field = document.getElementById('calculated-area');
+const perimeter_field = document.getElementById('calculated-perimeter');
+const coordinates_field = document.getElementById('coordinates');
+const center_field = document.getElementById('center');
+const zoom_field = document.getElementById('zoom');
+var cancelPop = "<button id='cancelPopup'>Annuler</button>";
+var renderPop = "<button id='renderPopup'>Terminer</button>";
 
 utils.fitView();
 
@@ -54,21 +59,21 @@ export const draw = new MapboxDraw({
             "type": "fill",
             "filter": ["all", ["==", "$type", "Polygon"], ["!=", "mode", "static"]],
             "paint": {
-              "fill-color": "#FFD704",
-              "fill-outline-color": "#FFD704",
-              "fill-opacity": 0.3
+                "fill-color": "#FFD704",
+                "fill-outline-color": "#FFD704",
+                "fill-opacity": 0.3
             }
-          },
-          // polygon mid points
+        },
+        // polygon mid points
         {
             'id': 'gl-draw-polygon-midpoint',
             'type': 'circle',
             'filter': ['all',
-            ['==', '$type', 'Point'],
-            ['==', 'meta', 'midpoint']],
+                ['==', '$type', 'Point'],
+                ['==', 'meta', 'midpoint']],
             'paint': {
-            'circle-radius': 4,
-            'circle-color': '#FFD704'
+                'circle-radius': 4,
+                'circle-color': '#FFD704'
             }
         },
         // polygon outline stroke
@@ -77,13 +82,13 @@ export const draw = new MapboxDraw({
             "type": "line",
             "filter": ["all", ["==", "$type", "Polygon"], ["!=", "mode", "static"]],
             "layout": {
-            "line-cap": "round",
-            "line-join": "round"
+                "line-cap": "round",
+                "line-join": "round"
             },
             "paint": {
-            "line-color": "#FFD704",
-            "line-dasharray": [1, 2],
-            "line-width": 2
+                "line-color": "#FFD704",
+                "line-dasharray": [1, 2],
+                "line-width": 3
             }
         },
         // vertex point halos
@@ -92,8 +97,8 @@ export const draw = new MapboxDraw({
             "type": "circle",
             "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
             "paint": {
-            "circle-radius": 5,
-            "circle-color": "#FFD704"
+                "circle-radius": 5,
+                "circle-color": "#FFD704"
             }
         },
         // vertex points
@@ -113,13 +118,13 @@ export const draw = new MapboxDraw({
             "type": "line",
             "filter": ["all", ["==", "$type", "LineString"], ["==", "mode", "static"]],
             "layout": {
-            "line-cap": "round",
-            "line-join": "round"
+                "line-cap": "round",
+                "line-join": "round"
             },
             "paint": {
-            "line-color": "#FFD704",
-            "line-dasharray": [1, 0],
-            "line-width": 3
+                "line-color": "#FFD704",
+                "line-dasharray": [1, 0],
+                "line-width": 3
             }
         },
         // polygon fill
@@ -193,98 +198,101 @@ function removePop(last_vertex) {
 }
 
 map.on('click', () => {
-    var list = draw.getAll().features[0].geometry.coordinates[0];
-    coordinates = Object.values(list.reduce((p, c) => (p[JSON.stringify(c)] = c, p), {}));
+    if (draw.getMode() === "draw_polygon") {
+        var list = draw.getAll().features[0].geometry.coordinates[0];
+        coordinates = Object.values(list.reduce((p, c) => (p[JSON.stringify(c)] = c, p), {}));
 
-    if (vertex) {
-        removePopup = new mapboxgl.Popup({ closeButton: false, className: "cancelPopup" })
-            .setLngLat(coordinates[vertex])
-            .setHTML(cancelPop)
-            .on('open', e => {
-                if (document.getElementById('cancelPopup')) {
-                    document.getElementById('cancelPopup')
-                        .addEventListener('click', e => {
-                            draw.trash();
-                            removePopup.remove();
-                            last_vertex = vertex - 2;
+        if (vertex) {
+            removePopup = new mapboxgl.Popup({ closeButton: false, className: "cancelPopup" })
+                .setLngLat(coordinates[vertex])
+                .setHTML(cancelPop)
+                .on('open', e => {
+                    if (document.getElementById('cancelPopup')) {
+                        document.getElementById('cancelPopup')
+                            .addEventListener('click', e => {
+                                draw.trash();
+                                removePopup.remove();
+                                last_vertex = vertex - 2;
 
-                            removePop(last_vertex);
+                                removePop(last_vertex);
 
-                            vertex--;
-                        });
-                }
-            })
-            .addTo(map);
+                                vertex--;
+                            });
+                    }
+                })
+                .addTo(map);
+        }
+
+        vertex++;
     }
 
-    vertex++;
 });
 
 map.on('click', () => {
-    const data = draw.getAll();
-    const Id = draw.getAll().features[0].id;
-    var list = draw.getAll().features[0].geometry.coordinates[0];
-    var coordinates = Object.values(list.reduce((p, c) => (p[JSON.stringify(c)] = c, p), {}));
-    const center = turf.center(data.features[data.features.length - 1]).geometry.coordinates;
+    if (draw.getMode() === "draw_polygon") {
+        const data = draw.getAll();
+        const Id = draw.getAll().features[0].id;
+        var list = draw.getAll().features[0].geometry.coordinates[0];
+        var coordinates = Object.values(list.reduce((p, c) => (p[JSON.stringify(c)] = c, p), {}));
+        const center = turf.center(data.features[data.features.length - 1]).geometry.coordinates;
 
-    if (coordinates.length > 2) {
-        var dimensions = utils.getDimensions(data, data.features[data.features.length - 1].geometry.coordinates);
-        const updated_area = (dimensions[0] < 1000000) ? `${dimensions[0].toFixed(2)} m²`
-            : `${(dimensions[0] / 1000000).toFixed(2)} km²`;
+        if (coordinates.length > 2) {
+            var dimensions = utils.getDimensions(data, data.features[data.features.length - 1].geometry.coordinates);
+            const updated_area = (dimensions[0] < 1000000) ? `${dimensions[0].toFixed(2)} m²`
+                : `${(dimensions[0] / 1000000).toFixed(2)} km²`;
 
-        // Add a popup to display area
-        areaPopup = new mapboxgl.Popup({ closeButton: false, className: 'areaPopup' })
-            .setLngLat(center)
-            .setHTML(`surface: ${updated_area}`)
-            .addTo(map)
+            // Add a popup to display area
+            areaPopup = new mapboxgl.Popup({ closeButton: false, className: 'areaPopup' })
+                .setLngLat(center)
+                .setHTML(`surface: ${updated_area}`)
+                .addTo(map)
 
-        // Add a popup to render geometry
-        renderPopup = new mapboxgl.Popup({ closeButton: false, className: "renderPopup" })
-            .setLngLat(coordinates[0])
-            .setHTML(renderPop)
-            .on('open', e => {
-                if (document.getElementById('renderPopup')) {
-                    document.getElementById('renderPopup')
-                        .addEventListener('click', e => {
-                            draw.changeMode('direct_select', { featureId: `${Id}` });
-                            renderPopup.remove();
-                            removePopup.remove();
-                            areaPopup.remove();
-                        })
-                }
-            })
-            .addTo(map)
+            // Add a popup to render geometry
+            renderPopup = new mapboxgl.Popup({ closeButton: false, className: "renderPopup" })
+                .setLngLat(coordinates[0])
+                .setHTML(renderPop)
+                .on('open', e => {
+                    if (document.getElementById('renderPopup')) {
+                        document.getElementById('renderPopup')
+                            .addEventListener('click', e => {
+                                draw.changeMode('direct_select', { featureId: `${Id}` });
+                                renderPopup.remove();
+                                removePopup.remove();
+                                areaPopup.remove();
+                            })
+                    }
+                })
+                .addTo(map)
+        }
     }
 });
 
 function updateArea(e) {
     const data = draw.getAll();
-    const area_field = document.getElementById('calculated-area');
-    const perimeter_field = document.getElementById('calculated-perimeter');
     const coordinates = data.features[data.features.length - 1].geometry.coordinates;
 
-    // Set center of the polygon
     const center = turf.center(data.features[data.features.length - 1]).geometry.coordinates;
 
-    const inputCenter = document.getElementById('center');
-    inputCenter.value = center;
-
-    const Inputcoordinates = document.getElementById('coordinates');
-    Inputcoordinates.value = coordinates;
-
     if (data.features.length > 0) {
-        const dimensions = utils.getDimensions(data, coordinates);
+        var dimensions = utils.getDimensions(data, coordinates);
 
-        const updated_area = (dimensions[0] < 1000000) ? `${dimensions[0].toFixed(2)} m²`
+        var updated_area = (dimensions[0] < 1000000) ? `${dimensions[0].toFixed(2)} m²`
             : `${(dimensions[0] / 1000000).toFixed(2)} km²`;
         area_field.setAttribute('value', updated_area);
 
-        const updated_perimeter = (dimensions[1] > 1) ? `${dimensions[1].toFixed(2)} km`
+        var updated_perimeter = (dimensions[1] > 1) ? `${dimensions[1].toFixed(2)} km`
             : `${(dimensions[1] * 1000).toFixed(2)} m`;
         perimeter_field.setAttribute('value', updated_perimeter);
+
+        coordinates_field.setAttribute('value', coordinates);
+
+        center_field.setAttribute('value', center);
     }
 }
 
-document.getElementById('zoom').value = localStorage.getItem('zoom');
+map.on('mousemove', () => {
+    var zoom = map.getZoom();
+    zoom_field.setAttribute('value', zoom);
+})
 
 export { map };

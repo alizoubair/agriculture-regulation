@@ -41,8 +41,13 @@ label {
 	margin-bottom: 8px;
 }
 
-.popup {
+.popup .mapboxgl-popup-content {
 	color: #000;
+	padding: 10px;
+}
+
+.popup {
+	padding-bottom: 10px;
 }
 
 .mapboxgl-popup-content {
@@ -117,7 +122,7 @@ main {
 
 .page-content {
 	display: grid;
-	grid-template-columns: 380px auto;
+	grid-template-columns: 421px auto;
 	height: 100%;
 }
 
@@ -133,7 +138,7 @@ main {
 .sidebar-content {
 	display: grid;
 	grid-template-rows: 59px auto 60px;
-	grid-template-columns: 360px;
+	grid-template-columns: 399px;
 	grid-column-start: span 1;
 	margin-right: 20px;
 	border: 1px solid #BFE3C3;
@@ -158,7 +163,7 @@ main {
 #idGreenhouse tbody tr {
 	display: grid;
 	grid-template-rows: repeat(3, 1fr);
-	grid-template-columns: 12px repeat(2, auto) 88.95px;
+	grid-template-columns: 12px repeat(2, auto) 73.95px;
 	margin-bottom: 3.97px;
 	border: 0.5px solid #BFE3C3;
 }
@@ -168,13 +173,30 @@ main {
 	grid-row-end: span 1;
 	grid-column-start: 2;
 	grid-column-end: 4;
+}
+
+#idGreenhouse tbody .sorting_1 a {
 	color: #78B044;
 }
 
 #idGreenhouse tbody tr td {
-	margin-left: 20px;
-	margin-top: 6.93px;
-	margin-bottom: 8.76px;
+	margin: 6.93px 8px 8.76px 8px;
+	color: #808080;
+}
+
+#idGreenhouse tbody tr .area {
+	grid-row-start: 2;
+	grid-row-end: span 1;
+	grid-column-start: 2;
+	grid-column-end: 3;
+	color: #808080;
+}
+
+#idGreenhouse tbody tr .perimeter {
+	grid-row-start: 2;
+	grid-row-end: span 1;
+	grid-column-start: 3;
+	grid-column-end: 5;
 	color: #808080;
 }
 
@@ -199,7 +221,7 @@ main {
 	line-height: 20px;
 	color: #E7AB11;
 	background: none;
-	margin-right: 19.85px;
+	margin-right: 12.85px;
 }
 
 #idGreenhouse tbody .action #deleteBtn {
@@ -237,7 +259,6 @@ main {
 	width: 177px;
 	background: #EEF5EC;
 	color: #ACB4AB;
-	border-radius: 0px 5px 0px 0px;
 	text-align: center;
 	padding: 21.6px 67.09px 24.4px 66.91px;
 	text-align: center;
@@ -297,9 +318,7 @@ main {
 }
 
 #idFarm tbody tr td {
-	margin-left: 8px;
-	margin-top: 6.93px;
-	margin-bottom: 8.76px;
+	margin: 6.93px 8px 8.76px 8px;
 }
 
 #idFarm tbody .sorting_1 {
@@ -307,6 +326,9 @@ main {
 	grid-row-end: span 1;
 	grid-column-start: 2;
 	grid-column-end: 4;
+}
+
+#idFarm tbody .sorting_1 a {
 	color: #78B044;
 }
 
@@ -415,6 +437,11 @@ main {
 	font-size: 11px;
 	line-height: 18px;
 	border-radius: 3px;
+}
+
+.coordinates,
+.center,
+.zoom {
 	display: none;
 }
 
@@ -445,10 +472,22 @@ main {
 
 /* Main */
 #search {
+	display: flex;
+}
+
+#inputSearch {
 	width: 139.94px;
 	height: 13px;
 	margin: 9px 9px 10px 9px;
-	padding: 11px 182px 12px 16px;
+	padding: 11px 221px 12px 16px;
+}
+
+#search i {
+	position: relative;
+	width: 18.75px;
+	height: 19.15px;
+	right: 46px;
+	top: 17px;
 }
 
 #dropdown-farms {
@@ -513,6 +552,7 @@ main {
 	font-weight: 500;
 	font-size: 17px;
 	line-height: 24px;
+	color: #FFFFFF;
 }
 
 .sidebar-footer div a {
@@ -521,6 +561,7 @@ main {
 	font-weight: 400;
 	font-size: 12px;
 	line-height: 18px;
+	color: #FFFFFF;
 }
 
 /* main content */
@@ -564,10 +605,7 @@ main {
 }
 
 .sidebar-content form select {
-	display: block;
-	width: 178px;
-	height: 13px;
-	padding: 11px 152px 12px 14px;
+	padding: 11px 138px 12px 14px;
 	background: #EEF5EC;
 	font-weight: 400;
 	font-size: 14px;

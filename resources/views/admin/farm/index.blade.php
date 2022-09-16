@@ -11,7 +11,10 @@
                 <a class="greenhouses" href="/admin/greenhouses" style="background: #EEF5EC">Serres</a>
             </div>
             <div>
-                <input id="search" class="searchFarm" name="searchFarm" type="text" placeholder="recherche par ferme">
+                <div id="search">
+                    <input id="inputSearch" class="searchFarm" name="searchFarm" type="text" placeholder="recherche par ferme">
+                    <i class="bi bi-search"></i>
+                </div>
                 <div id="dropdown-farms" class="dropdown-content">
                     <table id="idFarm" class="dropdown-content datatable" style="width: 100%;">
                         <tbody id="farms">    
@@ -29,7 +32,7 @@
     <script type="module" src="{{ asset('js/mapbox.js') }}"></script>
     <script type="module" src="{{ asset('js/farm.js') }}"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var table = $('.datatable').DataTable({
                 'scrollY': '450px',
                 'scrollCollapse': true,
@@ -37,30 +40,42 @@
                 'ajax': {
                     url: "{{ route('admin.farm.index') }}",
                     data: function (d) {
-                        d.name = $('#search').val()
+                        d.name = $('#inputSearch').val()
                     }
                 },
                 'columns': [
                     {
-                        data: 'name'
+                        class: 'name',
+                        data: 'name',
+                        name: 'name',
+                        orderable: false,
+                        searchable: false
                     },
-                    {   
+                    {
                         'class': 'area',
                         data: 'area',
-                        render: function(data) {
+                        render: function (data) {
                             return 'Surface: ' + data;
                         }
                     },
-                    {   
+                    {
                         'class': 'perimeter',
                         data: 'perimeter',
-                        render: function(data) {
+                        render: function (data) {
                             return 'Périmètre: ' + data;
                         }
                     },
                     {
-                        'class' :'coordinates',
-                        data : 'coordinates'
+                        'class': 'coordinates',
+                        data: 'coordinates'
+                    },
+                    {
+                        'class': 'center',
+                        data: 'center'
+                    },
+                    {
+                        'class': 'zoom',
+                        data: 'zoom'
                     },
                     {
                         'class': 'action',
@@ -72,9 +87,33 @@
                 ],
                 'columnDefs': [
                     {
+                        'targets': 1,
+                        'createdCell': function (td, cellData, rowData, row, col) {
+                            $(td).attr('id', 'area');
+                        }
+                    },
+                    {
+                        'targets': 2,
+                        'createdCell': function (td, cellData, rowData, row, col) {
+                            $(td).attr('id', 'perimeter');
+                        }
+                    },
+                    {
                         'targets': 3,
-                        'createdCell':  function (td, cellData, rowData, row, col) {
-                            $(td).attr('id', 'coordinates'); 
+                        'createdCell': function (td, cellData, rowData, row, col) {
+                            $(td).attr('id', 'coordinates');
+                        }
+                    },
+                    {
+                        'targets': 4,
+                        'createdCell': function (td, cellData, rowData, row, col) {
+                            $(td).attr('id', 'center');
+                        }
+                    },
+                    {
+                        'targets': 5,
+                        'createdCell': function (td, cellData, rowData, row, col) {
+                            $(td).attr('id', 'zoom');
                         }
                     }
                 ],
@@ -83,9 +122,11 @@
                 }
             });
 
-            $('#search').keyup(function() {
+            $('#search').keyup(function () {
                 table.draw();
             });
+
+            console.log(table)
         })
-    </script>
+   </script>
 @endsection

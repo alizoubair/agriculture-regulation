@@ -15,7 +15,7 @@
 
             <p>Dessinez le périmètre de votre ferme.</p>
 
-            <form method="POST" action="{{ route('admin.farm.update', ['id'=>$viewData['farm']->getId()]) }}" enctype="multipart/form-data">
+            <form id="form" method="POST" action="{{ route('admin.farm.update', ['id'=>$viewData['farm']->getId()]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div>
@@ -31,17 +31,22 @@
                     <input id="calculated-perimeter" type="text" name="perimeter" value="{{ $viewData['farm']->getPerimeter() }}" class="form-control">
                 </div>
                 <div>
-                    <input id="zoom" type="text" name="zoom" value="{{ $viewData['farm']->getZoomLevel() }}" style="display: none">
+                    <input id="coordinates" type="text" name="coordinates" value="{{ $viewData['farm']->getCoordinates() }}" style="display: none">
                 </div>
                 <div>
-                    <input id="coordinates" type="text" name="coordinates" value="{{ $viewData['farm']->getCoordinates() }}" style="display: none">
+                    <input id="center" type="text" name="center" value="{{ $viewData['farm']->getCenter() }}" style="display: none">
+                </div>
+                <div>
+                    <input id="zoom" type="text" name="zoom" value="{{ $viewData['farm']->getZoomLevel() }}" style="display: none">
                 </div>
             </form>
         </div>
-        <button id="changeBtn" type="submit">Enregistrer</button>
+        <button id="changeBtn" type="submit" form="form">Enregistrer</button>
     </div>
     <div id="map"></div>
 </div>
+@endsection
 
-<script type="module" src="{{ asset('js/create_polygon.js') }}"></script>
+@section('javascripts')
+    <script type="module" src="{{ asset('js/create_polygon.js') }}"></script>
 @endsection

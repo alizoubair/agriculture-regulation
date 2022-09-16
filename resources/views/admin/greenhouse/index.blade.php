@@ -1,4 +1,8 @@
 @extends('layouts.index')
+@section('header')
+    <h1>Carte des fermes</h1>
+@endsection
+
 @section('index')
     <div class="page-content">
         <div class="sidebar-content">
@@ -7,8 +11,10 @@
                 <a class="greenhouses" href=" {{ route('admin.greenhouse.index') }}" style="background: #78B044; color: #FFFFFF">Serres</a>
             </div>
             <div>
-                <input id="search" class="searchGreenhouse" type="text" placeholder="recherche par serre">
-
+                <div id="search">
+                    <input id="inputSearch" class="searchGreenhouse" type="text" placeholder="recherche par serre">
+                    <i class="bi bi-search"></i>
+                </div>
                 <div id="dropdown-greenhouses" class="dropdown">
                     <table id="idGreenhouse" class="dropdown-content datatable" style="width: 100%">
                         <tbody id="greenhouse">
@@ -24,6 +30,7 @@
 @section('javascripts')
     <script type="module" src="{{ asset('js/mapbox.js') }}"></script>
     <script type="module" src="{{ asset('js/greenhouse.js') }}"></script>
+    
     <script>
         $(document).ready(function() {
             var table = $('.datatable').DataTable({
@@ -33,7 +40,7 @@
                 'ajax': {
                     url: "{{ route('admin.greenhouse.index') }}",
                     data: function(d) {
-                        d.name = $('#search').val()
+                        d.name = $('#inputSearch').val()
                     }
                 },
                 'columns': [
@@ -86,6 +93,6 @@
             $('#search').keyup(function() {
                 table.draw();
             })
-        })
+        });
     </script>
 @endsection

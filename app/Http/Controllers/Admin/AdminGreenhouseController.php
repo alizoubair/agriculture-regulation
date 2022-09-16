@@ -25,13 +25,17 @@ class AdminGreenhouseController extends Controller
 							});
 						}
 					})
+					->addColumn('name', function($greenhouse) {
+						return '<a href="#">'.$greenhouse->name.'</a>';
+					})
 					->addColumn('action', function($greenhouse) {
 						return '<a id="updateBtn" href="/admin/greenhouses/'.$greenhouse->id.'/edit"><i class="bi bi-pencil-fill"></i></a>
 								<form methode="POST">
 									<button id="deleteBtn" type="submit"><i class="bi bi-trash-fill"></i></button>
 								</form>';
 					})
-					->make(true);
+					->rawColumns(['name', 'action'])
+					->toJson();
 		}
 
 		return view('admin.greenhouse.index');
@@ -79,7 +83,9 @@ class AdminGreenhouseController extends Controller
 		$greenhouse->setFarmId($request->input('farm_id'));
 		$greenhouse->setArea($request->input('area'));
 		$greenhouse->setPerimeter($request->input('perimeter'));
-
+		$greenhouse->setCoordinates($request->input('coordinates'));
+		$greenhouse->setCenter($request->input('center'));
+		$greenhouse->setZoomLevel($request->input('zoom'));
 		$greenhouse->save();
 
 		return redirect()->route('admin.greenhouse.index');

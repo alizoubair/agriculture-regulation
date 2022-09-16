@@ -18,8 +18,8 @@ class CreateGreenhousesTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('farm_id');
             $table->foreign('farm_id')->references('id')->on('farms');
-            $table->integer('area');
-            $table->integer('perimeter');
+            $table->string('area');
+            $table->string('perimeter');
             $table->timestamps();
         });
     }

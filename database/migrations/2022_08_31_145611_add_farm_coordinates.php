@@ -14,7 +14,7 @@ class AddFarmCoordinates extends Migration
     public function up()
     {
         Schema::table('farms', function(Blueprint $table) {
-            $table->string('coordinates');
+            $table->string('coordinates', 8000);
         });
     }
 
@@ -26,7 +26,7 @@ class AddFarmCoordinates extends Migration
     public function down()
     {
         Schema::table('farms', function(Blueprint $table) {
-            $table->string('coordinates');
+            $table->string('coordinates', 100);
         });
     }
 }
