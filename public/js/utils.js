@@ -34,8 +34,59 @@ function getDimensions(data, coordinates) {
     // Restrict the area and perimeter to 2 decimal points.
     var rounded_area = Math.round(area * 100) / 100;
     var rounded_perimeter = Math.round(perimeter * 100) / 100;
-    
+
     return [rounded_area, rounded_perimeter];
 }
 
-export { fitView, getDimensions };
+function getUniqueFeatures(features) {
+    const uniqueIds = new Set();
+    const uniqueFeatures = [];
+    for (const feature of features) {
+        const id = feature.layer.id;
+        if (!uniqueIds.has(id)) {
+            uniqueIds.add(id);
+            uniqueFeatures.push(feature);
+        }
+    }
+    return uniqueFeatures;
+}
+
+var filteredMarkers = [];
+
+function filterFeatures(event, uniqueFeatures, markers) {
+    const value = event.target.value;
+
+    if (uniqueFeatures) {
+        for (const uniqueFeature of uniqueFeatures) {
+            map.setLayoutProperty(
+                uniqueFeature.layer.id,
+                'visibility',
+                // Filter visible features that match the input value.
+                (uniqueFeature.properties.name.includes(value)) ? 'visible' : 'none'
+            );
+        }
+
+        // Filter visible marker
+        if (filteredMarkers && markers) {
+            for (const filteredMarker of filteredMarkers) {
+                if (filteredMarker._element.id.includes(value)) {
+                    filteredMarker.addTo(map);
+                    filteredMarkers = filteredMarkers.filter((marker) => {
+                        return (marker !==  filteredMarker);
+                    });
+                }
+            }
+        }
+
+        for (const marker of markers) {
+            if (!marker._element.id.includes(value)) {
+                marker.remove();
+                if (!filteredMarkers.find(element => element === marker)) {
+                    filteredMarkers.push(marker);
+                }
+            }
+        }
+    }
+}
+
+export { fitView, getDimensions, getUniqueFeatures, filterFeatures };

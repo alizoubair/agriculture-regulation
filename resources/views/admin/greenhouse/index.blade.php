@@ -79,6 +79,12 @@
                 ],
                 'columnDefs': [
                     {
+                        'targets': 0,
+                        'createdCell':  function (td, cellData, rowData, row, col) {
+                            $(td).attr('id', 'name'); 
+                        }
+                    },
+                    {
                         'targets': 4,
                         'createdCell':  function (td, cellData, rowData, row, col) {
                             $(td).attr('id', 'coordinates'); 

@@ -87,6 +87,12 @@
                 ],
                 'columnDefs': [
                     {
+                        'targets': 0,
+                        'createdCell': function (td, cellData, rowData, row, coll) {
+                            $(td).attr('id', 'name');
+                        }
+                    },
+                    {
                         'targets': 1,
                         'createdCell': function (td, cellData, rowData, row, col) {
                             $(td).attr('id', 'area');
@@ -125,8 +131,6 @@
             $('#search').keyup(function () {
                 table.draw();
             });
-
-            console.log(table)
         })
    </script>
 @endsection

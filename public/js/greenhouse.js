@@ -1,6 +1,8 @@
 import { map } from './mapbox.js'
 import * as utils from './utils.js';
 
+var name;
+
 utils.fitView();
 
 map.on('load', () => {
@@ -17,12 +19,19 @@ map.on('load', () => {
                     i++;
                 }
             }
-            
+
+            if ($(this)[0].id === "name") {
+                name = $(this)[0].innerText;
+            }
+
             // Add a data source containing GeoJSON data.
             map.addSource(`greenhouse${i}`, {
                 'type': 'geojson',
                 'data': {
                     'type': 'Feature',
+                    'properties': {
+                        'name': `${name}`
+                    },
                     'geometry': {
                         'type': 'Polygon',
                         // These coordinates outline Maine.
@@ -55,5 +64,22 @@ map.on('load', () => {
                 },
             });
         })
+    });
+});
+
+/* Filter greenhouse features */
+map.on('load', () => {
+    const filterEl = document.getElementById('inputSearch');
+    var features, uniqueFeatures;
+
+    map.on('mousemove', () => {
+        features = map.queryRenderedFeatures();
+        if (features) {
+            uniqueFeatures = utils.getUniqueFeatures(features);
+        }
+    });
+
+    filterEl.addEventListener('keyup', (e) => {
+        utils.filterFeatures(e, uniqueFeatures, []);
     });
 });

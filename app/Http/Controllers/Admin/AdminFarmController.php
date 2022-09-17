@@ -26,7 +26,7 @@ class AdminFarmController extends Controller
 						}
 					})
 					->addColumn('name', function($farm) {
-						return '<a href="#">'.$farm->name.'</a>';
+						return '<a id="'.$farm->name.'" href="#">'.$farm->name.'</a>';
 					})
 					->addColumn('action', function($farm) {
 						return '<a id="updateBtn" href="/admin/farms/'.$farm->id.'/edit"><i class="bi bi-pencil-fill"></i></a>
