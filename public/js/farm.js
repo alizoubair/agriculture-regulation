@@ -71,6 +71,7 @@ map.on('load', () => {
             const popup = new mapboxgl.Popup({ offset: 25, closeButton: false, className: "popup" }).setText(
                 `${document.getElementById('area').innerText}  ${document.getElementById('perimeter').innerText}`
             );
+
             // Add farms' position on map with markers.
             if ($(this)[0].id === "center") {
                 var center = $(this)[0].innerText.split(',').map(i => parseFloat(i));
@@ -91,6 +92,18 @@ map.on('load', () => {
 
                 markers.push(marker);
             }
+
+            // Handle markers on mouse zoom
+            map.on('moveend', () => {
+                console.log(map.getZoom())
+                for (const marker of markers) {
+                        if (parseFloat(map.getZoom()) <= parseFloat(zoom.innerText)) {
+                            marker.addTo(map);
+                        } else {
+                            marker.remove();
+                        }
+                }
+            });
         });
     });
 });

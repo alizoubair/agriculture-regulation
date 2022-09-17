@@ -34,7 +34,7 @@
     <script>
         $(document).ready(function () {
             var table = $('.datatable').DataTable({
-                'scrollY': '450px',
+                'scrollY': '580px',
                 'scrollCollapse': true,
                 'serverSide': true,
                 'ajax': {
