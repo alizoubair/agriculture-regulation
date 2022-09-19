@@ -1,6 +1,8 @@
 import { map } from './mapbox.js';
 import * as utils from './utils.js';
 
+const filterEl = document.getElementById('inputSearch');
+document.documentElement.style.setProperty('--background', '#78B044')
 var toggleableFarmLayerIds = [];
 var markers = [];
 var name;
@@ -68,40 +70,41 @@ map.on('load', () => {
             toggleableFarmLayerIds.push([`outlineFarm${i}`, `farm${i}`]);
 
             // Attach a popup to a marker instance
-            const popup = new mapboxgl.Popup({ offset: 25, closeButton: false, className: "popup" }).setText(
-                `${document.getElementById('area').innerText}  ${document.getElementById('perimeter').innerText}`
-            );
+            if (document.getElementById('area') && document.getElementById('perimeter')) {
+                const popup = new mapboxgl.Popup({ offset: 25, closeButton: false, className: "popup" }).setText(
+                    `${document.getElementById('area').innerText}  ${document.getElementById('perimeter').innerText}`
+                );
 
-            // Add farms' position on map with markers.
-            if ($(this)[0].id === "center") {
-                var center = $(this)[0].innerText.split(',').map(i => parseFloat(i));
+                // Add farms' position on map with markers.
+                if ($(this)[0].id === "center") {
+                    var center = $(this)[0].innerText.split(',').map(i => parseFloat(i));
 
-                const marker = new mapboxgl.Marker({
-                    draggable: false
-                })
-                    .setLngLat([center[0], center[1]])
-                    .addTo(map);
+                    const marker = new mapboxgl.Marker({
+                        draggable: false
+                    })
+                        .setLngLat([center[0], center[1]])
+                        .addTo(map);
 
-                const element = marker.getElement();
-                element.id = `${name}`;
+                    const element = marker.getElement();
+                    element.id = `${name}`;
 
-                element.addEventListener('mouseenter', () => popup.addTo(map));
-                element.addEventListener('mouseleave', () => popup.remove());
+                    element.addEventListener('mouseenter', () => popup.addTo(map));
+                    element.addEventListener('mouseleave', () => popup.remove());
 
-                marker.setPopup(popup);
+                    marker.setPopup(popup);
 
-                markers.push(marker);
+                    markers.push(marker);
+                }
             }
 
             // Handle markers on mouse zoom
             map.on('moveend', () => {
-                console.log(map.getZoom())
                 for (const marker of markers) {
-                        if (parseFloat(map.getZoom()) <= parseFloat(zoom.innerText)) {
-                            marker.addTo(map);
-                        } else {
-                            marker.remove();
-                        }
+                    if (parseFloat(map.getZoom()) <= parseFloat(zoom.innerText)) {
+                        marker.addTo(map);
+                    } else {
+                        marker.remove();
+                    }
                 }
             });
         });
@@ -147,6 +150,7 @@ function showFarm(event) {
 
                     // Remove marker when we're close enough
                     map.on('moveend', () => {
+                        console.log(map.getZoom())
                         if (parseFloat(map.getZoom()) === parseFloat(zoom)) {
                             selectedMarker.remove();
                         }
@@ -164,7 +168,6 @@ window.onload = function () {
 
 /* Filter farm features */
 map.on('load', () => {
-    const filterEl = document.getElementById('inputSearch');
     var features, uniqueFeatures;
 
     map.on('mousemove', () => {

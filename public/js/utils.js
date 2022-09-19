@@ -53,8 +53,22 @@ function getUniqueFeatures(features) {
 
 var filteredMarkers = [];
 
+function isValid(markers, value) {
+    for (const marker of markers) {
+        if ((marker._element.id).includes(value)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function filterFeatures(event, uniqueFeatures, markers) {
     const value = event.target.value;
+
+    if (!isValid(markers, value)) {
+        return;
+    };
 
     if (uniqueFeatures) {
         for (const uniqueFeature of uniqueFeatures) {
@@ -67,7 +81,7 @@ function filterFeatures(event, uniqueFeatures, markers) {
         }
 
         // Filter visible marker
-        if (filteredMarkers && markers) {
+        if (filteredMarkers.length && markers.length) {
             for (const filteredMarker of filteredMarkers) {
                 if (filteredMarker._element.id.includes(value)) {
                     filteredMarker.addTo(map);

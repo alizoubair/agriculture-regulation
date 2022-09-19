@@ -384,7 +384,7 @@ main {
 	grid-row-start: 1;
 	grid-row-end: 4;
 	content: "";
-	background: #79FF76;
+	background: var(--background);
 }
 
 #idFarm thead {
